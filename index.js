@@ -8,7 +8,6 @@ const cookieSession = require('cookie-session');
 
 require('./models/user_model');
 
-
 require('./strategies/google_strategy');
 
 

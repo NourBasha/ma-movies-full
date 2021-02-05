@@ -1,0 +1,141 @@
+
+.header{
+     background-color:  #202429b6;
+     
+  
+    .ma{
+        color:#178bf8de;
+        font-size: 20px;
+        padding: 0;
+        margin: 0 auto 0 0;
+        font-weight: bold;
+        &:hover {
+            color:#178bf8de ;
+        }
+         span{
+        color:#00dbdb;
+        font-size: 30px;
+        font-weight: bold;
+        }
+    }
+
+
+
+    #header-links-container{
+        
+        .header-links{
+
+            .active{
+                color: white;
+            }
+            .home-item{
+                border-radius: 10px;
+                font-weight: bold;
+            }
+            .browse-item{
+                border-radius: 10px;
+                font-weight: bold;
+            }   
+            .login-item{
+                color:$color-header-darker;
+            } 
+              .signup-item{
+                color:$color-header-darker;
+            }
+            .google-item{
+                color:$color-header-darker;
+            }
+
+               .theme-item{
+                color:$color-header-darker;
+            }
+
+            
+    
+        }
+
+       .header-dropdown{
+           a{
+            color: $color-main-vague;
+            &:hover{
+                color: white;
+
+            }
+           }
+
+           div{
+
+            a{
+                &:hover{
+                    background-color: #044949c5;
+                }
+            }
+
+           }
+
+        }
+
+   
+    
+
+    @media (max-width:768px) {
+
+        .header-links{
+           
+            .home-item{
+                padding-right: 10px;
+                border-radius: 10px;
+                font-weight: bold;
+               
+            }
+            .browse-item{
+                padding-right: 10px;
+                border-radius: 10px;
+                font-weight: bold;
+               
+            }      
+    
+        } 
+
+        .header-dropdown{
+        
+            a{
+                 justify-self: end;
+                 justify-content: end;   
+                 padding-right: 10px;
+      
+            }
+
+           
+ 
+            div{
+                border-color:  $color-main-vague;
+                position: absolute;
+                right: 60px;
+              
+            }
+ 
+         }
+ 
+    }
+
+         
+}
+
+.username{
+    text-decoration: none;
+    color: $color-main-vague;
+    &:hover{
+        color: $color-main-vague;
+    }
+}
+
+   
+    
+}
+
+
+
+
+
+

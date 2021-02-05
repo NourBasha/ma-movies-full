@@ -1,0 +1,238 @@
+
+
+.movie {
+
+  .data-video-container{
+    
+    .first-row {
+      display: flex;
+      padding: 20px 10px 0;
+    
+      .poster-image {
+        margin-bottom: 0;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+      }
+  
+      .movie-meta {
+        align-self: center;
+        background-color: #808080be;
+        border-radius: 25px;
+        .movie-name-row {
+          padding: 10px 10px 10px 0;
+          h1{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: white;
+            
+          }
+        }
+  
+        @media (max-width:992px) {
+           .movie-name-row {
+              margin-top: 20px;
+             }
+
+        }
+
+        .movie-year-row {
+              margin-top: 10px;
+            h3{
+              
+              font-size: 35px;
+              color: $color-main-vague
+              
+            }
+        }
+  
+          .movie-genre-row {
+            span {
+              margin-top: 20px;
+                 p {
+                   color: white;
+                 }
+  
+            }
+          }
+  
+        .rating-row{
+               display: flex;
+                  margin-top: 20px;
+  
+             .rating-col {
+              padding-left: 15px;  
+             .rate-val {
+              margin-right: 5px;
+              font-size: 1rem;
+              color: $colo-secondary;
+             .val {
+              font-size: 22px;
+              color: white;
+              font-weight: bold;
+              margin-left: 10px;
+                  }
+             .out-of {
+              font-size: 16px;
+              color: white;
+              font-weight: bold;
+                 }
+           }
+        }
+          .rate-star {
+             
+              align-self: center;
+           
+            .checked {
+               color: yellow;
+               align-content: center;
+            }
+            .gray{
+               color: rgb(126, 126, 126);
+            }
+          }
+  
+        }
+
+        @media (max-width:576px) {
+          .rating-row{ 
+               
+            .val {
+              font-size: 18px;
+            
+                  }
+           }
+        }
+  
+        
+          .overview-row{
+            margin-top: 20px;
+             h6 {
+               font-size: 20px;
+              color: $color-main-vague;
+               }
+             p {
+            color: white;
+            line-height: 2;
+            font-size: 18px;
+           width: 100%;
+              }
+          }
+  
+        
+        
+      }
+      
+      @media (max-width:992px) {
+        .movie-meta{
+          margin-top: 10px;
+        }
+      }
+      
+      
+    }
+  
+    .video-row{
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding-right: 5%;
+      padding-left: 5%;
+
+      .video-heading-col{
+          background-color: #8080806c ;
+        
+          border-radius: 20px ;
+          .video-heading{
+            margin: 0;
+            padding: 5px 0 5px 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          }
+        
+      }
+          .video{
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+          }
+
+          
+
+      }
+  }
+
+   
+      .cast-title{
+          font-size: 24px;
+          color: $colo-secondary;
+          margin-bottom: 20px;
+      }
+  
+      
+        
+
+        .cast-and-footer{
+
+
+          .cast-col{
+
+            .cast-row-heading{
+              background-color: #8080806c ;
+              margin: 20px;
+              border-radius: 20px ;
+              .cast-heading{
+                margin: 0;
+                padding: 5px 0 5px 0;
+                
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+            }
+            }
+           
+
+            .cast-row {
+              .cast-image {
+                width: 4%;
+                height: auto;
+              }
+          
+              .cast-name {
+                  font-size: 18px;
+                  color: white;
+                  font-weight: bold;
+                  font-family: 'Times New Roman', Times, serif;
+                  margin: 0 30px 0 30px ;
+              }
+              .cast-as{
+                  font-size: 14px;
+                  color: $colo-secondary;
+              }
+              .cast-role {
+                    font-size: 18px;
+                  color: white;
+                  font-family: 'Times New Roman', Times, serif;
+                  margin-left: 30px;
+              }
+            }
+
+          }
+
+
+          .footer-col{
+            .full-cast-row {
+              padding: 10px 0;
+              margin-top: 10px;
+                 .fullCast{
+                   a{
+                     font-size:20px;
+                     color: white;
+                     padding-right: 10px;
+                   }
+                 }
+              }
+          }
+       
+      
+        }
+
+  
+
+  }

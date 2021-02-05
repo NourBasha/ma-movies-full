@@ -1,0 +1,119 @@
+
+.poster-container {
+  padding: 0;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+    transition: all .05s ease-in;
+    transform: scale(1.1);
+    z-index: 2;
+  }
+
+  &:hover > .rating {
+    display: block;
+    top: 15px;
+    left: 13px;
+  }
+
+  &:hover > .title {
+    display: flex;
+    bottom: 15px;
+  }
+
+  &:hover > .release_date {
+    display: block;
+    top: 15px;
+    right:13px;
+  }
+
+  @media (max-width:500px) {
+    &:hover > .rating {
+     
+      left: 0px;
+    }
+  
+   
+    &:hover > .release_date {
+    
+      right:0px;
+    }
+  }
+
+  .title {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    background-color: $color-main-soft;
+    border-radius: 10px;
+    display: none;
+    span {
+      color: white;
+      padding: 10px;
+      font-size: 25px;
+    }
+  }
+  .rating {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: $color-main-soft;
+    border-radius: 10px;
+    display: none;
+    padding: 0 10px 0 10px;
+    span {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      padding: 0;
+    }
+  }
+
+ 
+  .release_date {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: $color-main-soft;
+    border-radius: 10px;
+    display: none;
+    span {
+      color: white;
+      padding:  20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  .poster-image {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+
+  @media (max-width:768px) {
+      .title{
+        span{
+          font-size: 15px ;
+          padding: 5px;
+        }
+      }
+      .rating{
+        padding:5px;
+        span{
+          font-size: 15px ;
+        }
+      }.release_date{
+       
+        span{
+          font-size: 12px ;
+          padding: 5px 10px 5px 10px;
+
+
+        }
+      }
+  }
+}

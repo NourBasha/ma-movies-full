@@ -1,6 +1,8 @@
 const passport = require('passport');
 
+const mongoose = require('mongoose');
 
+const User = mongoose.model('users');
 
 module.exports = (app) =>{
 
@@ -14,16 +16,19 @@ module.exports = (app) =>{
       (req,res)=>{
         res.redirect('/');
     } );
+        
+    app.get('/api/logout',(req,res)=>{
+        req.logout();
+        res.redirect('/');
+    })
 
-    
-app.get('/api/logout',(req,res)=>{
-    req.logout();
-    res.redirect('/');
-})
+    app.get('/api/current-user', (req,res)=>{
 
-app.get('/api/current-user', (req,res)=>{
-    res.send(req.user);
-})
+        // User.findById()
+
+
+        res.send(req.user);
+    })
 
 }
 
