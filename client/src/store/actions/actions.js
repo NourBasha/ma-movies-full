@@ -179,17 +179,11 @@ export const setUserNotAuthenticated= ()  => {
 
 export const signUpSuccess= (payload)  => {
     return{
-        type : ACTION_TYPES.USER_SIGN_UP_SUCCESS_SAGA,
+        type : ACTION_TYPES.CURRENT_APP_USER_SAGA,
         payload: payload
     }
 }
 
-
-export const signUpFailure= ()  => {
-    return{
-        type : ACTION_TYPES.USER_SIGN_UP_FAILURE_SAGA      
-    }
-}
 
 export const getGoogleUser = ()=>{
     return { 

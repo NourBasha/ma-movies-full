@@ -1,20 +1,16 @@
-import {USER_SIGN_UP_FAILURE, USER_SIGN_UP_SUCCESS} from '../actions/action_types';
+import { CURRENT_APP_USER} from '../actions/action_types';
 
 const initialState ={
-    users : []
+    user : null
 }
 
 
 const SignupReducer = (state = initialState, action)=>{
     switch (action.type) {
-        case USER_SIGN_UP_SUCCESS:
+        case CURRENT_APP_USER:
             return{
                 ...state,
-                users : [action.payload, ...state.users] 
-            }
-        case USER_SIGN_UP_FAILURE:
-            return{
-                ...state,
+                users : action.payload || false
             }
         default:
            return state

@@ -7,7 +7,7 @@ const cookieSession = require('cookie-session');
 
 
 require('./models/user_model');
-
+require('./models/userWithEmail_model');
 require('./strategies/google_strategy');
 
 
@@ -27,17 +27,20 @@ const app = express();
 
 
 
+app.use(express.json());
+
 app.use(cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys : [keys.cookieKeys]
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 require('./route_handlers/authentication')(app);
-
+require('./route_handlers/emailAuthentication')(app);
 
 
 

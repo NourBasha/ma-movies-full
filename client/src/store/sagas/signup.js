@@ -1,10 +1,9 @@
 import {
-  USER_SIGN_UP_FAILURE,
-  USER_SIGN_UP_SUCCESS,
-  USER_SIGN_UP_SUCCESS_SAGA,
-  USER_SIGN_UP_FAILURE_SAGA,
+  CURRENT_APP_USER,
+  CURRENT_APP_USER_SAGA,
 } from "../actions/action_types";
 import { put, takeEvery } from "redux-saga/effects";
+import axios from 'axios'; 
 
 function* signUpSuccess(action) {
  
@@ -12,33 +11,37 @@ function* signUpSuccess(action) {
   if (action) {
 
 
-    let prevUsers = window.localStorage.getItem("users");
+          const {email, password} = action.payload;
 
-    if (prevUsers) {
+          console.log('payload',action.payload);
+          console.log('emai is : ', email);
+          console.log('password is : ', password);
 
-      prevUsers = JSON.parse(prevUsers);
-      window.localStorage.setItem("users", JSON.stringify( [action.payload, ...prevUsers] ) );
-      window.localStorage.setItem("activeUsername", action.payload.username);
-      window.localStorage.setItem("activeEmail", action.payload.email);
-    } else {
-      window.localStorage.setItem("users", JSON.stringify([action.payload]));
-      window.localStorage.setItem("activeUsername", action.payload.username);
-      window.localStorage.setItem("activeEmail", action.payload.email);
-    }
+          let result = '';
 
-    window.localStorage.setItem("authState", true);
-    yield put({ type: USER_SIGN_UP_SUCCESS, payload: action.payload });
+            const user = {email,password}
+            console.log('user is : ',user);
+     yield  axios.post('/api/authenticate/signup',user)
+              .then(res=>{
+                console.log('res is : ',res);
+                result = res ;
+              })
+              .catch(err=>{
+                console.log('error is : ',err);
+              })
 
+              if(result){
+                yield put({ type: CURRENT_APP_USER, payload: result });
+                return;
+              }
+              
+              yield put({ type: CURRENT_APP_USER, payload:{} });
   }
 
 
 }
 
-function* signUpFailure() {
-  yield put({ type: USER_SIGN_UP_FAILURE });
-}
 
 export function* watchSignUp() {
-  yield takeEvery(USER_SIGN_UP_SUCCESS_SAGA, signUpSuccess);
-  yield takeEvery(USER_SIGN_UP_FAILURE_SAGA, signUpFailure);
+  yield takeEvery(CURRENT_APP_USER_SAGA, signUpSuccess);
 }

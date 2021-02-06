@@ -18,7 +18,6 @@ const Login = (props) => {
 
  const loginSubmit = (e)=>{
 
-
     e.preventDefault();
 
     setLoading(true);
@@ -89,7 +88,7 @@ const Login = (props) => {
                           </div>
                             
                             <button type='submit' className='btn mamovie-button'>Login</button>
-                    </form>
+                      </form>
                     </div>
                 </div>
                
