@@ -1,12 +1,12 @@
 import {all, fork } from 'redux-saga/effects';
-import {watchSignUp} from './signup';
+import {watchEmailUser} from './emailAuth';
 import {watchUser} from './googleUser';
 
 
 function* rootSaga() {
     yield all(
         [
-            fork(watchSignUp),
+            fork(watchEmailUser),
             fork(watchUser)
         ]
     )

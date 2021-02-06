@@ -10,10 +10,7 @@ module.exports = (app) =>{
 
     app.post('/api/authenticate/signup', async (req,res)=>{
 
-        console.log('req.body is : ', req.body);
-        console.log('***************************************');
-        console.log('req is : ', req);
-        console.log('***************************************');
+       
 
         try {
             const existing = await User.findOne({
@@ -34,9 +31,14 @@ module.exports = (app) =>{
 
     app.post('/api/authenticate/login', async (req,res)=>{
 
+      
+        console.log('***************************************');
+        console.log('req.body is : ', req.body);
+        console.log('***************************************');
+
             try {
 
-                const existing = await User.findOne({email:req.body.email, password:req.body.password}).save();
+                const existing = await User.findOne({email:req.body.email, password:req.body.password});
 
                 if(existing){
                     return res.send(existing)

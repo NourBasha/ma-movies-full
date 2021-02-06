@@ -194,7 +194,7 @@ const Header = (props) => {
 function mapStateToProps (state)  {
     return{
       userAuth: state.userAuth.userAuthenticated,
-      username: state.signUp.users,
+    //  username: state.signUp.users,
       googleUser: state.googleAuth.user
     }
 }

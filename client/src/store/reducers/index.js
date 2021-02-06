@@ -5,9 +5,15 @@ import { FilterOnReducer } from "./filter_on";
 import { FilterTypesReducer } from "./filter_type";
 import { BrowseResponseReducer } from "./browse_response";
 import { HomeResponseReducer } from "./home_response";
+
+
+
 import UserAuthReducer from "./userAuth";
-import SignupReducer from "./signup";
+
+import EmailAuth from "./emailAuth";
+
 import { AuthReducer } from "./authReducer";
+import { LoginState } from "./loginState";
 
 
 
@@ -18,9 +24,11 @@ import { AuthReducer } from "./authReducer";
         filterTypes : FilterTypesReducer,
         browseResponse: BrowseResponseReducer,
         homeResponse : HomeResponseReducer,
+
         userAuth : UserAuthReducer,
-        signUp: SignupReducer,
-        googleAuth: AuthReducer
+        emailAuth: EmailAuth,
+        googleAuth: AuthReducer,
+        loginState : LoginState
 })
 
 export default rootReducer;

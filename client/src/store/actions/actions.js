@@ -185,6 +185,22 @@ export const signUpSuccess= (payload)  => {
 }
 
 
+export const emailLogin= (payload)  => {
+    return{
+        type : ACTION_TYPES.CURRENT_APP_USER_LOGIN_SAGA,
+        payload: payload
+    }
+}
+
+
+export const setLoginState= (payload)  => {
+    return{
+        type : ACTION_TYPES.LOGIN_STATE,
+        payload: payload
+    }
+}
+
+
 export const getGoogleUser = ()=>{
     return { 
         type : ACTION_TYPES.GOOGLE_USER_SAGA

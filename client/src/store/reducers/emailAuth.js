@@ -5,7 +5,7 @@ const initialState ={
 }
 
 
-const SignupReducer = (state = initialState, action)=>{
+const EmailAuth = (state = initialState, action)=>{
     switch (action.type) {
         case CURRENT_APP_USER:
             return{
@@ -16,4 +16,4 @@ const SignupReducer = (state = initialState, action)=>{
            return state
     }
 }
-export default SignupReducer;
+export default EmailAuth;

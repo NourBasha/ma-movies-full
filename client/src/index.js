@@ -15,7 +15,7 @@ import './scss/main.scss';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer,applyMiddleware(sagaMiddleware));
+export const store = createStore(rootReducer,applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 

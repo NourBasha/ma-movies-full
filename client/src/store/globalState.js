@@ -9,6 +9,7 @@ import * as ACTIONS from "./actions/actions";
 import Context from '../utils/context';
 
 const GlobalState = (props)=>{
+
     const [theme, setTheme] = useState('light');
 
   const [componentMounted, setComponentMounted] = useState(false);
@@ -197,7 +198,8 @@ if (!componentMounted) return (
             setHomeApiResponse: (res) => updateHomeResponse(res),
             updateHomeResponseExpireTime: (res) => updateHomeResponseExpireTime(res),
             appTheme: theme,
-            toggleAppTheme: () => themeToggeler()
+            toggleAppTheme: () => themeToggeler(),
+          
         }}>
                 {props.children}
         </Context.Provider>

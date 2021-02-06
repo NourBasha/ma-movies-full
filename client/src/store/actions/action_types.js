@@ -37,6 +37,9 @@ export const USER_NOT_AUTHENTICATED = "USER_NOT_AUTHENTICATED";
 // signup 
 export const CURRENT_APP_USER = "CURRENT_APP_USER";
 export const CURRENT_APP_USER_SAGA = "CURRENT_APP_USER_SAGA";
+// login
+export const CURRENT_APP_USER_LOGIN_SAGA = "CURRENT_APP_USER_LOGIN_SAGA";
+export const LOGIN_STATE = "LOGIN_STATE";
 //google user
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_USER_SAGA = "GOOGLE_USER_SAGA";
