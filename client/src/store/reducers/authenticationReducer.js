@@ -5,15 +5,15 @@ const initialState ={
 }
 
 
-const EmailAuth = (state = initialState, action)=>{
+const AuthenticationReducer = (state = initialState, action)=>{
     switch (action.type) {
         case CURRENT_APP_USER:
             return{
                 ...state,
-                users : action.payload || false
+                user : action.payload || false
             }
         default:
            return state
     }
 }
-export default EmailAuth;
+export default AuthenticationReducer;

@@ -41,5 +41,6 @@ export const CURRENT_APP_USER_SAGA = "CURRENT_APP_USER_SAGA";
 export const CURRENT_APP_USER_LOGIN_SAGA = "CURRENT_APP_USER_LOGIN_SAGA";
 export const LOGIN_STATE = "LOGIN_STATE";
 //google user
-export const GOOGLE_USER = "GOOGLE_USER";
-export const GOOGLE_USER_SAGA = "GOOGLE_USER_SAGA";
+export const CURRENT_USER_SAGA = "CURRENT_USER_SAGA";
+// logout 
+export const USER_LOGOUT_SAGA = "USER_LOGOUT_SAGA";

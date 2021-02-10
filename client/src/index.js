@@ -13,6 +13,10 @@ import GlobalState from "./store/globalState";
 import './scss/main.scss';
 
 
+import axios from 'axios';
+
+window.axios = axios;
+
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(rootReducer,applyMiddleware(sagaMiddleware));

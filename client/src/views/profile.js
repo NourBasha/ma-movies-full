@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-const Profile = (props) =>{
+const Profile = ({user}) =>{
     return(
         <div className='profile container d-flex justify-content-center align-items-center'>
             <div >
@@ -9,9 +9,9 @@ const Profile = (props) =>{
                     ?
                         (<div className='profile-data'> 
                              <label> Username: </label>
-                             <h3 className='appText'>{window.localStorage.getItem('activeUsername')}</h3>
+                             <h3 className='appText'>{user.displayName}</h3>
                              <label> Email: </label>
-                             <h3 className='appText' >{window.localStorage.getItem('activeEmail')}</h3>
+                             <h3 className='appText' >{user.email}</h3>
                             
                         </div>)
                     :null
@@ -21,9 +21,9 @@ const Profile = (props) =>{
     )
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = ({auth}) =>{
     return{
-        user: state.signUp.users
+        user: auth.user
     }
 }
 

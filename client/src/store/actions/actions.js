@@ -192,7 +192,6 @@ export const emailLogin= (payload)  => {
     }
 }
 
-
 export const setLoginState= (payload)  => {
     return{
         type : ACTION_TYPES.LOGIN_STATE,
@@ -201,8 +200,16 @@ export const setLoginState= (payload)  => {
 }
 
 
-export const getGoogleUser = ()=>{
+export const getCurrentUser = ()=>{
     return { 
-        type : ACTION_TYPES.GOOGLE_USER_SAGA
+        type : ACTION_TYPES.CURRENT_USER_SAGA
+    }
+}
+
+
+
+export const logOut = ()=>{
+    return { 
+        type : ACTION_TYPES.USER_LOGOUT_SAGA
     }
 }

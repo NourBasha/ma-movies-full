@@ -11,18 +11,13 @@ import {connect} from 'react-redux';
 import * as ACTIONS from '../../store/actions/actions';
 import { useState } from "react";
 
-const Header = (props) => {
+const Header = ({user, userAuth , logout}) => {
 
   const context = useContext(Context);
   const history = useHistory();
 
 
   const [linksExpanded,setLinksExpanded] = useState(false);
-
-
-    // if(props.googleUser){
-    //   console.log(props.googleUser);
-    // }
 
 
   const LoginPage = () => {
@@ -50,11 +45,13 @@ const Header = (props) => {
   const setUserNotAuthenticated = () => {
 
     setLinksExpanded(false);
-    props.setNotAuthenticated();
+     //  props.setNotAuthenticated();
     
-    window.localStorage.setItem('authState',false);
-    window.localStorage.setItem('activeEmail','');
-    window.localStorage.setItem('activeUsername','');
+    // window.localStorage.setItem('authState',false);
+    // window.localStorage.setItem('activeEmail','');
+    // window.localStorage.setItem('activeUsername','');
+
+    logout(); // action creator
 
     if(window.location.href.includes('/browser')){
       history.push('/notAuthorised');
@@ -126,42 +123,51 @@ const Header = (props) => {
             >
                
               {
-                window.localStorage.getItem('authState') ==='true'
-                ? [
-                      window.localStorage.getItem('activeUsername') !== ''
-                      ?   
-                        <NavDropdown.Item className='username profile-item' 
-                                          key={'profile'} 
-                                          onClick={switchToProfile}>
-                                          {window.localStorage.getItem('activeUsername')}
-                        </NavDropdown.Item>                     
-                    
-                      :null 
-                      , 
-                      <NavDropdown.Divider key='divider' />
-                      ,
-                      <NavDropdown.Item 
-                            key={'logout'} 
-                            className='logout-item'
-                            onClick={setUserNotAuthenticated}>
-                        Logout
-                        </NavDropdown.Item>
-                  ]
+               
+                  
+                        user && user !== '' ? (
+                          [
+                     
+                            <NavDropdown.Item className='username profile-item' 
+                                                key={'profile'} 
+                                                onClick={switchToProfile}>
+                                                {user.displayName}
+                            </NavDropdown.Item>                     
+                          
+                            , 
+                            <NavDropdown.Divider key='divider' />
+                            ,
+                            <NavDropdown.Item 
+                                  key={'logout'} 
+                                  className='logout-item'
+                                  onClick={setUserNotAuthenticated}>
+                              Logout
+                              </NavDropdown.Item>
+                        ]
+                        )
                 : 
-                [ <NavDropdown.Item key={'login'} 
-                      className="login-item" 
-                      onClick={LoginPage}>
-                    Login
-                  </NavDropdown.Item>
-                  ,
-                  <NavDropdown.Item key={'signup'}   className="signup-item"onClick={signUp}>
-                        Sign Up
-                </NavDropdown.Item>
-                  ,
-                  <NavDropdown.Item key={'googleLogin'}   className="google-item"onClick={googleLogin}>
-                      Login with google
-                </NavDropdown.Item>
-                ]
+                  (
+                    [ 
+                      <NavDropdown.Item key={'login'} 
+                          className="login-item" 
+                          onClick={LoginPage}>
+                        Login
+                      </NavDropdown.Item>
+                      ,
+                      <NavDropdown.Item key={'signup'}   className="signup-item"onClick={signUp}>
+                            Sign Up
+                      </NavDropdown.Item>
+                        ,
+                      <NavDropdown.Item key={'googleLogin'}   className="google-item"onClick={googleLogin}>
+                          Login with google
+                      </NavDropdown.Item>
+                    ]
+
+                  )
+                      
+                
+                  
+
               }
 
               <NavDropdown.Divider  key='divider2'/>
@@ -182,7 +188,7 @@ const Header = (props) => {
     
       </Navbar>
       
-    
+    <button onClick={()=> {console.log(user)}}> user  </button>
        
     </div>
 
@@ -191,11 +197,10 @@ const Header = (props) => {
 
 }
 
-function mapStateToProps (state)  {
+function mapStateToProps ({userAuth, auth})  {
     return{
-      userAuth: state.userAuth.userAuthenticated,
-    //  username: state.signUp.users,
-      googleUser: state.googleAuth.user
+      userAuth: userAuth.userAuthenticated,
+      user: auth.user
     }
 }
 
@@ -203,6 +208,7 @@ function mapDispatchToProps  (dispatch){
       return {
         setAuthenticated : () => dispatch(ACTIONS.setUserAuthenticated()),
         setNotAuthenticated : () => dispatch(ACTIONS.setUserNotAuthenticated()),
+        logout : ()=> dispatch(ACTIONS.logOut())
       }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (Header);

@@ -12,7 +12,7 @@ import Context from './utils/context';
 import { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import {getGoogleUser} from './store/actions/actions';
+import {getCurrentUser} from './store/actions/actions';
 
 
 library.add(fab, faStar,faUserCog,faBars, faCheckCircle, faTimesCircle);
@@ -22,18 +22,20 @@ const App = () => {
   const context = useContext(Context);
   const dispatch = useDispatch();
   
-  dispatch(getGoogleUser());
+  console.log('insdie App and dispatching action!');
+  dispatch(getCurrentUser());
 
   useEffect(()=>{
-    /// set default login credentials for app viewers
 
-    
+    /// set default login credentials for app viewers
 
     let users = JSON.parse(window.localStorage.getItem('users'))
       
     if(users === null || users === undefined){
             window.localStorage.setItem('users',
-            JSON.stringify([{username:'user',email:'user@email.com',password:'Abcd@1234'}]));        
+            JSON.stringify([{username:'user',
+            email:'user@email.com',
+            password:'Abcd@1234'}]));        
     }
 
   },[dispatch])

@@ -338,7 +338,7 @@ const Signup = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    emailAuth: state.emailAuth.user,
+    user : state.auth.user,
   };
 };
 

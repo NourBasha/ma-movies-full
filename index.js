@@ -8,7 +8,10 @@ const cookieSession = require('cookie-session');
 
 require('./models/user_model');
 require('./models/userWithEmail_model');
+
+
 require('./strategies/google_strategy');
+require('./strategies/localStrategy');
 
 
 
@@ -25,8 +28,6 @@ mongoose.connect(keys.mongoURI,{useNewUrlParser: true, useUnifiedTopology: true}
 
 const app = express();
 
-
-
 app.use(express.json());
 
 app.use(cookieSession({
@@ -40,7 +41,6 @@ app.use(passport.session());
 
 
 require('./route_handlers/authentication')(app);
-require('./route_handlers/emailAuthentication')(app);
 
 
 

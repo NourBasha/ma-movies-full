@@ -1,6 +1,6 @@
 import {all, fork } from 'redux-saga/effects';
 import {watchEmailUser} from './emailAuth';
-import {watchUser} from './googleUser';
+import {watchUser} from './currentUser';
 
 
 function* rootSaga() {

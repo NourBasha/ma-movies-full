@@ -16,16 +16,17 @@ function* signUpSuccess(action) {
   if (action) {
 
 
-          const {email, password} = action.payload;
+          const {email, password, username} = action.payload;
 
           console.log('payload',action.payload);
           console.log('emai is : ', email);
           console.log('password is : ', password);
+          console.log('username is : ', username);
 
           let result = '';
 
-            const user = {email,password}
-            console.log('user is : ',user);
+            const user = {email,password, username}
+          
      yield  axios.post('/api/authenticate/signup',user)
               .then(res=>{
                 console.log('res is : ',res);
@@ -36,7 +37,7 @@ function* signUpSuccess(action) {
               })
 
               if(result){
-                yield put({ type: CURRENT_APP_USER, payload: result });
+                yield put({ type: CURRENT_APP_USER, payload: result.data });
                 return;
               }
               
@@ -56,19 +57,25 @@ console.log('store is : ', store);
 
           let result = '';
 
-          const user = {email,password}
+          const user = {username:email,password:password}
+
+          console.log('client, user is : ', user);
 
      yield  axios.post('/api/authenticate/login',user)
               .then(res=>{
                 result = res ;
+                console.log('res is :', res);
+              
+
                  store.dispatch(setLoginState(true));
               })
               .catch(err=>{
+                  console.log('error is :', err);
                   store.dispatch(setLoginState(false));
               })
 
               if(result){
-                yield put({ type: CURRENT_APP_USER, payload: result });
+                yield put({ type: CURRENT_APP_USER, payload: result.data });
                 return;
               }
               
