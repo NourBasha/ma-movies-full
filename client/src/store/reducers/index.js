@@ -8,11 +8,11 @@ import { HomeResponseReducer } from "./home_response";
 
 
 
-import UserAuthReducer from "./userAuth";
 
 import AuthenticationReducer from "./authenticationReducer";
 
 import { LoginState } from "./loginState";
+import { SignUpState } from "./signupState";
 
 
 
@@ -23,10 +23,9 @@ import { LoginState } from "./loginState";
         filterTypes : FilterTypesReducer,
         browseResponse: BrowseResponseReducer,
         homeResponse : HomeResponseReducer,
-        userAuth : UserAuthReducer,
-
         auth: AuthenticationReducer,
-        loginState : LoginState 
+        loginState : LoginState,
+        signupState : SignUpState
 })
 
 export default rootReducer;

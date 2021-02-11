@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { emailLogin, setUserAuthenticated } from "../store/actions/actions";
-import { useHistory } from "react-router-dom";
+import { emailLogin } from "../store/actions/actions";
 import Footer from "../components/container/footer";
 
 
@@ -10,45 +9,14 @@ const Login = (props) => {
     
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-//   const history = useHistory();
-  const [loading, setLoading] = useState(false);
 
   console.log(props.loginSuccess);
 
   const loginSubmit = (e) => {
     e.preventDefault();
 
-    setLoading(true);
-
     props.login({ email: email.toLocaleLowerCase(), password: password });
 
-    // let users = JSON.parse(window.localStorage.getItem('users'));
-
-    // var BreakException = {};
-
-    // try {
-    //         users.forEach(user => {
-
-    //         if(user.email === email.toLocaleLowerCase() && user.password === password){
-    //             //global auth state
-    //             props.setAuthenticated();
-    //             // local data
-    //             window.localStorage.setItem('authState',true);
-    //             window.localStorage.setItem('activeUsername', user.username);
-    //             window.localStorage.setItem('activeEmail',user.email);
-
-    //             setLoading(false);
-
-    //             history.push('/');
-
-    //             throw BreakException;
-    //         }
-
-    //     });
-
-    // }catch(e){
-    //     if (e !== BreakException) throw e;
-    // }
   };
 
   return (
@@ -144,15 +112,13 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    //users: state.signUp.users
     loginSuccess : state.loginState.login
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (payload) => dispatch(emailLogin(payload)),
-    setAuthenticated: () => dispatch(setUserAuthenticated()),
+    login: (payload) => dispatch(emailLogin(payload))
   };
 };
 

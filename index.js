@@ -14,8 +14,6 @@ require('./strategies/google_strategy');
 require('./strategies/localStrategy');
 
 
-
-
 mongoose.connect(keys.mongoURI,{useNewUrlParser: true, useUnifiedTopology: true})
 .then(res=>{
     console.log('conncetion done');
@@ -23,8 +21,6 @@ mongoose.connect(keys.mongoURI,{useNewUrlParser: true, useUnifiedTopology: true}
 .catch(err=>{
     console.log('connection error');
 })
-
-
 
 const app = express();
 

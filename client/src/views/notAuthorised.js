@@ -1,4 +1,7 @@
 
+import {Link} from 'react-router-dom';
+
+
 const NotAuthorised = (props) => {
   return (
     <div className="not-auth container" >
@@ -7,8 +10,17 @@ const NotAuthorised = (props) => {
           
            <div className='message-container'>
            <h4 className="not-auth-message">
-              You Are Not Authorised To Continue To This Page, Please Login Or
-              Sign Up To Continue
+              You Are Not Authorised To Continue To This Page, Please
+              &nbsp; 
+              <Link to={{pathname:'/login'}}>
+                    Login 
+              </Link>
+             &nbsp;  Or  &nbsp; 
+               <Link to={{pathname:'/signup'}}>
+                  Sign Up 
+              </Link>
+              &nbsp; 
+              To Continue
             </h4>
            </div>
           

@@ -161,22 +161,6 @@ export const saveHomeResponseExpireTime= (res)  => {
 }
 
 
-
-export const setUserAuthenticated= ()  => {
-    return{
-        type : ACTION_TYPES.USER_AUTHENTICATED,
-      
-    }
-}
-
-
-export const setUserNotAuthenticated= ()  => {
-    return{
-        type : ACTION_TYPES.USER_NOT_AUTHENTICATED,
-    }
-}
-
-
 export const signUpSuccess= (payload)  => {
     return{
         type : ACTION_TYPES.CURRENT_APP_USER_SAGA,
@@ -198,6 +182,14 @@ export const setLoginState= (payload)  => {
         payload: payload
     }
 }
+export const setSignUpState= (payload)  => {
+    return{
+        type : ACTION_TYPES.SIGNUP_STATE,
+        payload: payload
+    }
+}
+
+
 
 
 export const getCurrentUser = ()=>{
@@ -213,3 +205,5 @@ export const logOut = ()=>{
         type : ACTION_TYPES.USER_LOGOUT_SAGA
     }
 }
+
+

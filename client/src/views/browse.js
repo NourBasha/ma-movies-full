@@ -45,8 +45,6 @@ const  handlePagingHighlights = useCallback(()=>{
 
   }
 
-
-
   if(context.currentPageBrowse === paging[0]){
     if(!document.getElementsByClassName("first-page")[0].classList.contains('active')){
       document.getElementsByClassName("first-page")[0].classList.add("active");
@@ -241,6 +239,16 @@ const getMovies = useCallback(()=>{
 
      useEffect(()=>{
 
+     
+
+  
+     },[])
+
+
+    useEffect(() => {
+
+
+      // load genres 
       if(localStorage.getItem('genres') === null){
 
         refContext.current.browseSetGenresLoading(true);
@@ -260,12 +268,6 @@ const getMovies = useCallback(()=>{
       }else {
             genresList = JSON.parse(localStorage.getItem('genres') || [] );
       }
-
-  
-     },[])
-
-
-    useEffect(() => {
 
 
 

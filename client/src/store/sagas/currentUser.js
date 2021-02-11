@@ -7,10 +7,16 @@ import axios from 'axios';
 
  
  function* getUser () {
+   
+  console.log('inside getting user!!');
 
-    const user =  yield  axios.get('/api/current-user');    
+    let user =  yield axios.get('/api/current-user');    
 
     if(user){
+      if(user.data.password){ // if res contains password eliminate the password
+        const {password, ...cleanUser } = user.data;
+        return  yield put({type:CURRENT_APP_USER,payload: cleanUser });
+      }
       return  yield put({type:CURRENT_APP_USER,payload: user.data });
     }
 
@@ -25,10 +31,11 @@ function* logout() {
   const res = yield axios.get('/api/logout'); 
       console.log('logout res : ', res.data);
         if (res.data.message === 'done'){
-          yield put({type:CURRENT_APP_USER, payload: {} });
+          yield put({type:CURRENT_APP_USER, payload: false });
         }
- 
 }
+
+
 
 export function* watchUser () {
 

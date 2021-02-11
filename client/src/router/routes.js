@@ -12,7 +12,7 @@ import Login from '../views/login';
 import PageNotFound from '../views/page-not-found';
 
 
-const Routes = (props) =>{
+const Routes = ({user}) =>{
 
 
     
@@ -24,7 +24,9 @@ const Routes = (props) =>{
                     <Switch>
                         <Route exact path='/' component={Home} />
                         <Route exact  path='/browse'>
-                            {window.localStorage.getItem('authState') === 'true'? <Browse /> : <Redirect to={{pathname:'/notAuthorised'}}/> }
+                            { user
+                            ? <Browse /> 
+                            : <Redirect to={{pathname:'/notAuthorised'}}/> }
                              </Route>
                         <Route exact path='/movie/:id' render={(data)=> <MovieDetails  data={data} /> } />               
                         <Route exact path='/notAuthorised' component={NotAuthorised} />
@@ -41,9 +43,9 @@ const Routes = (props) =>{
    
 }
  
-function mapStateToProps  (state)  {
+function mapStateToProps  ({auth})  {
 return{
-    userAuth : state.userAuth.userAuthenticated
+   user : auth.user
 }
 }
 export default connect(mapStateToProps) (Routes);

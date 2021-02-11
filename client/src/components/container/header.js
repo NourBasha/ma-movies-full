@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import * as ACTIONS from '../../store/actions/actions';
 import { useState } from "react";
 
-const Header = ({user, userAuth , logout}) => {
+const Header = ({user,  logout}) => {
 
   const context = useContext(Context);
   const history = useHistory();
@@ -45,12 +45,7 @@ const Header = ({user, userAuth , logout}) => {
   const setUserNotAuthenticated = () => {
 
     setLinksExpanded(false);
-     //  props.setNotAuthenticated();
-    
-    // window.localStorage.setItem('authState',false);
-    // window.localStorage.setItem('activeEmail','');
-    // window.localStorage.setItem('activeUsername','');
-
+   
     logout(); // action creator
 
     if(window.location.href.includes('/browser')){
@@ -64,6 +59,7 @@ const Header = ({user, userAuth , logout}) => {
  
   return (
     <div className="header ">
+
       <Navbar expand="lg"  expanded={linksExpanded}    >
         
         <Navbar.Brand className="navbar-brand  ma" href="/">
@@ -73,12 +69,12 @@ const Header = ({user, userAuth , logout}) => {
 
     
       <Navbar.Toggle  id='toggleButton'
-       className="toggleButton"
-       onClick={() => setLinksExpanded((prevExpanded)=>(prevExpanded=!prevExpanded))}
-        aria-controls="#header-links-container" >
-      <FontAwesomeIcon
-        icon="bars" color="#FFF" size="1x"
-      />
+              className="toggleButton"
+              onClick={() => setLinksExpanded((prevExpanded)=>(prevExpanded=!prevExpanded))}
+                aria-controls="#header-links-container" >
+              <FontAwesomeIcon
+                icon="bars" color="#FFF" size="1x"
+              />
         </Navbar.Toggle>
       
        
@@ -90,17 +86,13 @@ const Header = ({user, userAuth , logout}) => {
          
               
                 <NavLink  to="/" exact 
-              
-                className="nav-link home-item d-flex justify-self-end justify-content-end"
-             >
-                  Home
+                      className="nav-link home-item d-flex justify-self-end justify-content-end" >
+                        Home
                 </NavLink>
 
                 <NavLink to="/browse" exact
-                 className="nav-link browse-item  d-flex justify-self-end justify-content-end"
-              
-                  >
-                  Browse
+                      className="nav-link browse-item  d-flex justify-self-end justify-content-end" >
+                        Browse
                 </NavLink>
 
           </Nav>
@@ -110,22 +102,22 @@ const Header = ({user, userAuth , logout}) => {
 
           <NavDropdown drop='left'
           
-            title={<span style={{display:'inline-block'}}>
-                     <FontAwesomeIcon  className='drop-icon' 
-                     icon='user-cog' size='lg' 
-                     color='#00dbdb'>
-                     </FontAwesomeIcon>
-                     </span>
-                     }
-             id="basic-nav-dropdown "
-             className='header-dropdown d-flex justify-self-end justify-content-end justify-items-end'
-                    style={{  color:'#00dbdb' }}
+                title={<span style={{display:'inline-block'}}>
+                          <FontAwesomeIcon  className='drop-icon' 
+                          icon='user-cog' size='lg' 
+                          color='#00dbdb'>  
+                          </FontAwesomeIcon>
+                          </span>
+                        }
+                id="basic-nav-dropdown "
+                className='header-dropdown d-flex justify-self-end justify-content-end justify-items-end'
+                style={{  color:'#00dbdb' }}
             >
                
               {
-               
-                  
-                        user && user !== '' ? (
+                user && user !== '' 
+                ? 
+                        (
                           [
                      
                             <NavDropdown.Item className='username profile-item' 
@@ -143,7 +135,7 @@ const Header = ({user, userAuth , logout}) => {
                                   onClick={setUserNotAuthenticated}>
                               Logout
                               </NavDropdown.Item>
-                        ]
+                           ]
                         )
                 : 
                   (
@@ -164,10 +156,7 @@ const Header = ({user, userAuth , logout}) => {
                     ]
 
                   )
-                      
                 
-                  
-
               }
 
               <NavDropdown.Divider  key='divider2'/>
@@ -192,22 +181,19 @@ const Header = ({user, userAuth , logout}) => {
        
     </div>
 
-
   );
 
 }
 
-function mapStateToProps ({userAuth, auth})  {
+function mapStateToProps ({ auth})  {
     return{
-      userAuth: userAuth.userAuthenticated,
       user: auth.user
     }
 }
 
 function mapDispatchToProps  (dispatch){
       return {
-        setAuthenticated : () => dispatch(ACTIONS.setUserAuthenticated()),
-        setNotAuthenticated : () => dispatch(ACTIONS.setUserNotAuthenticated()),
+     
         logout : ()=> dispatch(ACTIONS.logOut())
       }
 }

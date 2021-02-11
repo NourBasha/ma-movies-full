@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
 
+const bcrypt = require('bcrypt');
+
 module.exports = (app) =>{
 
     // google authentication
@@ -25,13 +27,13 @@ module.exports = (app) =>{
     })
 
     app.get('/api/current-user', (req,res)=>{
-        res.send(req.user);
+          res.send(req.user);
+       
     })
-
-
-
     
+
     // email and password authentication
+
     app.post('/api/authenticate/signup',
     
     async (req,res)=>{ // save the new user in db
@@ -44,11 +46,24 @@ module.exports = (app) =>{
                 return res.status(403).send({error:'user exists'});
             }
 
-            const user = await new User({email: req.body.email, password: req.body.password, displayName: req.body.username });
+            const user = new User({  email: req.body.email,
+                            password: req.body.password, 
+                            displayName: req.body.username
+                          });
+
+                  console.log('user before hash',user);
+
+                const salt = await bcrypt.genSalt(10); 
+                if(salt){
+                  console.log('salt has data : ',salt);
+                  user.password = await bcrypt.hash(user.password,salt);
+                  console.log('pass word after hash',user.password );
+                  }
 
 
+            console.log('collection rec : ',user);
 
-            user.save(function(err) {
+              await user.save(function(err) {
                 if(err) {
                   console.log(err);
                 } else {

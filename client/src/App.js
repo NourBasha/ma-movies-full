@@ -23,9 +23,10 @@ const App = () => {
   const dispatch = useDispatch();
   
   console.log('insdie App and dispatching action!');
-  dispatch(getCurrentUser());
-
+ 
   useEffect(()=>{
+
+    dispatch(getCurrentUser());
 
     /// set default login credentials for app viewers
 
