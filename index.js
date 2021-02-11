@@ -39,6 +39,20 @@ app.use(passport.session());
 require('./route_handlers/authentication')(app);
 
 
+if (process.env.NODE_ENV === 'production'){
+
+    //serves the entire build directory if route is not defined in server 
+    app.use(express.static('client/build')); 
+
+    // serves index.html if the requested route is not recognised and all the previous handlers fail to serve it 
+    const path = require('path');
+
+    app.get ('*', (req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
+
+}
+
 
 const PORT = process.env.PORT || 5000 ;
 
