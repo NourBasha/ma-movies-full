@@ -198,9 +198,10 @@ export const getCurrentUser = ()=>{
 
 
 
-export const logOut = ()=>{
+export const logOut = (payload)=>{
     return { 
-        type : ACTION_TYPES.USER_LOGOUT_SAGA
+        type : ACTION_TYPES.USER_LOGOUT_SAGA,
+        payload : payload
     }
 }
 

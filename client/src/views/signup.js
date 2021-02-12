@@ -117,6 +117,8 @@ const Signup = ({signUpResponse,addUser,history}) => {
       if (signUpResponse=== true || signUpResponse === false){ // response came, stop loading
         setLoading(false);
       }
+
+      
   },[signUpResponse])
 
 
@@ -155,7 +157,25 @@ const Signup = ({signUpResponse,addUser,history}) => {
         </div>
 
         <div className=" row d-flex justify-content-center ">
-          <div className=" signup-container">
+          <div className=" signup-container ">  
+          
+          <div className='row d-flex justify-content-center mb-1'>
+              <div className="google-btn " onClick={()=>{window.location.href='/auth/google'}}>
+                <div className="google-icon-wrapper">
+                  <img className="google-icon" alt=''
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                </div>
+                <p className="btn-text">
+                  <b>Sign-up with Google</b>
+                </p>
+              </div>
+          </div>
+         
+
+          <div class="separator appText">
+            or
+          </div>
+             
             <form onSubmit={signupSubmit} className="signup-form">
               <div className="mb-3">
                 <label className="form-label">Username</label>
@@ -283,7 +303,6 @@ const Signup = ({signUpResponse,addUser,history}) => {
         </div>
 
         <div className='row signup-response d-flex justify-content-center align-items-center'>
-
               <div className='col-4  success-or-failure '>
                     {
                         signUpResponse === true 
@@ -293,11 +312,8 @@ const Signup = ({signUpResponse,addUser,history}) => {
                             ( <h4 className='signup-failuer headings'> Sign up failed </h4>)
                             :null
                     }
-                          
-
               </div>
-
-             {
+                   {
                loading
                ?( <div className="col overlay" key='2'>
                       <LoadingOverlay

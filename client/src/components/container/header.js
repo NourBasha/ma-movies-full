@@ -1,58 +1,19 @@
-import { NavLink, useHistory} from "react-router-dom";
-import Context from "../../utils/context";
-import { useContext } from "react";
-import Toggle from "../../utils/theme/toggler";
+import { NavLink} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import * as ACTIONS from '../../store/actions/actions';
-import { useState } from "react";
 
-const Header = ({user,  logout}) => {
-
-  const context = useContext(Context);
-  const history = useHistory();
+const Header = ({user,  logout, history}) => {
 
 
-  const [linksExpanded,setLinksExpanded] = useState(false);
+  const handleLogout = () => {
 
-
-  const LoginPage = () => {
    
-    setLinksExpanded(false);
-    history.push('/login');
-   
-  }
+    console.log('header, history: ',history);
+     logout(history); // action creator
 
-  const signUp = ()=>{
-    setLinksExpanded(false);
-    history.push('/signup');
-  }
-
-  const googleLogin = ()=>{
-    setLinksExpanded(false);
-    window.location.href = '/auth/google';
-  }
-
-  const switchToProfile = () =>{
-    setLinksExpanded(false);
-    history.push('/profile');
-  }
-
-  const setUserNotAuthenticated = () => {
-
-    setLinksExpanded(false);
-   
-    logout(); // action creator
-
-    if(window.location.href.includes('/browser')){
-      history.push('/notAuthorised');
-    }else{
-      history.push('/');
-    }
    
   }
   
@@ -60,126 +21,79 @@ const Header = ({user,  logout}) => {
   return (
     <div className="header ">
 
-      <Navbar expand="lg"  expanded={linksExpanded}    >
+      <Navbar>
         
-        <Navbar.Brand className="navbar-brand  ma" href="/">
-          Ma
-          <span>Movies</span>
+        <Navbar.Brand className="navbar-brand  ma" >
+          <NavLink to='/' >
+            Ma
+            <span>Movies</span>
+            </NavLink>
         </Navbar.Brand>
-
     
-      <Navbar.Toggle  id='toggleButton'
-              className="toggleButton"
-              onClick={() => setLinksExpanded((prevExpanded)=>(prevExpanded=!prevExpanded))}
-                aria-controls="#header-links-container" >
-              <FontAwesomeIcon
-                icon="bars" color="#FFF" size="1x"
-              />
-        </Navbar.Toggle>
-      
-       
-       <Navbar.Collapse id="header-links-container"
-                       
-                        className="header-links-container" >
           
-          <Nav className=" header-links mx-auto" onClick={() => setLinksExpanded(false)}>       
+          <Nav className=" header-links ml-auto" >       
          
-              
-                <NavLink  to="/" exact 
-                      className="nav-link home-item d-flex justify-self-end justify-content-end" >
-                        Home
-                </NavLink>
+                {
+                    user 
+                    ?(
+                        [
+                            <NavLink to="/profile" exact
+                                key='profile'
+                                className="nav-link profile-item headerAppText" >
+                                    {user.displayName} 
+                                    {/* profile */}
+                            </NavLink>,
+                            <NavLink to="/browse" exact
+                                key='watchlist'
+                                className="nav-link watchlist-item headerAppText" >
+                                    Watchlist
+                            </NavLink>,
+                            <a 
+                            key='logout'
+                            className="nav-link logout-item headerAppText " 
+                            style={{cursor:'pointer'}}
+                            onClick={handleLogout}
+                            >
+                              Logout
+                           </a>
+                        ]
+                    ) 
+                    :(
+                      [  <NavLink to="/login" exact
+                            key='login'
+                            className="nav-link login-item headerAppText " >
+                                Login
+                        </NavLink>,
+                        <NavLink to="/signup" exact
+                            key='signup'
+                            className="nav-link signup-item headerAppText" >
+                                Sign-up
+                        </NavLink>]
+                    )
+                }
 
-                <NavLink to="/browse" exact
-                      className="nav-link browse-item  d-flex justify-self-end justify-content-end" >
-                        Browse
-                </NavLink>
+
+
 
           </Nav>
 
      
   
-
-          <NavDropdown drop='left'
-          
-                title={<span style={{display:'inline-block'}}>
-                          <FontAwesomeIcon  className='drop-icon' 
-                          icon='user-cog' size='lg' 
-                          color='#00dbdb'>  
-                          </FontAwesomeIcon>
-                          </span>
-                        }
-                id="basic-nav-dropdown "
-                className='header-dropdown d-flex justify-self-end justify-content-end justify-items-end'
-                style={{  color:'#00dbdb' }}
-            >
-               
-              {
-                user && user !== '' 
-                ? 
-                        (
-                          [
-                     
-                            <NavDropdown.Item className='username profile-item' 
-                                                key={'profile'} 
-                                                onClick={switchToProfile}>
-                                                {user.displayName}
-                            </NavDropdown.Item>                     
-                          
-                            , 
-                            <NavDropdown.Divider key='divider' />
-                            ,
-                            <NavDropdown.Item 
-                                  key={'logout'} 
-                                  className='logout-item'
-                                  onClick={setUserNotAuthenticated}>
-                              Logout
-                              </NavDropdown.Item>
-                           ]
-                        )
-                : 
-                  (
-                    [ 
-                      <NavDropdown.Item key={'login'} 
-                          className="login-item" 
-                          onClick={LoginPage}>
-                        Login
-                      </NavDropdown.Item>
-                      ,
-                      <NavDropdown.Item key={'signup'}   className="signup-item"onClick={signUp}>
-                            Sign Up
-                      </NavDropdown.Item>
-                        ,
-                      <NavDropdown.Item key={'googleLogin'}   className="google-item"onClick={googleLogin}>
-                          Login with google
-                      </NavDropdown.Item>
-                    ]
-
-                  )
-                
-              }
-
-              <NavDropdown.Divider  key='divider2'/>
-
-                <Toggle
-                  theme={context.appTheme}
-                  toggleTheme={context.toggleAppTheme}
-                  className="theme-item"
-                  collapseLinks=  {() => setLinksExpanded(false)} 
-                />
-            
-            </NavDropdown>
-
-        
-            
-        </Navbar.Collapse>
-      
     
       </Navbar>
       
     <button onClick={()=> {console.log(user)}}> user  </button>
        
     </div>
+
+// theme , apply this to browse
+
+// <Toggle
+// theme={context.appTheme}
+// toggleTheme={context.toggleAppTheme}
+// className="theme-item"
+// collapseLinks=  {() => setLinksExpanded(false)} 
+// />
 
   );
 
@@ -194,7 +108,7 @@ function mapStateToProps ({ auth})  {
 function mapDispatchToProps  (dispatch){
       return {
      
-        logout : ()=> dispatch(ACTIONS.logOut())
+        logout : (payload)=> dispatch(ACTIONS.logOut(payload))
       }
 }
-export default connect(mapStateToProps,mapDispatchToProps) (Header);
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(Header));

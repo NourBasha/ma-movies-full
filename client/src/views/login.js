@@ -43,6 +43,23 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
 
         <div className="row login-data d-flex justify-content-center align-items-center">
           <div className="form-container">
+
+          <div className='row d-flex justify-content-center mb-1'>
+              <div className="google-btn " onClick={()=>{window.location.href='/auth/google'}}>
+                <div className="google-icon-wrapper">
+                  <img className="google-icon" alt=''
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                </div>
+                <p className="btn-text">
+                  <b>Log-in with Google</b>
+                </p>
+              </div>
+          </div>
+
+          <div class="separator appText">
+            or
+          </div>
+
             <form onSubmit={loginSubmit}>
               <div className="mb-3">
                 <label className="form-label">Email address</label>

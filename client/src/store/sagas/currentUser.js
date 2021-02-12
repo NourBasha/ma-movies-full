@@ -24,14 +24,17 @@ import axios from 'axios';
 
 }
 
-function* logout() {
+function* logout(action) {
+  console.log(action.payload);
 
-  console.log('inside logout generator func : ');
+   const history = action.payload;
+
 
   const res = yield axios.get('/api/logout'); 
       console.log('logout res : ', res.data);
         if (res.data.message === 'done'){
           yield put({type:CURRENT_APP_USER, payload: false });
+          history.push('/');
         }
 }
 

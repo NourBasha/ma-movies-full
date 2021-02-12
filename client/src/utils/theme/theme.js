@@ -7,6 +7,7 @@ export const lightTheme = {
     background: 'url('+light+')',
     text: '#00dbdb',
     appText:'#b0ffff',
+    headerAppText: '#FFF',
     toggleBorder: '#FFF',
     filterBackground : '#136e6ed0'
 }
@@ -17,6 +18,7 @@ export const darkTheme = {
     background: 'url('+dark+')',
     text:'#00dbdb',
     appText:'#FFF',
+    headerAppText: '#b9b9b9',
     toggleBorder: '#000000',
     filterBackground : '#000000d0'
 }

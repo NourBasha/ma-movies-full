@@ -22,7 +22,13 @@ const Routes = ({user}) =>{
                  <div>
                  <Header  />
                     <Switch>
-                        <Route exact path='/' component={Home} />
+                        <Route exact path='/' > 
+                        {
+                           user
+                           ? <Redirect to='/browse' />
+                           : <Home />
+                        }
+                        </Route>
                         <Route exact  path='/browse'>
                             { user
                             ? <Browse /> 
@@ -33,7 +39,7 @@ const Routes = ({user}) =>{
                         <Route exact path='/signup' component={Signup} />
                         <Route exact path='/profile' component={Profile} />
                         <Route exact path='/login' component={Login} />
-                        <Route component={PageNotFound} />
+                        <Route path='*' component={PageNotFound} />
 
                     </Switch>
                  </div>
