@@ -190,8 +190,6 @@ export const setSignUpState= (payload)  => {
 }
 
 
-
-
 export const getCurrentUser = ()=>{
     return { 
         type : ACTION_TYPES.CURRENT_USER_SAGA

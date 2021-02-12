@@ -31,7 +31,6 @@ module.exports = (app) =>{
        
     })
     
-
     // email and password authentication
 
     app.post('/api/authenticate/signup',
@@ -90,7 +89,6 @@ module.exports = (app) =>{
     } 
     
     );
-
 
     app.post('/api/authenticate/login', 
 

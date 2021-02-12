@@ -13,28 +13,30 @@ import axios from "axios";
 
 function* signUpSuccess(action) {
   if (action) {
-    const { email, password, username } = action.payload;
+    console.log(action.payload)
+    const { email, password, username } = action.payload.user;
+    const history = action.payload.history;
 
     let result = "";
 
-    const user = { email, password, username };
-
     yield axios
-      .post("/api/authenticate/signup", user)
+      .post("/api/authenticate/signup", { email, password, username })
       .then((res) => {
-        result = res;
+        result = res.data;
       })
-      .catch((err) => {
+      .catch((err) => {  
        
       });
 
     if (result) {
-      yield put({ type: CURRENT_APP_USER, payload: result.data });
+      yield put({ type: CURRENT_APP_USER, payload: result });
       yield put({ type: SIGNUP_STATE, payload: true });
+      setTimeout(() => {
+        history.push('/browse');
+      }, 400);
       return;
     }
 
-    
       yield put({ type: CURRENT_APP_USER, payload: false });
       yield put({ type: SIGNUP_STATE, payload: false });
     
@@ -42,7 +44,7 @@ function* signUpSuccess(action) {
 }
 function* login(action) {
   if (action) {
-    const { email, password } = action.payload;
+    const { email, password, history } = action.payload;
 
     let result = "";
 
@@ -59,6 +61,10 @@ function* login(action) {
       const { password, ...user } = result;
       yield put({ type: CURRENT_APP_USER, payload: user });
       yield put({ type: LOGIN_STATE, payload: true });
+      setTimeout(() => {
+        history.push('/browse');
+      }, 400);
+     
       return;
     }
 

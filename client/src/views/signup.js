@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import { signUpSuccess } from "../store/actions/actions";
 import Footer from "../components/container/footer";
 
-const Signup = (props) => {
+import LoadingOverlay from 'react-loading-overlay'; 
+import BeatLoader from 'react-spinners/BeatLoader';
+import { withRouter } from "react-router";
+
+
+const Signup = ({signUpResponse,addUser,history}) => {
   const [username, setUsername] = useState("");
   const [usernameValid, setUsernameValid] = useState(true);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
@@ -20,6 +25,8 @@ const Signup = (props) => {
   const [passwordMatchText, setPasswordMatchText] = useState("");
 
   const [formValid, setFormValid] = useState(true);
+
+  const [loading, setLoading] = useState(false);
 
   const handlePassword = (e) => {
     setPasswordMatchText(e.target.value);
@@ -105,11 +112,17 @@ const Signup = (props) => {
     }
   };
 
+
+  useEffect(()=>{
+      if (signUpResponse=== true || signUpResponse === false){ // response came, stop loading
+        setLoading(false);
+      }
+  },[signUpResponse])
+
+
   const signupSubmit = (e) => {
     e.preventDefault();
-
     let user = {};
-
     if (passwordMatch && usernameValid && emailValid && passwordValid) {
       //push to object
       user.username = username;
@@ -121,7 +134,12 @@ const Signup = (props) => {
       setPassword("");
       setPasswordMatch("");
       setPasswordMatchText("");
-      props.addUser(user);
+
+      if(signUpResponse === null){ // start loading until a response comes back
+        setLoading(true);
+      }
+
+      addUser({user, history});
     } else {
       setFormValid(false);
     }
@@ -132,7 +150,7 @@ const Signup = (props) => {
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center text-center">
           <div className=" signup-heading ">
-            <h2 className="appText">Sign Up</h2>
+            <h2 className="headings">Sign Up</h2>
           </div>
         </div>
 
@@ -259,27 +277,38 @@ const Signup = (props) => {
             </form>
 
             {!formValid ? (
-              <p style={{ margin: "5px" }}>Invalid data entry</p>
+              <p style={{ margin: "5px" }}>Invalid entry</p>
             ) : null}
           </div>
         </div>
 
-        <div className='row d-flex justify-content-center'>
+        <div className='row signup-response d-flex justify-content-center align-items-center'>
 
-              <div className='col-6 offset-3 '>
-
+              <div className='col-4  success-or-failure '>
                     {
-                        props.signUpResponse === true 
-                        ?  <h4 className='signup-success'> Sign up success </h4>
+                        signUpResponse === true 
+                        ?  <h4 className='signup-success headings'> Sign up success </h4>
                         : 
-                          props.signUpResponse === false ?
-                            ( <h4 className='signup-failuer'> Sign up failed </h4>)
+                          signUpResponse === false ?
+                            ( <h4 className='signup-failuer headings'> Sign up failed </h4>)
                             :null
                     }
                           
 
               </div>
 
+             {
+               loading
+               ?( <div className="col overlay" key='2'>
+                      <LoadingOverlay
+                        className="loading-overlay"
+                        active={loading}
+                        spinner={<BeatLoader size={30} color={"#00dbdb"} />}
+                      ></LoadingOverlay>
+                  </div>
+                )
+                :null
+             }
         </div>
 
       </div>
@@ -302,4 +331,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)( withRouter(Signup));

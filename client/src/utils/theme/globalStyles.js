@@ -72,4 +72,10 @@ export const GlobalStyles = createGlobalStyle`
   transition: all 0.50s linear;
  }
 
+ .headings {
+  background : ${({theme}) => theme.filterBackground};
+  color: ${({theme}) => theme.appText}; 
+  transition: all 0.50s linear;
+}
+
   `

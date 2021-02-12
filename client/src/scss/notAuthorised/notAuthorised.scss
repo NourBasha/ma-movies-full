@@ -11,6 +11,9 @@
         padding: 50px 30px 50px 30px;
         background-color: $color-header-darker;
         border-radius:10px;
+        a{
+            color: lighten($color: $color-main, $amount: 35%);
+        }
 
     }
  }
