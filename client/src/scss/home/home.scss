@@ -1,7 +1,38 @@
 
 
 .home-container{
-    padding-top: 10px;
+   
+     .caro-row{
+       padding: 10px 20px;
+       .caro-col{
+          padding: 0;
+        .carousel {
+       
+         .carousel-inner{
+         
+          .carousel-item{
+
+            background-size: contain;
+            background-position: 50% 50%;
+            width: 100%;
+            height: 85vh;
+            img{
+              width: 100%;
+              height: 100%;
+              border-radius: 10px;
+
+              // width:100%;
+              // height: 100%;
+            }
+
+            .caption{
+              background-color: #000000c7;
+            }
+          }
+         }
+        }
+       }
+     }
     
     
     .home-movies{

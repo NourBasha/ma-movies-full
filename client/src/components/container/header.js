@@ -82,7 +82,7 @@ const Header = ({user,  logout, history}) => {
     
       </Navbar>
       
-    <button onClick={()=> {console.log(user)}}> user  </button>
+    {/* <button onClick={()=> {console.log(user)}}> user  </button> */}
        
     </div>
 

@@ -70,56 +70,81 @@ const Home = (props) => {
     }
   }, [getMovies, getCaroMovies]);
 
-  const DisplayCaroselMovies = ()=>{
-
-    console.log('inside displaying caro');
-    console.log('inside displaying caro', caroMovieList);
-
-    for(let i=0; i<caroMovieList.length;i++){
-      console.log( 'index : ',DATA.IMAGE_BIG+caroMovieList[i].poster_path);
-    }
-
-    const list = caroMovieList.map((movie)=>
-
-               
-              <Carousel.Item key={movie.title}>
-                  <img
-                    className="d-block w-100"
-                    src={DATA.IMAGE_BIG+movie.poster_path}
-                    alt="First slide"
-                  />
-                  <Carousel.Caption>
-                    <h3>{movie.title}</h3>
-                    <p>{movie.overview}</p>
-                  </Carousel.Caption>
-            </Carousel.Item>
-            
-      
-      );
-
-      console.log('list is : ', list);
-
-
-      return list;
-      
-  }
-
 
   return (
     <div className=" home-container">
       {/* start of carousel */}
 
-      <Carousel>
+     <div className='row caro-row'>
+          <div className='col-12 col-md-6 caro-col'>
+                <Carousel>
+                      {
+                        caroMovieList.length
+                        ? (
+                          caroMovieList.map((movie,index)=>{
+                            if(index<=9){
+                            return(
+                              <Carousel.Item key={movie.title}
+                              className='img-fluid'
+                              >
+                                  <img
+                                    className="d-block w-100"
+                                    src={DATA.IMAGE_BIG+movie.poster_path}
+                                    alt="First slide"
+                                  />
+                                  <Carousel.Caption>
+                                      <div className='caption'>
+                                      <h3>{movie.title}</h3>
+                                      <p>{movie.overview}</p>
+                                      </div>
+                                  </Carousel.Caption>
+                            </Carousel.Item>
+                            ) 
+                           }
+                          }
+                            )
 
+                        )
+                        :null
+                      }
+                  
+              </Carousel>
+          </div>
+        
+          <div className=' d-none d-md-block col-md-6 caro-col pl-1'>
+                <Carousel>
+                      {
+                        caroMovieList.length
+                        ? (
+                          caroMovieList.map((movie,index)=>{
+                            if(index>9){
+                            return(
+                              <Carousel.Item key={movie.title}
+                              className='img-fluid'
+                              >
+                                  <img
+                                    className="d-block w-100"
+                                    src={DATA.IMAGE_BIG+movie.poster_path}
+                                    alt="First slide"
+                                  />
+                                  <Carousel.Caption>
+                                    <h3>{movie.title}</h3>
+                                    <p>{movie.overview}</p>
+                                  </Carousel.Caption>
+                            </Carousel.Item>
+                            ) 
+                           }
+                          }
+                            )
 
-      {
-        caroMovieList.length
-        ? <DisplayCaroselMovies />
-        :null
-      }
-           
-
-        </Carousel>
+                        )
+                        :null
+                      }
+                  
+              </Carousel>
+          </div>
+        
+     </div>
       
       {/* end of carousel */}
 
