@@ -81,5 +81,10 @@ export const GlobalStyles = createGlobalStyle`
   color: ${({theme}) => theme.appText}; 
   transition: all 0.50s linear;
 }
+ .headings-reverse {
+  background : ${({theme}) => theme.filterBackgroundReverse};
+  color: ${({theme}) => theme.appText}; 
+  transition: all 0.50s linear;
+}
 
   `

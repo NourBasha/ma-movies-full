@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef, useCallback } from "react";
+import React, { useEffect, useContext, useRef, useCallback,useState } from "react";
 import axios from "axios";
 import Context from "../utils/context";
 import Footer from "../components/container/footer";
@@ -8,17 +8,50 @@ import MovieCard from "../components/functional/movieCard";
 import Carousel from 'react-bootstrap/Carousel';
 
 import * as DATA from '../utils/data';
-
-import img from '../assets/imgs/alt.jpg';
-import img2 from '../assets/imgs/backgroundLight.jpg';
-
+import Rating from '../components/functional/rating';
+import { Link } from "react-router-dom";
 
 let moviesList = [];
 let caroMovieList= [];
-
 const Home = (props) => {
   const context = useContext(Context);
   const contextRef = useRef(useContext(Context));
+  const [activeSlide, setActiveSlide] = useState(0);
+  
+
+
+const observeCarousel = () =>{
+    
+  let elemList = document.getElementsByClassName('carousel-item');
+    console.log(elemList);
+
+    [...elemList].forEach((element,index)=>{
+      let observer = new MutationObserver(
+        function(mutations) {
+                          mutations.forEach(
+                            function(mutation){
+                              console.log('mutation is : ',mutation);
+                              if(mutation.attributeName === "class"){
+                                  let currentClassState = mutation.target.classList.contains('active');
+                                  
+                                  if(currentClassState){
+                                    console.log('contains active ? ', currentClassState);
+                                    console.log('contains active, index', index);
+                                    setActiveSlide(index);
+                                  }
+                                
+                              }
+                          }
+                          );
+                      }
+                      );
+    
+      observer.observe(element, {attributes: true});
+    })
+
+  
+}
+
 
   const getMovies = useCallback(() => {
     axios
@@ -56,6 +89,7 @@ const Home = (props) => {
   },[])
 
 
+
   useEffect(() => {
 
     getCaroMovies()
@@ -68,88 +102,108 @@ const Home = (props) => {
     } else {
       getMovies();
     }
+
+
+
   }, [getMovies, getCaroMovies]);
+
+
+  useEffect(()=>{
+        
+    if(caroMovieList.length){
+      observeCarousel();
+    }
+     
+  
+  })
 
 
   return (
     <div className=" home-container">
+
+      {/* start of heed message */}
+            <div className='container-fluid headings head-message'>
+              <div className='row '>
+                  <div className='col-12 head-col '>
+                      <h1 className='appText'> Discover the latest movies</h1>
+                      <h5 className='appText'>quickly &#38; easily</h5>
+                  </div>
+              </div>
+
+            </div>
+      {/* end of heed message */}
+
+
       {/* start of carousel */}
-
-     <div className='row caro-row'>
-          <div className='col-12 col-md-6 caro-col'>
-                <Carousel>
-                      {
-                        caroMovieList.length
-                        ? (
-                          caroMovieList.map((movie,index)=>{
-                            if(index<=9){
-                            return(
-                              <Carousel.Item key={movie.title}
-                              className='img-fluid'
-                              >
-                                  <img
-                                    className="d-block w-100"
-                                    src={DATA.IMAGE_BIG+movie.poster_path}
-                                    alt="First slide"
-                                  />
-                                  <Carousel.Caption>
-                                      <div className='caption'>
-                                      <h3>{movie.title}</h3>
-                                      <p>{movie.overview}</p>
-                                      </div>
-                                  </Carousel.Caption>
-                            </Carousel.Item>
-                            ) 
-                           }
-                          }
-                            )
-
-                        )
-                        :null
-                      }
-                  
-              </Carousel>
-          </div>
-        
-          <div className=' d-none d-md-block col-md-6 caro-col pl-1'>
-                <Carousel>
-                      {
-                        caroMovieList.length
-                        ? (
-                          caroMovieList.map((movie,index)=>{
-                            if(index>9){
-                            return(
-                              <Carousel.Item key={movie.title}
-                              className='img-fluid'
-                              >
-                                  <img
-                                    className="d-block w-100"
-                                    src={DATA.IMAGE_BIG+movie.poster_path}
-                                    alt="First slide"
-                                  />
-                                  <Carousel.Caption>
-                                    <h3>{movie.title}</h3>
-                                    <p>{movie.overview}</p>
-                                  </Carousel.Caption>
-                            </Carousel.Item>
-                            ) 
-                           }
-                          }
-                            )
-
-                        )
-                        :null
-                      }
-                  
-              </Carousel>
-          </div>
-        
-     </div>
+        <div className='container-fluid'>
+          
+           <div className='row caro-row pt-0 pl-4 pr-4 pb-4'>
+       
+       {
+         caroMovieList.length
+         ?([ <div key='carousel' className='col-12 col-md-7 caro-col'>
+              <Carousel>
+                    {
+                        caroMovieList.map((movie,index)=>
+                      
+                            <Carousel.Item
+                            key={movie.title}  
+                             >
+                                <img
+                                  className="d-block w-100"
+                                  src={DATA.IMAGE_BIG+movie.poster_path}
+                                  alt="First slide"
+                                />
+                            
+                          </Carousel.Item>                         
+                          )
+                    }
+                
+            </Carousel>
+        </div>,
       
+        <div  key='desc' className='col-12 col-md-5 p-0 caro-desc'>
+           
+                    <div className="card headings" >
+                        <div className="card-body">
+                           <div className='card-data'>
+                              <h5 className="card-title appText ">{caroMovieList[activeSlide].title}</h5>
+                                 <div className='rating-container'>
+                                    <h6 className="card-subtitle appText">{caroMovieList[activeSlide].vote_average}</h6>
+                                    <span>
+                                       <Rating rating={caroMovieList[activeSlide].vote_average} />
+                                    </span>
+                                </div>
+                              <p className="card-text appText">{caroMovieList[activeSlide].overview}</p>
+                            </div>
+                        
+                         <div className='card-links '>
+                           <Link to={{pathname:'/movie/'+caroMovieList[activeSlide].id}} className="card-link">More</Link>
+                           </div>
+                         </div>
+                     </div>
+                        
+        </div>
+        ])
+         :null
+       }
+   </div>
+    
+        </div>
       {/* end of carousel */}
 
       {/* start of movies */}
       <div className=" home-movies container-fluid ">
+
+           <div className='row movies-message'>
+             
+                  <div className='col-12 message-col headings'>
+                      <h2 className='appText'> Long standing hits</h2>
+                  </div>
+             
+
+            </div>
+
         <div className="head-movies row d-flex justify-content-center pl-4 pr-4">
           {context.redHomeLoading === false ? (
             <MovieCard movieList={moviesList} />

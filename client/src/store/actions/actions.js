@@ -206,3 +206,18 @@ export const logOut = (payload)=>{
 }
 
 
+export const saveMovie = (payload)=>{
+    return { 
+        type : ACTION_TYPES.SAVE_MOVIE_SAGA,
+        payload : payload
+    }
+}
+
+export const deleteMovie = (payload)=>{
+    return { 
+        type : ACTION_TYPES.DELETE_MOVIE_SAGA,
+        payload : payload
+    }
+}
+
+

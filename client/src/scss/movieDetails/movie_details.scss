@@ -24,7 +24,22 @@
           h1{
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: white;
-            
+          
+          }
+          .icons-wrapper{
+
+            .icon-saved-wrapper{
+              
+            }
+            .icon-unsaved-wrapper{
+              
+            }
+
+            svg{
+              position: absolute ;
+              top: 15px;
+              left: 15px;
+            }
           }
         }
   

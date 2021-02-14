@@ -1,7 +1,10 @@
 import React from 'react'
 import { func, string } from 'prop-types';
 // import styled from "styled-components"
-import NavDropdown from "react-bootstrap/NavDropdown";
+import "react-theme-toggle-button/dist/index.css";
+import DarkModeToggle from "react-dark-mode-toggle";
+
+
 
 // const A = styled.a`
 
@@ -21,12 +24,10 @@ const Toggle = ({theme,  toggleTheme, collapseLinks }) => {
 
    
     return (
-        
-            <NavDropdown.Item onClick={()=>{toggleTheme(); collapseLinks();}}  className="nav-link">
-            Switch Theme
-            </NavDropdown.Item>
-        
-      
+           // <ToggleButton isDark={theme ==='dark'?true:false} onChange={() => toggleTheme() } />
+            <DarkModeToggle onChange={()=>{toggleTheme()}} checked={theme ==='dark'?true:false}
+                            size={80}
+                            />
     );
 };
 

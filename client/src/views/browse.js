@@ -7,6 +7,7 @@ import Context from "../utils/context";
 //import img from "../assets/imgs/alt.jpg";
 import MovieCard from '../components/functional/movieCard';
 
+import Toggle from '../utils/theme/toggler';
 
 
 
@@ -386,6 +387,11 @@ const getMovies = useCallback(()=>{
  
   return (
     <div className="browse " >
+
+        <div className='switch-theme '>    
+            <Toggle theme={context.appTheme} toggleTheme={context.toggleAppTheme} />
+        </div>
+      
         
       <div className="browse-container container-fluid ">
 

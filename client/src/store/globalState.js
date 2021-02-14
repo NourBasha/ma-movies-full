@@ -10,7 +10,7 @@ import Context from '../utils/context';
 
 const GlobalState = (props)=>{
 
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState('dark');
 
   const [componentMounted, setComponentMounted] = useState(false);
 

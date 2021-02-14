@@ -1,11 +1,44 @@
 
 
 .home-container{
-   
+  
+      .head-message{
+        margin-top: 5px;
+        .row{
+          margin-bottom: 10px;
+          .head-col{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            h1{
+              display: inline-block;
+              font-size: 65px;
+              font-family: 'Fugaz One', cursive;
+            }
+            h5{
+              display: inline-block;
+              font-size: 35px;
+              font-family: 'Fugaz One', cursive;
+             
+            }
+          }
+          
+        }
+      }
+
+
      .caro-row{
-       padding: 10px 20px;
+       display: flex;
+       padding: 10px 0px;
+       justify-content: space-evenly;
+       
        .caro-col{
           padding: 0;
+          
+          
         .carousel {
        
          .carousel-inner{
@@ -25,19 +58,92 @@
               // height: 100%;
             }
 
-            .caption{
-              background-color: #000000c7;
-            }
+           
           }
          }
         }
        }
+
+     .caro-desc{
+      
+        align-self:stretch;
+          .card {
+            height: 100%;
+            border-radius: 10px;
+            .card-body{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .card-data{
+                  display: flex;
+                  flex-direction: column;
+
+                  h5{
+                    align-self: center;
+                      font-size: 65px;
+                      white-space:pre-wrap;
+                     @extend %animate-inward-side;
+                   
+                  }
+                 
+                  .rating-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 12px;
+                    h6{
+                     
+                     font-size:35px ;
+                     padding-right: 5px;
+                     @extend %animate-inward-side;
+
+                    }
+                    span{
+                     // @extend %animate-inward-side;
+                    }
+                  }
+                  p{
+                    line-height: 1.9;
+                    align-self: center;
+                    justify-self: center;
+                    @extend %animate-inward-side;
+                    font-size: 18px;
+                  }
+                }
+          
+                .card-links{
+                    display: flex;
+                    justify-content: flex-end;
+                  a{
+                    display: inline-block;
+                    
+                  }
+                }
+            }
+          
+          }
+       }
+
      }
     
     
     .home-movies{
         padding-bottom: 10px;
- 
+
+        .movies-message{
+          margin-top: 10px;
+          margin-bottom: 10px;
+          .message-col{
+            display: flex;
+            justify-content: center;
+            h2{
+              font-size: 40px;
+              font-family: 'Fugaz One', cursive;
+              padding: 10px 0;
+            }
+          }
+        }
     }
 
     .sign-up {

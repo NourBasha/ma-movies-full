@@ -24,9 +24,9 @@ const Header = ({user,  logout, history}) => {
       <Navbar>
         
         <Navbar.Brand className="navbar-brand  ma" >
-          <NavLink to='/' >
-            Ma
-            <span>Movies</span>
+           <NavLink to='/' >
+              Ma
+              <span>Movies</span>
             </NavLink>
         </Navbar.Brand>
     
@@ -48,14 +48,14 @@ const Header = ({user,  logout, history}) => {
                                 className="nav-link watchlist-item headerAppText" >
                                     Watchlist
                             </NavLink>,
-                            <a 
+                            <div
                             key='logout'
                             className="nav-link logout-item headerAppText " 
                             style={{cursor:'pointer'}}
                             onClick={handleLogout}
                             >
                               Logout
-                           </a>
+                           </div>
                         ]
                     ) 
                     :(
@@ -82,18 +82,11 @@ const Header = ({user,  logout, history}) => {
     
       </Navbar>
       
-    {/* <button onClick={()=> {console.log(user)}}> user  </button> */}
+  
        
     </div>
 
-// theme , apply this to browse
 
-// <Toggle
-// theme={context.appTheme}
-// toggleTheme={context.toggleAppTheme}
-// className="theme-item"
-// collapseLinks=  {() => setLinksExpanded(false)} 
-// />
 
   );
 

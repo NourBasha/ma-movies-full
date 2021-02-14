@@ -1,20 +1,35 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 //import "./movie_details.scss";
 import * as DATA from "../utils/data";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import alt from "../assets/imgs/alt.jpg";
+import Rating from '../components/functional/rating';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
+import {saveMovie,deleteMovie} from '../store/actions/actions';
 
 let movie = [];
 let movieVideos = [];
 let movieCastCrew = [];
 
+
 const MovieDetails = (props) => {
   const [loadingError, setLoadingState] = useState(true);
   const [loadingCrewError, setLoadingCrewState] = useState(true);
+  const [movieSaved, setMovieSaved] = useState(false);
 
-  useEffect(()=>{
-      // document.getElementsByClassName('header')[0].style.backgroundColor = '#202429'
+
+  const checkSavedMovie = useCallback( async ()=>{
+      const existing = await axios.post('/api/movie/watchlist/issaved',{movie_id:props.data.match.params.id});
+     console.log(existing);
+      if(Object.keys(existing.data).length!== 0){
+        console.log('client, movie : ',existing);
+       return setMovieSaved(true);
+      }else {
+        console.log('client, movie not saved');
+        setMovieSaved(false);
+      }
+     
   },[])
 
   useEffect(() => {
@@ -58,9 +73,12 @@ const MovieDetails = (props) => {
         })
         .finally(() => {});
     }
+
+
     getmovieDetails();
+    checkSavedMovie()
     getCrew();
-  }, [props.data.match.params.id]);
+  }, [props.data.match.params.id,checkSavedMovie]);
 
   function Genres(props) {
     const genreList = props.genres.map((genre, index) => (
@@ -76,21 +94,14 @@ const MovieDetails = (props) => {
     return genreList;
   }
 
-  function Rating(props) {
-    let arr = [];
-    for (let i = 0; i < 10; i++) {
-      arr.push(
-        <span key={i}>
-          {i + 1 <= Math.round(props.rating) ? (
-            <FontAwesomeIcon icon="star" color="yellow" />
-          ) : (
-            <FontAwesomeIcon icon="star" color="gray" />
-          )}
-        </span>
-      );
-    }
-    return arr;
-  }
+ const handleSave= ()=>{
+    props.saveMovietoAPI({movie_id:props.data.match.params.id});
+    setMovieSaved(true);
+ }
+ const handleDelete= ()=>{
+    props.deleteMovieFromAPI({movie_id:props.data.match.params.id});
+    setMovieSaved(false);
+ }
 
   function MovieTrailer(props) {
     const videoList = props.trailers.map((video, index) => (
@@ -219,9 +230,21 @@ const MovieDetails = (props) => {
                         )}
                       </div>
                       <div className="col-12 col-lg-8  movie-meta">
-                        <div className="row d-flex justify-content-center  text-center movie-name-row pl-1 pr-1">
+                        <div className="row  text-center d-flex  justify-content-center movie-name-row pl-1 pr-1">
                           <h1> {movie.title}</h1>
+                          <span className='icons-wrapper' >
+                          {  movieSaved?(
+                            <div className='icon-saved-wrapper' onClick={handleDelete}>
+                              <FontAwesomeIcon icon='bookmark' size='4x' style={{ color: 'cayan' }}></FontAwesomeIcon>
+                            </div>
+                          )
+                            : (<div className='icon-unsaved-wrapper' onClick={handleSave} >
+                              <FontAwesomeIcon icon={['far', 'bookmark']} size='4x' style={{ color: 'yellow' }}></FontAwesomeIcon>
+                            </div>)
+                          }                          
+                          </span>
                         </div>
+                      
 
                         <div className="row d-flex justify-content-center movie-year-row">
                           {movie.release_date ? (
@@ -348,4 +371,11 @@ const MovieDetails = (props) => {
   );
 };
 
-export default MovieDetails;
+ const mapDispatchToProps = (dispatch)=>{
+    return{
+        saveMovietoAPI : (payload) => dispatch(saveMovie(payload)),
+        deleteMovieFromAPI : (payload) => dispatch(deleteMovie(payload))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(MovieDetails);

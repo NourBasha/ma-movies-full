@@ -8,18 +8,24 @@
       padding: 0;
       margin: 0 auto 0 0;
       font-weight: bold;
-      &:hover {
-        color: #178bf8de;
+    
+      a{
+        text-decoration: none;
+        &:hover {
+          color: #178bf8de;
+        }
+        span {
+          color: #00dbdb;
+          font-size: 30px;
+          font-weight: bold;
+        }
       }
-      span {
-        color: #00dbdb;
-        font-size: 30px;
-        font-weight: bold;
-      }
+     
     }
 
     .header-links {
       .nav-link {
+        color: blue;
         &:hover {
           color: $color-main-soft !important;
         }

@@ -10,20 +10,20 @@ const MovieCard= (props) => {
         key={movie.id}
         className="poster-container col-6 col-md-4 col-lg-3 p-0  p-md-1 p-lg-2 "
       >
-          <div className="rating">
+          <div className="rating headings">
                 <span className="top-span">
-                  <FontAwesomeIcon  icon="star"   className="next mr-1" color="yellow" />
+                  <FontAwesomeIcon  icon="star" className="next mr-1" color="yellow" />
                   { movie.vote_average }</span>
                   <span style={{'fontSize':15+'px'}}>&frasl;10</span>
               </div>
 
 
-              <div className="title justify-content-center ">
+              <div className="title justify-content-center headings ">
                 <span> { movie.title } </span>
               </div>
 
         
-              <div className="release_date">
+              <div className="release_date headings">
                       {movie.release_date ? (
                     <span> {movie.release_date.slice(0, 4)} </span>
                 ) : (

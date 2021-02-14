@@ -2,7 +2,14 @@
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faStar, faUserCog , faBars,faCheckCircle, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
+import { faStar,
+   faUserCog , 
+   faBars,
+   faCheckCircle,
+    faTimesCircle,
+    faBookmark
+  } from "@fortawesome/free-solid-svg-icons";
+  import {faBookmark as faBookmarkRegular} from '@fortawesome/free-regular-svg-icons';
 
 import {ThemeProvider} from "styled-components";
 import {GlobalStyles} from './utils/theme/globalStyles';
@@ -15,7 +22,7 @@ import { useDispatch } from "react-redux";
 import {getCurrentUser} from './store/actions/actions';
 
 
-library.add(fab, faStar,faUserCog,faBars, faCheckCircle, faTimesCircle);
+library.add(fab, faStar,faUserCog,faBars, faCheckCircle, faTimesCircle, faBookmark,faBookmarkRegular);
 
 const App = () => {
 
