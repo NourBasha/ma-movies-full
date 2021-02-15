@@ -71,6 +71,9 @@ export const GlobalStyles = createGlobalStyle`
   color: ${({theme}) => theme.appText}; 
   transition: all 0.50s linear;
  }
+ .appTextTransition {
+  transition: all 0.50s linear;
+ }
  .headerAppText {
   color: ${({theme}) => theme.headerAppText} !important; 
   transition: all 0.50s linear;

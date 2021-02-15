@@ -56,7 +56,7 @@ const Footer = (props)=>{
           <div className="col-12 col-lg-3 text-left footer-address">
             <h6>Contact Us</h6>
             <ul>
-              <li>24 Gamal Abdel Nasser st, Alexandria, Egypt</li>
+              <li>Miami, Alexandria, Egypt</li>
               <li>Phone: +201020696796</li>
               <li>
                 Email: <a href="/">Nour.basha2011@gmail.com</a>

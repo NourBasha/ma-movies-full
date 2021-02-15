@@ -138,7 +138,7 @@ const MovieDetails = (props) => {
             cast.profile_path !== undefined &&
             cast.profile_path !== "" &&
             cast.profile_path !== null ? (
-              <div className="cast-card text-center  col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1"
+              <div className="cast-card text-center   col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1"
               key={cast.id}>
                 <div className="card cast-card">
                   <img
@@ -147,8 +147,8 @@ const MovieDetails = (props) => {
                     alt="loading"
                   />
                   <div
-                    className="card-body pl-0 pr-0 pt-2 - pb-2"
-                    style={{ backgroundColor: "#007979da" }}
+                    className="card-body headings pl-0 pr-0 pt-2 - pb-2"
+                    
                   >
                     <h5 className="card-title" style={{ color: "white" }}>
                       {cast.name}
@@ -173,7 +173,7 @@ const MovieDetails = (props) => {
                     src={alt}
                     alt="loading"
                   />
-                  <div className="card-body pl-0 pr-0 pt-2 - pb-2"  style={{ backgroundColor: "#007979" }}>
+                  <div className="card-body headings pl-0 pr-0 pt-2 - pb-2" >
                     <h5 className="card-title" style={{ color: "white" }}> {cast.name} </h5>
                     <div style={{ color: "white" }}>
                       <span className="as">
@@ -210,10 +210,10 @@ const MovieDetails = (props) => {
         <div className="container-fluid movie bg-dark" style={{backgroundImage:"url("+DATA.IMAGE_BIG+movie.backdrop_path+")"}}>
       
           <div className="row "  > {/* this area is created to contain the background image */}
-              <div /*style={{backgroundImage: DATA.IMAGE_BIG+movie.backdrop_path}}*/ className="col-12 data-video-container" >
+              <div className="col-12 data-video-container" >
                     {/* start of movie data row */}
                     <div className="row first-row ">
-                      <div className="col-12   col-md-4 align-self-center">
+                      <div className="col-12 image-col  col-md-4 align-self-center">
                         {movie.poster_path ? (
                           <img
                             className="poster-image img-fluid "
@@ -227,83 +227,92 @@ const MovieDetails = (props) => {
                             alt=""
                           />
                         )}
+                        { props.user 
+                              ?
+                                ( <span className='icons-wrapper' >
+                                        {   
+                                          movieSaved?(
+                                          <div className='icon-saved-wrapper' onClick={handleDelete}>
+                                            <div className='saved' title='unsave'>
+                                            <FontAwesomeIcon icon='bookmark' size='5x' title='unsave'>
+                                            </FontAwesomeIcon>
+                                            </div>
+                                            <div className='check-saved'>
+                                            <FontAwesomeIcon icon='check' size='2x' title='unsave' ></FontAwesomeIcon>
+                                            </div>
+                                          </div>
+                                            )
+                                          : (<div className='icon-unsaved-wrapper' onClick={handleSave} >
+                                            <FontAwesomeIcon icon={['far', 'bookmark']} size='5x' title='save'></FontAwesomeIcon>
+                                          </div>)
+                                        }                          
+                                  </span>
+                                  )
+                               :null
+                            }
                       </div>
-                      <div className="col-12 col-lg-8  movie-meta">
-                        <div className="row  text-center d-flex  justify-content-center movie-name-row pl-1 pr-1">
-                          <h1> {movie.title}</h1>
-                          <span className='icons-wrapper' >
-                          {  
-                            movieSaved?(
-                            <div className='icon-saved-wrapper' onClick={handleDelete}>
-                              <div className='saved' title='unsave'>
-                              <FontAwesomeIcon icon='bookmark' size='4x' title='unsave'>
-                              </FontAwesomeIcon>
-                              </div>
-                              <div className='check-saved'>
-                              <FontAwesomeIcon icon='check' size='2x' title='unsave' ></FontAwesomeIcon>
-                              </div>
-                            </div>
-                          )
-                            : (<div className='icon-unsaved-wrapper' onClick={handleSave} >
-                              <FontAwesomeIcon icon={['far', 'bookmark']} size='4x' title='save'></FontAwesomeIcon>
-                            </div>)
-                          }                          
-                          </span>
-                        </div>
-
-                        <div className="row d-flex justify-content-center movie-year-row">
-                          {movie.release_date ? (
-                            <h3> {movie.release_date.slice(0, 4)}</h3>
-                          ) : (
-                            <p></p>
-                          )}
-                        </div>
-
-                        <div className="row d-flex justify-content-center movie-genre-row">
-                          {movie.genres ? <Genres genres={movie.genres} /> : <p></p>}
-                        </div>
-
-                        <div className="row d-flex justify-content-center rating-row">
-                          <div className="rating-col">
-                            <div className="rate-val">
-                              <span className="val">{movie.vote_average}</span>
-                              <span className="out-of">&frasl;10</span>
-                            </div>
+                        <div className="col-12 col-lg-8 headings movie-meta">
+                          <div className="row  text-center d-flex  justify-content-center movie-name-row pl-1 pr-1">
+                            <h1> {movie.title}</h1>
+                           
                           </div>
 
-                          <div className="rate-star">
-                            {movie.vote_average ? (
-                              <Rating rating={movie.vote_average} size={'lg'} />
+                          <div className="row d-flex justify-content-center movie-year-row">
+                            {movie.release_date ? (
+                              <h3> {movie.release_date.slice(0, 4)}</h3>
                             ) : (
                               <p></p>
                             )}
                           </div>
-                        </div>
 
-                        <div className="row d-flex justify-content-center text-center overview-row">
-                          <div className="col justify-self-center">
-                            <h6>Overview</h6>
-                            <p>{movie.overview}</p>
+                          <div className="row d-flex justify-content-center movie-genre-row">
+                            {movie.genres ? <Genres genres={movie.genres} /> : <p></p>}
+                          </div>
+
+                          <div className="row d-flex justify-content-center rating-row">
+                            <div className="rating-col">
+                              <div className="rate-val">
+                                <span className="val">{movie.vote_average}</span>
+                                <span className="out-of">&frasl;10</span>
+                              </div>
+                            </div>
+
+                            <div className="rate-star">
+                              {movie.vote_average ? (
+                                <Rating rating={movie.vote_average} size={'lg'} />
+                              ) : (
+                                <p></p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="row d-flex justify-content-center text-center overview-row">
+                            <div className="col justify-self-center">
+                              <h6>Overview</h6>
+                              <p>{movie.overview}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
+                     </div>
                     {/* end of movie data row */}
 
                     {/* start of trailer video row */}
-                    <div className="row video-row">
+                    <div className="row video-row d-flex justify-content-center">
                       {movieVideos.length !== 0 ? (
-                        <div style={{width:'100%', height:'100%'}}> 
-                            <div className="col-12 video-heading-col justify-content-center d-flex">
-                                   <h2 className='video-heading appText'>Trailer</h2>
-                              </div>
+                        [ <div key='trailer-head' className="col-12 video-heading-col headings justify-content-center d-flex">
+                                  <h2 className='video-heading appText'>Trailer</h2>
+                            </div>,
 
-                            <div className="col " style={{ justifyself: "center" }}>
-                              <MovieTrailer trailers={movieVideos} />
-                            </div>
-                        </div>
+                          <div  key='trailer' className="col-10 " style={{ justifyself: "center" }}>
+                            <MovieTrailer trailers={movieVideos} />
+                          </div>
+                          ]
                       ) : (
-                        <p className=" col-12 text-center" style={{ color: "white", fontSize: 16 + "px" }}>
+                        <p className=" col-12 text-center headings" 
+                        style={{ color: "white",
+                         fontSize: 16 + "px",
+                         padding:'10px',
+                         borderRadius:'10px' }}>
                           Sorry, No Trailer Available for This movie.
                         </p>
                       )}
@@ -328,12 +337,16 @@ const MovieDetails = (props) => {
                       {
                         movieCastCrew.cast.length>0
                         ?
-                          (  <div className="row cast-row-heading justify-content-center"> 
+                          (  <div className="row cast-row-heading headings justify-content-center"> 
                                   <h2 className='cast-heading appText'>Cast</h2>                                
                              </div>
                           )
                         :(
-                          <p className="col-12 text-center" style={{color:'white', fontSize: 16 + "px"}}>
+                          <p className="col-12 text-center headings" 
+                          style={{color:'white', 
+                          fontSize: 16 + "px",
+                          padding:'10px',
+                          borderRadius:'15px'}}>
                           Sorry, No Cast available for this movie</p>
                         )
                       }
@@ -347,7 +360,12 @@ const MovieDetails = (props) => {
                </div>
 
 
-                  : <p className="col-12 text-center" style={{color:'white', fontSize: 16 + "px"}}> Sorry, No Cast available for this movie</p>
+                  : <p className="col-12 text-center headings" 
+                  style={{color:'white', 
+                  fontSize: 16 + "px",
+                  padding:'10px',
+                  borderRadius:'15px'}}>
+                  Sorry, No Cast available for this movie</p>
 
               
               )}
@@ -376,6 +394,12 @@ const MovieDetails = (props) => {
   );
 };
 
+const mapStateToProps = ({auth})=>{
+  return{
+    user : auth.user
+  }
+}
+
  const mapDispatchToProps = (dispatch)=>{
     return{
         saveMovietoAPI : (payload) => dispatch(saveMovie(payload)),
@@ -383,4 +407,4 @@ const MovieDetails = (props) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(MovieDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

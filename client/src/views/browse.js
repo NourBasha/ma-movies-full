@@ -462,10 +462,10 @@ const getMovies = useCallback(()=>{
       </div>
 
       <nav aria-label=" Page navigation paging">
-        <ul className="pagination justify-content-center paging ">
-          <li className="page-item prev-page-item" onClick={prevPageClick}>
+        <ul className="pagination justify-content-center  paging ">
+          <li className="page-item prev-page-item " onClick={prevPageClick}>
             <button
-              className="page-link prev-page prev-page-item"
+              className="page-link prev-page prev-page-item headings"
               aria-label="Previous"
             >
               <span aria-hidden="true">&laquo;</span>
@@ -473,23 +473,23 @@ const getMovies = useCallback(()=>{
             </button>
           </li>
           <li
-            className="page-item paging-item first-page active"
+            className="page-item paging-item first-page active headings"
             onClick={changeFirst}
           >
-            <button className="page-link first-a">{paging[0]}</button>
+            <button className="page-link first-a headings">{paging[0]}</button>
           </li>
           <li
             className="page-item paging-item middle-page"
             onClick={changeMiddle}
           >
-            <button className="page-link middle-a">{paging[1]}</button>
+            <button className="page-link middle-a headings">{paging[1]}</button>
           </li>
           <li className="page-item paging-item last-page" onClick={changeLast}>
-            <button className="page-link last-a">{paging[2]}</button>
+            <button className="page-link last-a headings">{paging[2]}</button>
           </li>
           <li className="page-item next-page-item" onClick={nextPageClick}>
             <button
-              className="page-link next-page next-page-item"
+              className="page-link next-page next-page-item headings"
               aria-label="Next"
             >
               <span aria-hidden="true">&raquo;</span>

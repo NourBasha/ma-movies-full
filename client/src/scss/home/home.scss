@@ -81,7 +81,7 @@
 
                   h5{
                     align-self: center;
-                      font-size: 65px;
+                      font-size: 50px;
                       white-space:pre-wrap;
                      @extend %animate-inward-side;
                    
@@ -92,9 +92,14 @@
                     justify-content: center;
                     align-items: center;
                     margin-bottom: 12px;
-                    h6{
+                    .card-subtitle{
                      
                      font-size:35px ;
+                     @extend %animate-inward-side;
+
+                    }
+                    .card-subtitle-ten{
+                     font-size:20px ;
                      padding-right: 5px;
                      @extend %animate-inward-side;
 

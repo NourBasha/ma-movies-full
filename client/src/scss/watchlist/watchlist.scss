@@ -14,15 +14,17 @@
                     .saved{
                         svg{
                             @extend %svg ;
-                            color: $google-blue-transparent;
+                            color: $color-saved-green;
+                            cursor: pointer;
                         }
                     }
                     .check-saved{
                         svg{
                             position: absolute ;
                             top: 5px;
-                            left: 8px;
+                            left: 9px;
                             z-index: 5;
+                            cursor: pointer;
                         }
 
                     }
@@ -30,7 +32,8 @@
                 .icon-unsaved-wrapper{
                     svg{
                         @extend %svg ;
-                        color: $color-header-dark;
+                        color: $color-saved-green;
+                        cursor: pointer;
                     }
                 }
 

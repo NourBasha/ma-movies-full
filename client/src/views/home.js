@@ -17,6 +17,9 @@ const Home = (props) => {
   const context = useContext(Context);
   const contextRef = useRef(useContext(Context));
   const [activeSlide, setActiveSlide] = useState(0);
+  const [caroLoaded, setCaroLoaded] = useState(false);
+
+
   
 
 
@@ -83,6 +86,7 @@ const observeCarousel = () =>{
       
       if(movies){
         caroMovieList = movies.data.results;
+        setCaroLoaded(true);
         console.log(caroMovieList);
       }
 
@@ -140,8 +144,8 @@ const observeCarousel = () =>{
            <div className='row caro-row pt-0 pl-4 pr-4 pb-4'>
        
        {
-         caroMovieList.length
-         ?([ <div key='carousel' className='col-12 col-md-7 caro-col'>
+         caroLoaded
+         ?([ <div key='carousel' className='col-12 col-md-6 caro-col'>
               <Carousel>
                     {
                         caroMovieList.map((movie,index)=>
@@ -162,29 +166,32 @@ const observeCarousel = () =>{
             </Carousel>
         </div>,
       
-        <div  key='desc' className='col-12 col-md-5 p-0 caro-desc'>
+        caroMovieList.length
+        ?(<div  key='desc' className='col-12 col-md-6 p-0 caro-desc'>
            
-                    <div className="card headings" >
-                        <div className="card-body">
-                           <div className='card-data'>
-                              <h5 className="card-title appText ">{caroMovieList[activeSlide].title}</h5>
-                                 <div className='rating-container'>
-                                    <h6 className="card-subtitle appText">{caroMovieList[activeSlide].vote_average}</h6>
-                                    <span>
-                                       <Rating rating={caroMovieList[activeSlide].vote_average}  size={'lg'} />
-                                    </span>
-                                </div>
-                              <p className="card-text appText">{caroMovieList[activeSlide].overview}</p>
-                            </div>
+            <div className="card headings" >
+                <div className="card-body">
+                  <div className='card-data'>
+                      <h5 className="card-title appText ">{caroMovieList[activeSlide].title}</h5>
+                        <div className='rating-container'>
+                            <span className="card-subtitle appText">{caroMovieList[activeSlide].vote_average}</span>
+                            <span className="card-subtitle-ten appText">/10</span>
+                            <span>
+                              <Rating rating={caroMovieList[activeSlide].vote_average}  size={'lg'} />
+                            </span>
+                        </div>
+                      <p className="card-text appText ">{caroMovieList[activeSlide].overview}</p>
+                    </div>
+                
+                <div className='card-links '>
+                  <Link to={{pathname:'/movie/'+caroMovieList[activeSlide].id}} className="card-link">More</Link>
+                  </div>
+                </div>
+            </div>
                         
-                         <div className='card-links '>
-                           <Link to={{pathname:'/movie/'+caroMovieList[activeSlide].id}} className="card-link">More</Link>
-                           </div>
-                         </div>
-                     </div>
-                        
-        </div>
-        ])
+            </div>)
+          :null
+          ])
          :null
        }
    </div>
