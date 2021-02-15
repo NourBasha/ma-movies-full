@@ -10,6 +10,7 @@ import Signup from '../views/signup';
 import Profile from '../views/profile';
 import Login from '../views/login';
 import PageNotFound from '../views/page-not-found';
+import Watchlist from '../views/watchlist';
 
 
 const Routes = ({user}) =>{
@@ -34,7 +35,9 @@ const Routes = ({user}) =>{
                             ? <Browse /> 
                             : <Redirect to={{pathname:'/notAuthorised'}}/> }
                              </Route>
-                        <Route exact path='/movie/:id' render={(data)=> <MovieDetails  data={data} /> } />               
+                        <Route exact path='/movie/:id' render={(data)=> <MovieDetails  data={data} /> } />   
+
+                        <Route exact path='/watchlist' component={Watchlist} />
                         <Route exact path='/notAuthorised' component={NotAuthorised} />
                         <Route exact path='/signup' component={Signup} />
                         <Route exact path='/profile' component={Profile} />

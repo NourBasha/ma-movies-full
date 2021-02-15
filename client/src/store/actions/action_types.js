@@ -43,6 +43,8 @@ export const LOGIN_STATE = "LOGIN_STATE";
 export const CURRENT_USER_SAGA = "CURRENT_USER_SAGA";
 // logout 
 export const USER_LOGOUT_SAGA = "USER_LOGOUT_SAGA";
+// delete acc
+export const DELETE_ACCOUNT_SAGA = "DELETE_ACCOUNT_SAGA";
 // save movie
 export const SAVE_MOVIE_SAGA = "SAVE_MOVIE_SAGA";
 export const DELETE_MOVIE_SAGA = "DELETE_MOVIE_SAGA";

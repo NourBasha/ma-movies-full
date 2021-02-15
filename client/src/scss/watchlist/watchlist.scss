@@ -1,0 +1,65 @@
+.watchlist{
+
+    .card-row{
+        margin: 10px 0;
+        .card-col{
+            padding: 0 5px;
+            margin: 0 0 10px 0;
+            .card{
+                border-radius: 10px;
+                margin-bottom: 10px;
+               
+
+                .icon-saved-wrapper{
+                    .saved{
+                        svg{
+                            @extend %svg ;
+                            color: $google-blue-transparent;
+                        }
+                    }
+                    .check-saved{
+                        svg{
+                            position: absolute ;
+                            top: 5px;
+                            left: 8px;
+                            z-index: 5;
+                        }
+
+                    }
+                }
+                .icon-unsaved-wrapper{
+                    svg{
+                        @extend %svg ;
+                        color: $color-header-dark;
+                    }
+                }
+
+                %svg{
+                    position: absolute ;
+                    top: -1px;
+                    left: -1px;
+                    
+                  }
+
+                  .card-body{
+                       padding-right: 1rem ;
+                padding-left: 1rem ;
+                    .title{
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+                    .rating{
+                        font-weight: bold;
+                    }
+                    .ten{
+                        font-size: 12px;
+                    }
+                    .overview{
+                        
+                    }
+                  }
+
+            }
+        }
+    }
+}

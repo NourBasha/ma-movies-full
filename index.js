@@ -7,7 +7,7 @@ const cookieSession = require('cookie-session');
 
 
 require('./models/user_model');
-require('./models/userWithEmail_model');
+require('./models/movie_model');
 
 
 require('./strategies/google_strategy');
@@ -37,10 +37,12 @@ app.use(passport.session());
 
 
 require('./route_handlers/authentication')(app);
+require('./route_handlers/movies')(app);
 
 
 if (process.env.NODE_ENV === 'production'){
 
+    
     //serves the entire build directory if route is not defined in server 
     app.use(express.static('client/build')); 
 

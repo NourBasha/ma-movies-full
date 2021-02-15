@@ -29,13 +29,46 @@
           .icons-wrapper{
 
             .icon-saved-wrapper{
+              .saved{
+                &:hover{
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                }
+                svg{
+                  @extend %svg;
+                  color: #206e20;
+                  &:hover {
+                    cursor: pointer;
+                           }
+                }
+              }
+              .check-saved{
+               
+                svg{
+                  position: absolute ;
+                  top: 25px;
+                  left: 25px;
+                  color: darken($color: white, $amount: 10%);
+                  &:hover{
+                    cursor: pointer;
+                  }
+                 
+                }
+              }
               
             }
             .icon-unsaved-wrapper{
+              svg{
+                @extend %svg;
+                color: $color-main;
+                &:hover{
+                  color: darken($color: $color-main, $amount: 10%);
+                  cursor: pointer;
+                }
+              }
               
             }
 
-            svg{
+            %svg{
               position: absolute ;
               top: 15px;
               left: 15px;

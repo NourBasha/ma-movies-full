@@ -7,7 +7,8 @@ import { faStar,
    faBars,
    faCheckCircle,
     faTimesCircle,
-    faBookmark
+    faBookmark,
+    faCheck
   } from "@fortawesome/free-solid-svg-icons";
   import {faBookmark as faBookmarkRegular} from '@fortawesome/free-regular-svg-icons';
 
@@ -22,7 +23,7 @@ import { useDispatch } from "react-redux";
 import {getCurrentUser} from './store/actions/actions';
 
 
-library.add(fab, faStar,faUserCog,faBars, faCheckCircle, faTimesCircle, faBookmark,faBookmarkRegular);
+library.add(fab, faStar,faUserCog,faBars, faCheckCircle, faTimesCircle, faBookmark,faBookmarkRegular, faCheck);
 
 const App = () => {
 

@@ -30,7 +30,7 @@ const MovieDetails = (props) => {
         setMovieSaved(false);
       }
      
-  },[])
+  },[props.data.match.params.id])
 
   useEffect(() => {
     async function getCrew() {
@@ -64,7 +64,7 @@ const MovieDetails = (props) => {
         .get(url)
         .then((response) => {
           movie = response.data;
-        
+          console.log(movie);
           movieVideos = movie.videos.results;
           setLoadingState(false);
         })
@@ -199,7 +199,6 @@ const MovieDetails = (props) => {
 
     return crewList;
   }
-
   return (
     <div   >
       {loadingError ? (
@@ -233,18 +232,24 @@ const MovieDetails = (props) => {
                         <div className="row  text-center d-flex  justify-content-center movie-name-row pl-1 pr-1">
                           <h1> {movie.title}</h1>
                           <span className='icons-wrapper' >
-                          {  movieSaved?(
+                          {  
+                            movieSaved?(
                             <div className='icon-saved-wrapper' onClick={handleDelete}>
-                              <FontAwesomeIcon icon='bookmark' size='4x' style={{ color: 'cayan' }}></FontAwesomeIcon>
+                              <div className='saved' title='unsave'>
+                              <FontAwesomeIcon icon='bookmark' size='4x' title='unsave'>
+                              </FontAwesomeIcon>
+                              </div>
+                              <div className='check-saved'>
+                              <FontAwesomeIcon icon='check' size='2x' title='unsave' ></FontAwesomeIcon>
+                              </div>
                             </div>
                           )
                             : (<div className='icon-unsaved-wrapper' onClick={handleSave} >
-                              <FontAwesomeIcon icon={['far', 'bookmark']} size='4x' style={{ color: 'yellow' }}></FontAwesomeIcon>
+                              <FontAwesomeIcon icon={['far', 'bookmark']} size='4x' title='save'></FontAwesomeIcon>
                             </div>)
                           }                          
                           </span>
                         </div>
-                      
 
                         <div className="row d-flex justify-content-center movie-year-row">
                           {movie.release_date ? (
@@ -268,7 +273,7 @@ const MovieDetails = (props) => {
 
                           <div className="rate-star">
                             {movie.vote_average ? (
-                              <Rating rating={movie.vote_average} />
+                              <Rating rating={movie.vote_average} size={'lg'} />
                             ) : (
                               <p></p>
                             )}

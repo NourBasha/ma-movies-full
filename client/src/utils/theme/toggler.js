@@ -1,7 +1,6 @@
 import React from 'react'
 import { func, string } from 'prop-types';
 // import styled from "styled-components"
-import "react-theme-toggle-button/dist/index.css";
 import DarkModeToggle from "react-dark-mode-toggle";
 
 

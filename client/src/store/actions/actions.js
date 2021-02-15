@@ -204,6 +204,11 @@ export const logOut = (payload)=>{
         payload : payload
     }
 }
+export const deleteAcc = ()=>{
+    return { 
+        type : ACTION_TYPES.DELETE_ACCOUNT_SAGA
+    }
+}
 
 
 export const saveMovie = (payload)=>{

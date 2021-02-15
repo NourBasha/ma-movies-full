@@ -25,7 +25,7 @@ const Header = ({user,  logout, history}) => {
         
         <Navbar.Brand className="navbar-brand  ma" >
            <NavLink to='/' >
-              Ma
+                Ma
               <span>Movies</span>
             </NavLink>
         </Navbar.Brand>
@@ -43,7 +43,7 @@ const Header = ({user,  logout, history}) => {
                                     {user.displayName} 
                                     {/* profile */}
                             </NavLink>,
-                            <NavLink to="/browse" exact
+                            <NavLink to="/watchlist" exact
                                 key='watchlist'
                                 className="nav-link watchlist-item headerAppText" >
                                     Watchlist

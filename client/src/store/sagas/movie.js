@@ -1,4 +1,4 @@
-import {put, takeEvery} from 'redux-saga/effects';
+import {takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import {DELETE_MOVIE_SAGA,SAVE_MOVIE_SAGA} from '../actions/action_types';
 

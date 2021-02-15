@@ -6,9 +6,9 @@ const Rating= (props) => {
       arr.push(
         <span key={i}>
           {i + 1 <= Math.round(props.rating) ? (
-            <FontAwesomeIcon icon="star" color="yellow" size="lg" />
+            <FontAwesomeIcon icon="star" color="yellow" size={props.size} />
           ) : (
-            <FontAwesomeIcon icon="star" color="gray" size="lg"/>
+            <FontAwesomeIcon icon="star" color="gray" size={props.size}/>
           )}
         </span>
       );

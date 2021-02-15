@@ -11,6 +11,7 @@ $colo-secondary:#0361b8de;
 $color-soft-text : #000000;
 $white: #fff;
 $google-blue: #4285f4;
+$google-blue-transparent: #4286f4b2;
 $button-active-blue: #1669F2;
 $color-dark:#000000d0;
 
@@ -41,6 +42,7 @@ $color-dark:#000000d0;
 @import './profile/profile.scss';
 @import './login/login.scss';
 @import './components/container/footer.scss';
+@import './watchlist/watchlist.scss';
 
 //google font
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);

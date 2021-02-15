@@ -3,13 +3,16 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
+const Movie = mongoose.model('movies');
 
 const bcrypt = require('bcrypt');
+const reaquire_login = require('../middlewares/reaquire_login');
+
+
 
 module.exports = (app) =>{
 
     // google authentication
-
     app.get('/auth/google', passport.authenticate('google',{
         scope:['profile','email']
     })
@@ -32,7 +35,6 @@ module.exports = (app) =>{
     })
     
     // email and password authentication
-
     app.post('/api/authenticate/signup',
     
     async (req,res)=>{ // save the new user in db
@@ -98,6 +100,20 @@ module.exports = (app) =>{
         } 
 
         );
+
+
+
+    // delete account 
+    app.delete('/api/delete-account',reaquire_login, async (req,res)=>{
+
+        const result = await Movie.deleteMany({_user: req.user.id}) ;     
+        console.log('server, delted count is : ', result);
+        const user = await User.deleteOne({_id : req.user.id});
+        console.log('server, deleter user count : ', user);
+        res.send({});
+      
+    }) 
+
 
 }
 

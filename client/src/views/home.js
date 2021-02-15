@@ -171,7 +171,7 @@ const observeCarousel = () =>{
                                  <div className='rating-container'>
                                     <h6 className="card-subtitle appText">{caroMovieList[activeSlide].vote_average}</h6>
                                     <span>
-                                       <Rating rating={caroMovieList[activeSlide].vote_average} />
+                                       <Rating rating={caroMovieList[activeSlide].vote_average}  size={'lg'} />
                                     </span>
                                 </div>
                               <p className="card-text appText">{caroMovieList[activeSlide].overview}</p>
