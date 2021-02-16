@@ -30,13 +30,8 @@ const Routes = ({user}) =>{
                            : <Home />
                         }
                         </Route>
-                        <Route exact  path='/browse'>
-                            { user
-                            ? <Browse /> 
-                            : <Redirect to={{pathname:'/notAuthorised'}}/> }
-                             </Route>
+                        <Route exact  path='/browse' component={Browse}/>
                         <Route exact path='/movie/:id' render={(data)=> <MovieDetails  data={data} /> } />   
-
                         <Route exact path='/watchlist' component={Watchlist} />
                         <Route exact path='/notAuthorised' component={NotAuthorised} />
                         <Route exact path='/signup' component={Signup} />

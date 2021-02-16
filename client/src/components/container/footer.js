@@ -15,39 +15,25 @@ const Footer = (props)=>{
               Ma<span className="mamovies">Movies</span>{" "}
             </a>
             <p>
-              This website gets its data from themoviedb, we only use it here
-              to showcase our software development abilities and to practice
-              software development. We hope you enjoy your visit to our
-              website and hopefully you will come back again!
+              This website gets its data from themoviedb API, we only use it here
+              to practice. We aspire that you would enjoy your visit to our Application
+               and hopefully you will come back again!
             </p>
           </div>
 
           <div className="col-12 col-sm-4 col-md-4 col-lg-3 text-left  helpful-links ">
-            <h6>Helpful Links</h6>
+            <h6>Social Links</h6>
             <div className="row ">
               <div className="col">
                 <ul className="footer-links1">
                   <li>
-                    <a href="/">About</a>
+                    <a href="https://www.linkedin.com/in/nour-wagdy-932918184">Linkedin</a>
                   </li>
                   <li>
-                    <a href="/">Team</a>
+                    <a href="https://github.com/NourBasha">Github</a>
                   </li>
                   <li>
-                    <a href="/">Privacy Policy</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="col">
-                <ul className="footer-links2">
-                  <li>
-                    <a href="/">FAQ</a>
-                  </li>
-                  <li>
-                    <a href="/">Blog</a>
-                  </li>
-                  <li>
-                    <a href="/">Contact</a>
+                    <a href="https://www.facebook.com/nour.wagdy.334839">Facebook</a>
                   </li>
                 </ul>
               </div>
@@ -56,7 +42,6 @@ const Footer = (props)=>{
           <div className="col-12 col-lg-3 text-left footer-address">
             <h6>Contact Us</h6>
             <ul>
-              <li>Miami, Alexandria, Egypt</li>
               <li>Phone: +201020696796</li>
               <li>
                 Email: <a href="/">Nour.basha2011@gmail.com</a>

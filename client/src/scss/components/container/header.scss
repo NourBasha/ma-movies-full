@@ -48,47 +48,4 @@
   }
 
 
-  @media (max-width: 768px) {
-    .navbar {
-      padding-left: 5px;
-      padding-right: 5px;
-      .ma {
-        font-size: 14px;
-
-        a {
-          text-decoration: none;
-          &:hover {
-            color: #007bff !important ;
-          }
-          span {
-            font-size: 20px;
-          }
-        }
-      }
-
-      .header-links {
-        .nav-link {
-          padding-left: 5px;
-          padding-right: 5px;
-          font-size: 14px;
-          &:hover {
-          }
-        }
-
-        .active {
-        }
-
-        // .profile-item{
-        //     font-size: 12px;
-        // }
-        // .signup-item{
-        // }
-        // .google-item{
-        // }
-        // .theme-item{
-        // }
-      }
-    }
-  }
-
 }

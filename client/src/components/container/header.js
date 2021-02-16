@@ -59,16 +59,18 @@ const Header = ({user,  logout, history}) => {
                         ]
                     ) 
                     :(
-                      [  <NavLink to="/login" exact
-                            key='login'
-                            className="nav-link login-item headerAppText " >
-                                Login
-                        </NavLink>,
+                      // [  <NavLink to="/login" exact
+                      //       key='login'
+                      //       className="nav-link login-item headerAppText " >
+                      //           Login
+                      //   </NavLink>
+                      //   ,
                         <NavLink to="/signup" exact
                             key='signup'
                             className="nav-link signup-item headerAppText" >
-                                Sign-up
-                        </NavLink>]
+                               Register
+                        </NavLink>
+                        //]
                     )
                 }
 

@@ -2,9 +2,16 @@
    .data {
     .profile-data{
         margin-top: 40px;
-        padding: 40px;
+        padding: 20px;
+        // padding-right: ;
         background-color: $color-header-dark;
         border-radius: 10px;
+        label{
+            
+        }
+        h3{
+            
+        }
     }
     button{
         color: white !important ;
@@ -32,12 +39,6 @@
 
 
 
-    @media (max-width:768px) {
-        .appText{
-            font-size: 20px;
-        }
-    
-    }
 
 }
 

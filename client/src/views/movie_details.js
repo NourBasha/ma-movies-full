@@ -138,7 +138,7 @@ const MovieDetails = (props) => {
             cast.profile_path !== undefined &&
             cast.profile_path !== "" &&
             cast.profile_path !== null ? (
-              <div className="cast-card text-center   col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1"
+              <div className="cast-card text-center   col-10 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1"
               key={cast.id}>
                 <div className="card cast-card">
                   <img
@@ -165,7 +165,7 @@ const MovieDetails = (props) => {
                 </div>
               </div>
             ) : (
-              <div className="cast-card text-center col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1"
+              <div className="cast-card text-center col-10 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1"
               key={cast.id}>
                 <div className="card cast-card">
                   <img
@@ -209,7 +209,7 @@ const MovieDetails = (props) => {
       ) : (
         <div className="container-fluid movie bg-dark" style={{backgroundImage:"url("+DATA.IMAGE_BIG+movie.backdrop_path+")"}}>
       
-          <div className="row "  > {/* this area is created to contain the background image */}
+          <div className="row "  > 
               <div className="col-12 data-video-container" >
                     {/* start of movie data row */}
                     <div className="row first-row ">
@@ -303,7 +303,7 @@ const MovieDetails = (props) => {
                                   <h2 className='video-heading appText'>Trailer</h2>
                             </div>,
 
-                          <div  key='trailer' className="col-10 " style={{ justifyself: "center" }}>
+                          <div  key='trailer' className="col-12 col-md-10 " style={{ justifyself: "center" }}>
                             <MovieTrailer trailers={movieVideos} />
                           </div>
                           ]

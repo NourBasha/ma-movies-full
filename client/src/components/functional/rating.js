@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Rating= (props) => {
+const Rating= ({rating,size}) => {
     let arr = [];
     for (let i = 0; i < 10; i++) {
       arr.push(
         <span key={i}>
-          {i + 1 <= Math.round(props.rating) ? (
-            <FontAwesomeIcon icon="star" color="yellow" size={props.size} />
+          {i + 1 <= Math.round(rating) ? (
+            <FontAwesomeIcon icon="star" color="yellow" size={`${size}`} />
           ) : (
-            <FontAwesomeIcon icon="star" color="gray" size={props.size}/>
+            <FontAwesomeIcon icon="star" color="gray" size={`${size}`}/>
           )}
         </span>
       );

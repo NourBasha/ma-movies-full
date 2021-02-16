@@ -10,13 +10,16 @@ const Profile = ({ user, deleteAccount }) => {
     <div className="profile container d-flex justify-content-center align-items-center">
       <div>
         {user ? (
-          <div className="data">
-            <div className="profile-data">
-              <label> Username: </label>
-              <h3 className="appText">{user.displayName}</h3>
-              <label> Email: </label>
-              <h3 className="appText">{user.email}</h3>
+          <div className=" row data d-flex justify-content-center">
+            <div className=" col-10 profile-data ">
+                
+                    <label> Username: </label>
+                    <h3 className="appText">{user.displayName}</h3>
+                    <label> Email: </label>
+                    <h3 className="appText">{user.email}</h3>
+               
             </div>
+           
             <button className="btn mamovie-button mt-2"  data-toggle="modal" data-target="#delete-modal">
               Delete Account
             </button>

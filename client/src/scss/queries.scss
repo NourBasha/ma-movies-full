@@ -1,0 +1,250 @@
+
+
+@media (max-width:768px) {
+
+    
+#root{
+
+  .header{
+    .navbar {
+      padding-left: 5px;
+      padding-right: 5px;
+      .ma {
+        font-size: 14px;
+
+        a {
+          text-decoration: none;
+          &:hover {
+            color: #007bff !important ;
+          }
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+
+      .header-links {
+        .nav-link {
+          padding-left: 5px;
+          padding-right: 5px;
+          font-size: 14px;
+          &:hover {
+          }
+        }
+
+        .active {
+        }
+
+       
+      }
+    }
+  }
+
+  .poster-container{
+    .title{
+      span{
+        font-size: 15px ;
+        padding: 5px;
+      }
+    }
+    .rating{
+      padding:5px;
+      span{
+        font-size: 15px ;
+      }
+    }.release_date{
+     
+      span{
+        font-size: 12px ;
+        padding: 5px 10px 5px 10px;
+
+
+      }
+    }
+  }
+
+.home-container{
+
+
+    .head-message{
+        display: none;
+    }
+
+    .caro-row{
+        margin-top: 10px;
+         
+        .caro-col{
+            
+            
+          .carousel {
+         
+           .carousel-inner{
+           
+            .carousel-item{
+              background-size: contain;
+              background-position: 50% 50%;
+              width: 100%;
+              height: 60vh;
+              img{
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+              }
+  
+            }
+           }
+          }
+         }
+  
+       .caro-desc{
+        
+            .card {
+             
+              .card-body{
+               
+  
+                  .card-data{
+                 
+                    row-gap: 10px;
+                   .title{
+               
+                    h5{
+                     font-size: 30px ;
+                    }
+                   }
+                   
+                    .rating-container {
+                     
+                      .card-subtitle{
+                          font-size: 24px;  
+  
+                      }
+                      .card-subtitle-ten{
+                      font-size: 14px;
+                      }
+                      span{
+                       // @extend %animate-inward-side;
+                      }
+                    }
+                    p{
+                     
+                    }
+                  }
+            
+                  .card-links{
+                   
+                    a{
+                      &:hover{
+
+                      }
+                    }
+                  }
+              }
+            
+            }
+         }
+  
+    }
+
+  
+
+    .home-movies {
+        .movies-message{
+            .message-col{
+                h2{
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+
+    .sign-up{
+      .input-email {
+        margin-bottom: 10px;
+      }
+
+      .heading{
+        p{
+          font-size: 15px;
+        }
+      }
+    }
+}
+
+.browse{
+
+   .switch-theme{
+      position: absolute;
+      top: 8%;
+      right: 5px;
+     
+    }
+
+    .filter{
+
+        h3{
+            margin-top: 10px;
+        }
+
+        .rating-filter{
+            margin-top: 10px;
+        }
+
+    }
+
+    .copyright{
+       
+        font-size: 12px;
+      }
+}
+
+
+.profile{
+  .data {
+   .profile-data{
+     padding-left: 10px ;
+     padding-right: 10px;
+     h3{
+       font-size: 18px;
+     }
+     
+   }
+   button{
+       &:hover{
+       }
+   }
+
+   #delete-modal{
+       .modal-content{
+           .modal-header{
+               h5{
+                  
+               }
+           }
+           .modal-body{
+
+           }
+           .modal-footer{
+
+           }
+       }
+   }
+  }
+
+
+
+   @media (max-width:768px) {
+       .appText{
+           font-size: 20px;
+       }
+   
+   }
+
+}
+
+
+
+
+}
+
+}

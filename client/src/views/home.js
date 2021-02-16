@@ -123,10 +123,10 @@ const observeCarousel = () =>{
 
 
   return (
-    <div className=" home-container">
+    <div className="home-container">
 
       {/* start of heed message */}
-            <div className='container-fluid headings head-message'>
+        <div className='container-fluid headings head-message'>
               <div className='row '>
                   <div className='col-12 head-col '>
                       <h1 className='appText'> Discover the latest movies</h1>
@@ -141,7 +141,7 @@ const observeCarousel = () =>{
       {/* start of carousel */}
         <div className='container-fluid'>
           
-           <div className='row caro-row pt-0 pl-4 pr-4 pb-4'>
+           <div className='row caro-row pt-0 pl-2 pr-2 pb-4'>
        
        {
          caroLoaded
@@ -172,19 +172,29 @@ const observeCarousel = () =>{
             <div className="card headings" >
                 <div className="card-body">
                   <div className='card-data'>
+                      <div className='title'>
                       <h5 className="card-title appText ">{caroMovieList[activeSlide].title}</h5>
+                        </div>
                         <div className='rating-container'>
                             <span className="card-subtitle appText">{caroMovieList[activeSlide].vote_average}</span>
                             <span className="card-subtitle-ten appText">/10</span>
                             <span>
-                              <Rating rating={caroMovieList[activeSlide].vote_average}  size={'lg'} />
+                              {
+                                window.innerWidth > 768
+                                ? <Rating rating={caroMovieList[activeSlide].vote_average}  size="lg" />
+                                : <Rating rating={caroMovieList[activeSlide].vote_average}  size="1x" />
+                              }
                             </span>
                         </div>
-                      <p className="card-text appText ">{caroMovieList[activeSlide].overview}</p>
+                      <p className="card-text appText ">{
+                      caroMovieList[activeSlide].overview.split(' ').length > 40 
+                      ? caroMovieList[activeSlide].overview.split(' ').splice(0,40).join(' ') + ' ...'
+                      : caroMovieList[activeSlide].overview
+                      }</p>
                     </div>
                 
-                <div className='card-links '>
-                  <Link to={{pathname:'/movie/'+caroMovieList[activeSlide].id}} className="card-link">More</Link>
+                <div className='card-links  '>
+                  <Link to={{pathname:'/movie/'+caroMovieList[activeSlide].id}} className="card-link appText ">More</Link>
                   </div>
                 </div>
             </div>

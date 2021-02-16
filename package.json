@@ -22,8 +22,6 @@
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "passport-local": "^1.0.0",
-    "react-loading-overlay": "^1.0.1",
-    "react-spinners": "^0.10.4"
+    "passport-local": "^1.0.0"
   }
 }

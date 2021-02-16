@@ -1,25 +1,27 @@
 import axios from "axios";
 import { useEffect, useContext, useRef, useCallback } from "react";
 import Context from "../utils/context";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { Link } from "react-router-dom";
-//import "./browse.scss";
-//import img from "../assets/imgs/alt.jpg";
+
 import MovieCard from '../components/functional/movieCard';
 
 import Toggle from '../utils/theme/toggler';
 
+import Skeleton, {SkeletonTheme} from 'react-loading-skeleton';
+
+import {connect} from 'react-redux';
+import { useHistory } from "react-router";
 
 
 let movieList = [];
 let paging = [1, 2, 3];
 let genresList = [];
 
-const Browse = () => {
+const Browse = ({user}) => {
 
 
   const context = useContext(Context);
   const refContext = useRef(useContext(Context));
+  const history = useHistory();
 
   
 const  handlePagingHighlights = useCallback(()=>{
@@ -240,7 +242,12 @@ const getMovies = useCallback(()=>{
 
      useEffect(()=>{
 
-     
+      setTimeout(() => {
+        
+          if(!user){
+            history.push('/');
+          }
+      }, 500);
 
   
      },[])
@@ -384,11 +391,47 @@ const getMovies = useCallback(()=>{
       </select>
     );
   }
+
+  const LoadingImageSkeleton = ()=>{
+    let skeletons = [];
+    for(let i=0 ; i < 19 ; i++ ){
+      skeletons[i] =
+                    <div  key={i*i-10} className='col-6 col-md-4 col-lg-3 p-0 p-md-1 p-lg-2'>
+                                  {
+                                     context.appTheme ==='dark'
+                                    ?(
+                                      <SkeletonTheme 
+                                      color="#202429c5" 
+                                      highlightColor="#3030308f">
+                                          {
+                                            window.innerWidth > 768 
+                                            ?<Skeleton height={350} />
+                                            :<Skeleton height={150} />
+                                          }
+                                      </SkeletonTheme>
+                                    )
+                                    :(
+                                      <SkeletonTheme 
+                                      color="#ffffffc7" highlightColor="#dbdbdbe0"
+                                      >
+                                          {
+                                            window.innerWidth > 768 
+                                            ?<Skeleton height={350} />
+                                            :<Skeleton height={150} />
+                                          }
+                                      </SkeletonTheme>
+                                    )
+                                  }
+                    </div>
+     
+        }
+      return skeletons;
+  }
  
   return (
     <div className="browse " >
 
-        <div className='switch-theme '>    
+        <div className='switch-theme'>    
             <Toggle theme={context.appTheme} toggleTheme={context.toggleAppTheme} />
         </div>
       
@@ -429,7 +472,7 @@ const getMovies = useCallback(()=>{
                   aria-label="Search"
                 />
                 <button
-                  className="filter-col btn   my-2 my-sm-0"
+                  className="filter-col btn mamovie-button my-2 my-sm-0"
                   type="submit"
                 >Search
                 </button>
@@ -443,18 +486,21 @@ const getMovies = useCallback(()=>{
 
         {/*second row*/}
         <div className="row movie-row d-flex justify-content-center pl-4 pr-4">
-          {context.browseMoviesLoading !== true ? (
+          {
+            
+          context.browseMoviesLoading !== true 
+          ? (
             movieList.results ? (
               <MovieCard movieList={movieList.results} />
             ) : (
               <p>Error</p>
             )
-          ) : (
-            <div className="text-center">
-                <div className="spinner-border text-info m-5 "
-                      style={{width:'4rem', height:'4rem'}} role="status">
-                    </div>
-              </div>
+          ) 
+          :
+              
+            (
+              <LoadingImageSkeleton />
+            
           )}
         </div>
 
@@ -504,7 +550,7 @@ const getMovies = useCallback(()=>{
           <div className="container">
             <p className="mb-0 mr-auto p-2">
               {" "}
-              COPYRIGHT &copy; MaMovie | All Rights Reserved.
+              COPYRIGHT &copy; MaMovies | All Rights Reserved.
             </p>
           </div>
         </div>
@@ -925,4 +971,10 @@ const getMovies = useCallback(()=>{
 
 };
 
-export default Browse;
+const mapStateToProps = ({auth})=>{
+  return{
+      user : auth.user
+  }
+}
+
+export default connect(mapStateToProps)(Browse);

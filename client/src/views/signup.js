@@ -7,6 +7,7 @@ import Footer from "../components/container/footer";
 import LoadingOverlay from 'react-loading-overlay'; 
 import BeatLoader from 'react-spinners/BeatLoader';
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 
 const Signup = ({signUpResponse,addUser,history}) => {
@@ -152,13 +153,27 @@ const Signup = ({signUpResponse,addUser,history}) => {
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center text-center">
           <div className=" signup-heading ">
-            <h2 className="headings">Sign Up</h2>
+            <h2 className="headings">Register</h2>
           </div>
         </div>
 
         <div className=" row d-flex justify-content-center ">
-          <div className=" signup-container ">  
+          <div className="col-10 col-md-8 col-lg-6 signup-container ">  
+          <div className='row  have-account d-flex justify-content-center mb-1'>
+
+              <p className='appText' >already have an account? &nbsp;
+                <Link className='appText' to={{pathname:'/login'}}>
+                  Login
+                </Link>
+                 </p>
+
+          </div>
           
+          
+          <div className="separator appText" style={{marginBottom:'10px'}}>
+           
+          </div>
+             
           <div className='row d-flex justify-content-center mb-1'>
               <div className="google-btn " onClick={()=>{window.location.href='/auth/google'}}>
                 <div className="google-icon-wrapper">
@@ -166,14 +181,14 @@ const Signup = ({signUpResponse,addUser,history}) => {
                       src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
                 </div>
                 <p className="btn-text">
-                  <b>Sign-up with Google</b>
+                  <b>Login with Google</b>
                 </p>
               </div>
           </div>
          
 
-          <div class="separator appText">
-            or
+          <div className="separator appText">
+             Sign up
           </div>
              
             <form onSubmit={signupSubmit} className="signup-form">
@@ -303,13 +318,14 @@ const Signup = ({signUpResponse,addUser,history}) => {
         </div>
 
         <div className='row signup-response d-flex justify-content-center align-items-center'>
-              <div className='col-4  success-or-failure '>
+              <div className='col-8 text-center success-or-failure '>
                     {
-                        signUpResponse === true 
+                      
+                         signUpResponse === true 
                         ?  <h4 className='signup-success headings'> Sign up success </h4>
                         : 
                           signUpResponse === false ?
-                            ( <h4 className='signup-failuer headings'> Sign up failed </h4>)
+                            ( <h4 className='signup-failure headings'> Sign up failed </h4>)
                             :null
                     }
               </div>

@@ -10,6 +10,10 @@ import {connect} from 'react-redux';
 import {saveMovie,deleteMovie} from '../store/actions/actions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import LoadingOverlay from 'react-loading-overlay';
+import BeatLoader from 'react-spinners/BeatLoader';
+
+import img from '../assets/imgs/alt.jpg'
 
 let idList = [];
 let movieList = [];
@@ -63,9 +67,10 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
             console.log('ids came', moviesIDs);
             moviesIDs.data.forEach(data=>{
                 idList.push(data.movie_id);
-            })
-            getMoviesWithIDs();
+            });
+            return getMoviesWithIDs();
         }
+        setMoviesReady(true);
     },[getMoviesWithIDs])
 
     useEffect(()=>{
@@ -127,9 +132,15 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
                                     </div>)
                             :null    
                         }       
-                            <Card.Img variant="top" src={IMAGE_PATH+movie.poster_path} />
+                            {
+                                movie.poster_path
+                                ? <Card.Img variant="top" src={IMAGE_PATH+movie.poster_path} />
+                                : <Card.Img variant="top" src={img} />
+
+                            }
                             <Card.Body>
                                 <Card.Title className='title'>{movie.title}</Card.Title>
+                                <Card.Title className='year'>{movie.release_date.slice(0,4)}</Card.Title>
                                 <Card.Text> 
                                     <span className='d-flex justify-content-start align-items-center'>
                                         <span  className='rating'>{movie.vote_average} </span>
@@ -156,15 +167,46 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
     return(
         <div className='watchlist'>
             <div className='container-fluid'>
-                <div className='row card-row'>
+                <div className='row card-row d-flex justify-content-center'>
                    {
                        moviesReady
                        ?
-                            movieList.length >0 
+                            movieList.length > 0 
                             ?    (  <MovieCard/>)
-                            : <div> No saved movies yet </div>
+                            : (<div className=' col-10 headings empty-col'
+                                style={{borderRadius:'10px',
+                                marginTop:'50px',
+                                 padding:'30px',
+                                 display:'flex',
+                                 flexDirection:'column',
+                                 alignItems:'center'
+                                 }}>
+                                
+                                 <h2 style={{
+                                     fontFamily: 'Fugaz One',
+                                     margin:'0',
+                                     display:'inline-block',
+                                    
+                                 }}>
+                                    Watchlist is empty
+                                 </h2>
+                                <p>
+                                    start bookmarking movies now, go to&nbsp;
+                                    <Link className='appText' to={{pathname:'/browse'}}>
+                                    Browse 
+                                 </Link>.
+                                </p>
+                              
+                              </div>)
                        
-                       : <div> No saved movies yet </div>
+                       :   (<div className=' col-12 loading-overlay-wrapper'>
+                             <LoadingOverlay
+                                className='loading-overlay'
+                                active={!moviesReady}
+                                spinner={<BeatLoader size={30} color={"#00dbdb"} />}
+                                >
+                             </LoadingOverlay>
+                       </div>)
                    }
                 </div>
 

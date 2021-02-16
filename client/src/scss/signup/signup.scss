@@ -21,6 +21,17 @@
             margin-top: 20px;
             border-radius: 10px;    
 
+            .have-account{
+              p{
+                a{
+                  text-decoration: none;
+                  &:hover{
+                    color: $color-white;
+                  }
+                }
+              }
+            }
+
             .google-btn {
                 width: 184px;
                 height: 42px;
@@ -111,12 +122,16 @@
 
         .success-or-failure{
             display: inline-block;
+            margin-top: 5px;
             h4{
                 display: inline-block;
                 padding: 10px 10px;
-                
                 border-radius: 10px;
                 white-space: nowrap;
+            }
+            .signup-success{
+            }
+            .signup-failure{
             }
         }
 
