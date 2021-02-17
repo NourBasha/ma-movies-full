@@ -431,12 +431,14 @@ const getMovies = useCallback(()=>{
   return (
     <div className="browse " >
 
-        <div className='switch-theme'>    
-            <Toggle theme={context.appTheme} toggleTheme={context.toggleAppTheme} />
-        </div>
+      
       
         
       <div className="browse-container container-fluid ">
+
+      <div className='switch-theme'>    
+            <Toggle theme={context.appTheme} toggleTheme={context.toggleAppTheme} />
+        </div>
 
         {/* start of filter*/}
         <div className="filter text-center">

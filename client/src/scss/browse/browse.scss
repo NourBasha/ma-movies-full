@@ -1,16 +1,20 @@
 
 .browse {
     width: 100%;
+    margin-top: -15px;
   
-    .switch-theme{
-      position: absolute;
-      top: 10%;
-      right:20px;
+    .browse-container{
+       .switch-theme{
+      
+        button{
+          position: absolute;
+          right:20px;
+        }
      
     }
 
     .filter {
-      padding-top: 40px;
+      margin-top: 20px;
       margin-bottom: 40px;
   
     
@@ -63,6 +67,8 @@
       
   
     }
+    }
+   
   
   
     .paging {

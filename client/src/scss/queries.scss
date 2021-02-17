@@ -174,14 +174,16 @@
 .browse{
 
    .switch-theme{
-      position: absolute;
-      top: 8%;
-      right: 5px;
+  
+      button{
+        position: absolute;
+        right: 5px;
+      }
      
     }
 
     .filter{
-
+      padding-top: 30px;
         h3{
             margin-top: 10px;
         }
