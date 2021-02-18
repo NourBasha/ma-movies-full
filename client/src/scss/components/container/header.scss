@@ -2,6 +2,8 @@
   background-color: #202429b6;
 
   .navbar {
+
+
     .ma {
       color: #178bf8de;
       font-size: 20px;
@@ -11,13 +13,10 @@
     
       a{
         text-decoration: none;
-        &:hover {
-          color: #178bf8de;
-        }
-        span {
-          color: #00dbdb;
-          font-size: 30px;
-          font-weight: bold;
+        img{
+          height: auto;
+          width: 80px;
+          margin: -15px 0;
         }
       }
      

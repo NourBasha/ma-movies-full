@@ -1,5 +1,6 @@
 
 
+import logo from '../../assets/imgs/mamovies-logo.png';
 
 const Footer = (props)=>{
     return (
@@ -12,7 +13,7 @@ const Footer = (props)=>{
               id="brand-logo"
               className="navbar-brand mr-3 ma"
               href="/">
-              Ma<span className="mamovies">Movies</span>{" "}
+             <img className='img-fluid' src={logo} alt="MaMovies" />
             </a>
             <p>
               This website gets its data from themoviedb API, we only use it here

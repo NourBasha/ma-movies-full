@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import * as ACTIONS from '../../store/actions/actions';
+import logo from '../../assets/imgs/mamovies-logo.png';
 
 const Header = ({user,  logout, history}) => {
 
@@ -13,7 +14,6 @@ const Header = ({user,  logout, history}) => {
      logout(history); // action creator   
   }
   
- 
   return (
     <div className="header ">
 
@@ -21,8 +21,7 @@ const Header = ({user,  logout, history}) => {
         
         <Navbar.Brand className="navbar-brand  ma" >
            <NavLink to='/' >
-                Ma
-              <span>Movies</span>
+              <img className='img-fluid' src={logo} alt="MaMovies" />
             </NavLink>
         </Navbar.Brand>
     
