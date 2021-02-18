@@ -8,6 +8,12 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
+const Subscribtion = mongoose.model('subscribtions');
+
+const Mailer = require('../services/mailer');
+
+const template = require('../services/mailTemplates/welcomeTemplate');
+
 
 
 passport.serializeUser((user,done)=>{
@@ -45,10 +51,22 @@ passport.use(
                 if(existing){
                     return done(null,existing)
                 }
-
+                //new user
                 const user = await new User({googleId: profile.id, email: profile._json.email, displayName: profile._json.name }).save();
-                  done(null,user);
+                // subscribe for weekly updates
+                await new Subscribtion({
+                    email :profile._json.email.toLowerCase(),
+                    dateOfSub : Date.now()
+                     }).save();
 
+                  await new Mailer(
+                      {subject: 'Welcome to MaMovies', subscriber: profile._json.email }, 
+                      template('It\'s great to have you with us! we hope you enjoy our App and our weekly new movies list! :)') 
+                      ).send();
+
+                      console.log('server, subbed + sent email');
+
+                done(null,user);
              } catch (error) {
                     console.log(error);
              }

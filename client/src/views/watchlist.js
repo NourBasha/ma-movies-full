@@ -151,7 +151,7 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
                                     </span>
                                 </Card.Text>
                                 <Card.Text className='overview'>
-                                {movie.overview}
+                                {movie.overview.split(' ').splice(0,30).join(' ')+" ..."}
                                 </Card.Text>   
                             </Card.Body>
                             <div className='card-link-wrapper d-flex justify-content-end'>

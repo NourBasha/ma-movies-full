@@ -9,12 +9,8 @@ const Header = ({user,  logout, history}) => {
 
 
   const handleLogout = () => {
-
    
-    console.log('header, history: ',history);
-     logout(history); // action creator
-
-   
+     logout(history); // action creator   
   }
   
  

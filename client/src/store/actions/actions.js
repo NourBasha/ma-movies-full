@@ -226,3 +226,17 @@ export const deleteMovie = (payload)=>{
 }
 
 
+export const subscribe = (payload)=>{
+    return{
+        type: ACTION_TYPES.SUBSCRIBE_SAGA,
+        payload: payload
+    }
+}
+
+export const setSubscribeState = (payload)=>{ // loading sub
+    return{
+        type: ACTION_TYPES.SUBSCRIBE_SUCCESS,
+        payload: payload
+    }
+}
+

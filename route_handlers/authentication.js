@@ -4,9 +4,14 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
 const Movie = mongoose.model('movies');
+const Subscribtion = mongoose.model('subscribtions');
 
 const bcrypt = require('bcrypt');
 const reaquire_login = require('../middlewares/reaquire_login');
+
+const Mailer = require('../services/mailer');
+
+const template = require('../services/mailTemplates/welcomeTemplate');
 
 
 
@@ -46,29 +51,41 @@ module.exports = (app) =>{
             if(existing) {
                 return res.status(403).send({error:'user exists'});
             }
-
             const user = new User({  email: req.body.email,
                             password: req.body.password, 
                             displayName: req.body.username
                           });
 
-                  console.log('user before hash',user);
 
                 const salt = await bcrypt.genSalt(10); 
                 if(salt){
-                  console.log('salt has data : ',salt);
                   user.password = await bcrypt.hash(user.password,salt);
-                  console.log('pass word after hash',user.password );
                   }
 
+              await user.save( async function(err) {
 
-            console.log('collection rec : ',user);
-
-              await user.save(function(err) {
                 if(err) {
                   console.log(err);
+                  return res.status(408).send({message:'DB error'})
                 } else {
-                  console.log('user: ' + user.email + "user saved in db.");
+
+                  try {
+                     await new Subscribtion({
+                      email :user.email.toLowerCase(),
+                      dateOfSub : Date.now()
+                       }).save();
+
+                    await new Mailer(
+                        {subject: 'Welcome to MaMovies', subscriber: user.email }, 
+                        template('It\'s great to have you with us! we hope you enjoy our App and our weekly new movies list! :)') 
+                        ).send();
+
+                        console.log('server, subbed + sent email');
+
+                  } catch (error) {
+                    console.log(error);
+                  }
+
                   req.login(user, function(err) {
                     if (err) {
                       console.log( 'after saving, login() method error: ',err);
@@ -82,9 +99,7 @@ module.exports = (app) =>{
                   });
                 }
               });
-
     
-
         } catch (error) {
             console.log('server signup, failure error: ',error);
         }
@@ -100,8 +115,6 @@ module.exports = (app) =>{
         } 
 
         );
-
-
 
     // delete account 
     app.delete('/api/delete-account',reaquire_login, async (req,res)=>{

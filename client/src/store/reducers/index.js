@@ -5,6 +5,7 @@ import { FilterOnReducer } from "./filter_on";
 import { FilterTypesReducer } from "./filter_type";
 import { BrowseResponseReducer } from "./browse_response";
 import { HomeResponseReducer } from "./home_response";
+import { SubscribeSuccess } from "./subscribeSuccess";
 
 
 
@@ -25,7 +26,8 @@ import { SignUpState } from "./signupState";
         homeResponse : HomeResponseReducer,
         auth: AuthenticationReducer,
         loginState : LoginState,
-        signupState : SignUpState
+        signupState : SignUpState,
+        subSuccess : SubscribeSuccess
 })
 
 export default rootReducer;

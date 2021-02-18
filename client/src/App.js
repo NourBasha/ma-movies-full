@@ -30,7 +30,6 @@ const App = () => {
   const context = useContext(Context);
   const dispatch = useDispatch();
   
-  console.log('insdie App and dispatching action!');
  
   useEffect(()=>{
 

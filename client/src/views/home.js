@@ -10,14 +10,19 @@ import Carousel from 'react-bootstrap/Carousel';
 import * as DATA from '../utils/data';
 import Rating from '../components/functional/rating';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {subscribe,setSubscribeState} from '../store/actions/actions';
+import {validateEmail} from '../utils/validateEmail';
 
 let moviesList = [];
 let caroMovieList= [];
-const Home = (props) => {
+const Home = ({subscribeUser,subscribtionSuccess, setSubscribingState}) => {
   const context = useContext(Context);
   const contextRef = useRef(useContext(Context));
   const [activeSlide, setActiveSlide] = useState(0);
   const [caroLoaded, setCaroLoaded] = useState(false);
+  const [emailSubscribtion,setEmailSubscribtion] = useState('');
+  const [emailValid,setEmailValid] = useState(null);
 
 
   
@@ -26,20 +31,17 @@ const Home = (props) => {
 const observeCarousel = () =>{
     
   let elemList = document.getElementsByClassName('carousel-item');
-    console.log(elemList);
 
     [...elemList].forEach((element,index)=>{
       let observer = new MutationObserver(
         function(mutations) {
                           mutations.forEach(
                             function(mutation){
-                              console.log('mutation is : ',mutation);
                               if(mutation.attributeName === "class"){
                                   let currentClassState = mutation.target.classList.contains('active');
                                   
                                   if(currentClassState){
-                                    console.log('contains active ? ', currentClassState);
-                                    console.log('contains active, index', index);
+                                  
                                     setActiveSlide(index);
                                   }
                                 
@@ -87,12 +89,11 @@ const observeCarousel = () =>{
       if(movies){
         caroMovieList = movies.data.results;
         setCaroLoaded(true);
-        console.log(caroMovieList);
       }
 
   },[])
 
-
+  
 
   useEffect(() => {
 
@@ -112,6 +113,13 @@ const observeCarousel = () =>{
   }, [getMovies, getCaroMovies]);
 
 
+
+  useEffect(()=>{
+    if(subscribtionSuccess === false || subscribtionSuccess === true ){
+      document.getElementsByClassName('email-input')[0].value = '';
+    }
+  },[subscribtionSuccess])
+
   useEffect(()=>{
         
     if(caroMovieList.length){
@@ -121,6 +129,22 @@ const observeCarousel = () =>{
   
   })
 
+
+  const handleSubscribe = () =>{
+
+    setSubscribingState('');
+
+    if(validateEmail(emailSubscribtion)){
+      console.log('client, before action, email : ', emailSubscribtion);
+      setSubscribingState(null);
+      subscribeUser({email:emailSubscribtion});
+      setEmailValid(true);
+    }else {
+      setEmailValid(false);
+    }
+    
+    
+  }
 
   return (
     <div className="home-container">
@@ -256,17 +280,60 @@ const observeCarousel = () =>{
                 </div>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control email-input"
                   placeholder="E-mail"
                   aria-label="E-mail"
                   aria-describedby="basic-addon1"
+                  onChange={(e)=>setEmailSubscribtion(e.target.value.toLowerCase().trim())}
                 />
+                 
               </div>
             </div>
+           
+            {
+                    emailValid === false
+                    ?
+                        <div className='col-12 col-md-6 ml-auto   text-center text-md-right '>
+                        
+                             <p> this email is not correct  </p> 
+                             
+                    
+                        </div>
+                     :null
+             }
             <div className="col-12 col-md-4  text-center text-md-left">
-              <button className="btn btn-light">Subscribe</button>
+              <button className="btn btn-light" onClick={handleSubscribe} >Subscribe</button>
             </div>
           </div>
+         {
+           
+           subscribtionSuccess === null 
+           ? ( <div className='row'>
+                  <div className='col d-flex justify-content-center'>
+                        <div className="text-center">
+                          <div
+                            className="spinner-border text-info m-5 "
+                            style={{ width: "2rem", height: "2rem" }}
+                            role="status"
+                          ></div>
+                        </div>
+                    </div>
+               </div>
+               )
+           : subscribtionSuccess === false 
+              ? (<div className='row mt-5'> 
+                      <div className='col d-flex justify-content-center'>
+                          <h6>failed to subscribe this E-mail</h6>
+                      </div>
+                 </div>) 
+              : subscribtionSuccess === true 
+                ? (<div className='row mt-5'> 
+                      <div className='col d-flex justify-content-center'>
+                          <h6>subscribed successfully</h6>
+                      </div>
+                   </div>) 
+                : null
+         }
         </div>
       </div>
       {/* end of sign up */}
@@ -276,4 +343,16 @@ const observeCarousel = () =>{
   );
 };
 
-export default Home;
+const mapStateToProps = ({subSuccess})=>{
+    return{
+      subscribtionSuccess : subSuccess.subSuccess 
+    }
+}
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    subscribeUser : (email) => dispatch(subscribe(email)),
+    setSubscribingState : (val) =>  dispatch(setSubscribeState(val))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

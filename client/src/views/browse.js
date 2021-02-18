@@ -247,10 +247,10 @@ const getMovies = useCallback(()=>{
           if(!user){
             history.push('/');
           }
-      }, 500);
+      }, 100);
 
   
-     },[])
+     })
 
 
     useEffect(() => {
@@ -430,10 +430,7 @@ const getMovies = useCallback(()=>{
  
   return (
     <div className="browse " >
-
-      
-      
-        
+   
       <div className="browse-container container-fluid ">
 
       <div className='switch-theme'>    

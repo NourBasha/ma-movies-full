@@ -8,6 +8,7 @@ const cookieSession = require('cookie-session');
 
 require('./models/user_model');
 require('./models/movie_model');
+require('./models/subscribe_model');
 
 
 require('./strategies/google_strategy');
@@ -38,11 +39,10 @@ app.use(passport.session());
 
 require('./route_handlers/authentication')(app);
 require('./route_handlers/movies')(app);
-
+require('./route_handlers/subscribe')(app);
 
 if (process.env.NODE_ENV === 'production'){
 
-    
     //serves the entire build directory if route is not defined in server 
     app.use(express.static('client/build')); 
 
@@ -54,7 +54,6 @@ if (process.env.NODE_ENV === 'production'){
     });
 
 }
-
 
 const PORT = process.env.PORT || 5000 ;
 

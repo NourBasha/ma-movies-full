@@ -2,6 +2,7 @@ import {all, fork } from 'redux-saga/effects';
 import {watchEmailUser} from './emailAuth';
 import {watchUser} from './currentUser';
 import { watchMovie } from './movie';
+import { watchSubs } from './subscribe';
 
 
 function* rootSaga() {
@@ -9,7 +10,8 @@ function* rootSaga() {
         [
             fork(watchEmailUser),
             fork(watchUser),
-            fork(watchMovie)
+            fork(watchMovie),
+            fork(watchSubs)
         ]
     )
 }

@@ -48,3 +48,6 @@ export const DELETE_ACCOUNT_SAGA = "DELETE_ACCOUNT_SAGA";
 // save movie
 export const SAVE_MOVIE_SAGA = "SAVE_MOVIE_SAGA";
 export const DELETE_MOVIE_SAGA = "DELETE_MOVIE_SAGA";
+// subscribe 
+export const SUBSCRIBE_SAGA = "SUBSCRIBE_SAGA";
+export const SUBSCRIBE_SUCCESS = "SUBSCRIBE_SUCCESS";
