@@ -12,12 +12,10 @@ const Profile = ({ user, deleteAccount }) => {
         {user ? (
           <div className=" row data d-flex justify-content-center">
             <div className=" col-10 profile-data ">
-                
                     <label> Username: </label>
                     <h3 className="appText">{user.displayName}</h3>
                     <label> Email: </label>
                     <h3 className="appText">{user.email}</h3>
-               
             </div>
            
             <button className="btn mamovie-button mt-2"  data-toggle="modal" data-target="#delete-modal">

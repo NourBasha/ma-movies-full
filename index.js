@@ -32,7 +32,6 @@ app.use(cookieSession({
     keys : [keys.cookieKeys]
 }));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -40,6 +39,7 @@ app.use(passport.session());
 require('./route_handlers/authentication')(app);
 require('./route_handlers/movies')(app);
 require('./route_handlers/subscribe')(app);
+
 
 if (process.env.NODE_ENV === 'production'){
 

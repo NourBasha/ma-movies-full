@@ -6,15 +6,18 @@ const Subscribtion = mongoose.model('subscribtions');
 const Mailer = require('../services/mailer');
 
 const template = require('../services/mailTemplates/welcomeTemplate');
+const weeklyTemplate = require('../services/mailTemplates/weeklyEmailTemplate');
 
 const _ = require('lodash');
 
 const {Path} = require('path-parser');
 
+const axios = require('axios');
+const keys = require('../config/keys');
+
+const autoWeeklySend = require('../services/automaticSend');
+
 module.exports = (app)=>{
-
-
-
 
     app.post('/api/subscribe', async (req,res)=>{
 
@@ -34,9 +37,11 @@ module.exports = (app)=>{
                   }).save();
   
                   await new Mailer(
-                      {subject: 'Welcome to MaMovies', subscriber: req.body.email}, 
-                      template(sub) 
+                      {subject: 'Welcome to MaMovies', subscribers:[{email:req.body.email}]}, 
+                      template({user:null, subscribtion:sub}) 
                       ).send();
+
+                   autoWeeklySend(null);
   
                   res.send({message:'done'});
             } catch (error) {
@@ -50,8 +55,9 @@ module.exports = (app)=>{
         res.redirect("/unsubscribed");    /// make view in client
     });
 
-    app.post('/api/subscribtion/webhook', (req,res)=>{
+    app.post('/api/subscribtion/webhook', async (req,res)=>{
 
+        console.log('coming data is : ', req.body);
         try {
             
             const p = new Path('/api/unsubscribe/:Id');
@@ -70,16 +76,71 @@ module.exports = (app)=>{
                         .compact()
                         .uniqBy('Id')
                         .value();
-                    _.map(result, ({Id})=>{
-                        Subscribtion.deleteOne({_id : Id});
+                
+            console.log('webhook result is : ', result);
+
+                    _.map(result, async ({subscribtionID})=>{
+                       await Subscribtion.deleteOne({_id : subscribtionID});
                     });
                         
+                    console.log('deleted');
+
             res.send({});
 
         } catch (error) {
             res.status(422).send(error);
         }
 
+
+    });
+
+
+    app.get('/api/movies/weekly', async (req,res)=>{
+
+        console.log('req.user is : ', req.user);
+        
+        try {
+            
+        const movieList = await axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=${keys.theMoviedbAPIKey}`);
+        console.log('server, movie list is :', movieList);
+
+        if(movieList){
+            console.log('server, movie list is :', movieList.data);
+         let emailMoviesList = [] ; 
+                 
+                _.map( movieList.data.results ,({id,title,vote_average,poster_path})=>{
+                        emailMoviesList.push({id,title,vote_average,poster_path});                         
+                   });
+           
+                emailMoviesList.splice(10);
+            const emailSubject = 'Trending movies this week!';
+            await Subscribtion.find({},(err,subs)=>{
+               
+                        if(subs){
+                            console.log('results back, subs', subs);
+                            _.map(subs, async (subscribtion) =>{
+                                console.log('results back, sub1 ', subscribtion);
+
+                                await new Mailer(
+                                    {subject: emailSubject, subscribers: [{email: subscribtion.email}]},
+                                    weeklyTemplate(req.user,subscribtion, emailMoviesList)
+                                    ).send();
+                            });
+                        };
+                            })
+                        .select({
+                            dateOfSub: false
+                        });
+
+                res.send({});
+              
+        }
+
+
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
 
     });
 

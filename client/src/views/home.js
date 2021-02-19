@@ -84,7 +84,7 @@ const observeCarousel = () =>{
 
   const getCaroMovies = useCallback( async ()=>{
 
-    const movies = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=83a0145e56d35a45ba5ea0f752806cd2');
+    const movies = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key='+process.env.REACT_APP_API_KEY);
       
       if(movies){
         caroMovieList = movies.data.results;
@@ -150,6 +150,13 @@ const observeCarousel = () =>{
     <div className="home-container">
 
       {/* start of heed message */}
+
+        <button onClick={()=>{
+          axios.get('/api/movies/weekly');
+        }}>
+            get server movies
+        </button>
+
         <div className='container-fluid headings head-message'>
               <div className='row '>
                   <div className='col-12 head-col '>
@@ -160,7 +167,6 @@ const observeCarousel = () =>{
 
             </div>
       {/* end of heed message */}
-
 
       {/* start of carousel */}
         <div className='container-fluid'>

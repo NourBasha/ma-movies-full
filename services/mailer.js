@@ -7,19 +7,25 @@ const keys = require('../config/keys');
 
 class Mailer extends helper.Mail {
 
-    constructor({subject, subscriber}, content){ 
+    constructor({subject, subscribers}, content){ 
         super();
         this.sgApi = sendgrid(keys.sendGridKey);
         this.from_email = new helper.Email('MaMovies.no.reply@gmail.com'); // sender email created on sendgrid 
         this.subject = subject;  
         this.body = new helper.Content('text/html',content); // from template 
-        this.recipient = new helper.Email(subscriber); 
+        this.recipients = this.formatAddresses(subscribers); 
 
         this.addContent(this.body); // built-in function function inside helper.Mail
         this.addClickTracking();
-       
         this.addRecipient();
 
+    }
+
+
+    formatAddresses (recipients){
+        return recipients.map(({email})=> { // object destructuring 
+            return new helper.Email(email);
+        })
     }
 
     addClickTracking(){
@@ -34,7 +40,9 @@ class Mailer extends helper.Mail {
 
     addRecipient (){
         const personalize = new helper.Personalization();
-         personalize.addTo(this.recipient);
+        this.recipients.forEach(recipient => {
+            personalize.addTo(recipient);
+        });
         this.addPersonalization(personalize);
     }
 

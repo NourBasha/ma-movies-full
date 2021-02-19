@@ -430,7 +430,10 @@ const getMovies = useCallback(()=>{
  
   return (
     <div className="browse " >
-   
+     <button onClick={()=>{
+          axios.get('/api/movies/weekly');
+        }}>get
+        </button>
       <div className="browse-container container-fluid ">
 
       <div className='switch-theme'>    

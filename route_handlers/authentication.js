@@ -12,6 +12,9 @@ const reaquire_login = require('../middlewares/reaquire_login');
 const Mailer = require('../services/mailer');
 
 const template = require('../services/mailTemplates/welcomeTemplate');
+const autoWeeklySend = require('../services/automaticSend');
+const { use } = require('passport');
+
 
 
 
@@ -35,8 +38,7 @@ module.exports = (app) =>{
     })
 
     app.get('/api/current-user', (req,res)=>{
-          res.send(req.user);
-       
+          res.send(req.user); 
     })
     
     // email and password authentication
@@ -70,16 +72,17 @@ module.exports = (app) =>{
                 } else {
 
                   try {
-                     await new Subscribtion({
+                   const sub =  await new Subscribtion({
                       email :user.email.toLowerCase(),
                       dateOfSub : Date.now()
                        }).save();
 
                     await new Mailer(
-                        {subject: 'Welcome to MaMovies', subscriber: user.email }, 
-                        template('It\'s great to have you with us! we hope you enjoy our App and our weekly new movies list! :)') 
+                        {subject: 'Welcome to MaMovies', subscribers:  [{email: user.email}]    }, 
+                        template({user, subscribtion:sub}) 
                         ).send();
 
+                        autoWeeklySend(user);
                         console.log('server, subbed + sent email');
 
                   } catch (error) {
@@ -90,11 +93,7 @@ module.exports = (app) =>{
                     if (err) {
                       console.log( 'after saving, login() method error: ',err);
                     }
-                    console.log('it succeeded!');
-                    console.log( 'user is :',user)
                     const {password, ...authUser} = user._doc;
-
-                    console.log('auth user : ',authUser);
                     return res.send(authUser);
                   });
                 }

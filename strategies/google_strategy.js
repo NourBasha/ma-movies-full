@@ -14,6 +14,9 @@ const Mailer = require('../services/mailer');
 
 const template = require('../services/mailTemplates/welcomeTemplate');
 
+const autoWeeklySend = require('../services/automaticSend');
+
+
 
 
 passport.serializeUser((user,done)=>{
@@ -25,12 +28,9 @@ passport.deserializeUser((id,done)=>{
     User.findById(id)
     .then(user=>{
         done(null,user);
-    })
+    });
     
-
-
 })
-
 
 passport.use(
 
@@ -54,23 +54,25 @@ passport.use(
                 //new user
                 const user = await new User({googleId: profile.id, email: profile._json.email, displayName: profile._json.name }).save();
                 // subscribe for weekly updates
-                await new Subscribtion({
+               const sub =  await new Subscribtion({
                     email :profile._json.email.toLowerCase(),
                     dateOfSub : Date.now()
                      }).save();
 
                   await new Mailer(
-                      {subject: 'Welcome to MaMovies', subscriber: profile._json.email }, 
-                      template('It\'s great to have you with us! we hope you enjoy our App and our weekly new movies list! :)') 
+                      {subject: 'Welcome to MaMovies', subscribers: [{email:profile._json.email}]   }, 
+                      template({user, subscribtion:sub}) 
                       ).send();
+
+                          autoWeeklySend(user);
+
 
                       console.log('server, subbed + sent email');
 
                 done(null,user);
              } catch (error) {
                     console.log(error);
-             }
-                
+             }       
             }
     )
 

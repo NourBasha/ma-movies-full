@@ -11,6 +11,7 @@ import Profile from '../views/profile';
 import Login from '../views/login';
 import PageNotFound from '../views/page-not-found';
 import Watchlist from '../views/watchlist';
+import PasswordRecovery from '../views/PasswordRecovery';
 
 
 const Routes = ({user}) =>{
@@ -35,6 +36,8 @@ const Routes = ({user}) =>{
                         <Route exact path='/watchlist' component={Watchlist} />
                         <Route exact path='/notAuthorised' component={NotAuthorised} />
                         <Route exact path='/signup' component={Signup} />
+                        <Route exact path='/password-recovery' component={PasswordRecovery} />
+
                         <Route exact path='/profile' component={Profile} />
                         <Route exact path='/login' component={Login} />
                         <Route path='*' component={PageNotFound} />

@@ -7,6 +7,8 @@ import {withRouter} from 'react-router';
 import LoadingOverlay from 'react-loading-overlay';
 import BeatLoader from 'react-spinners/BeatLoader';
 
+import {Link} from 'react-router-dom';
+
 const Login = ({loginSuccess, login, setLoginState, history}) => {
 
     
@@ -55,7 +57,7 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-1">
                 <label className="form-label">Password</label>
                 <input
                   type="password"
@@ -64,10 +66,19 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
                   value={password}
                 />
               </div>
+              <div className='row password-wrapper'>
+                  <div className='col-12 password-col d-flex justify-content-end'>
+                      <Link className='appText' to={{pathname:'/password-recovery'}}>
+                        forgot password?  
+                      </Link>
+                  </div>
+              </div>
 
               <button type="submit" className="btn mamovie-button">
                 Login
               </button>
+             
+             
             </form>
           </div>
         </div>

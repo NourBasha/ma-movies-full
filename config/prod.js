@@ -4,5 +4,6 @@ module.exports = {
     mongoURI : process.env.MONGO_URI,
     cookieKeys : process.env.COOKIE_KEYS,
     sendGridKey : process.env.SENDGRID_KEY,
-    redirectDomain : process.env.REDIRECT_DOMAIN
+    redirectDomain : process.env.REDIRECT_DOMAIN,
+    theMoviedbAPIKey : process.env.MOVIEDB_API_KEY
 }
