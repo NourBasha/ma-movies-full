@@ -11,13 +11,11 @@ function* subscribe (action) {
 
     yield axios.post('/api/subscribe', {email: action.payload.email} )
     .then(res =>{
-        console.log('client, res sub : ', res);
         if(res.data){
              result = res.data
         }
     })
     .catch(err=>{
-        console.log('client, error sub, err : ',err);
     })
 
 

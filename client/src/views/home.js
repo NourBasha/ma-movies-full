@@ -135,7 +135,6 @@ const observeCarousel = () =>{
     setSubscribingState('');
 
     if(validateEmail(emailSubscribtion)){
-      console.log('client, before action, email : ', emailSubscribtion);
       setSubscribingState(null);
       subscribeUser({email:emailSubscribtion});
       setEmailValid(true);
@@ -150,13 +149,6 @@ const observeCarousel = () =>{
     <div className="home-container">
 
       {/* start of heed message */}
-
-        <button onClick={()=>{
-          axios.get('/api/movies/weekly');
-        }}>
-            get server movies
-        </button>
-
         <div className='container-fluid headings head-message'>
               <div className='row '>
                   <div className='col-12 head-col '>

@@ -25,7 +25,6 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
 
 
     const getMoviesWithIDs = useCallback(()=>{
-            console.log('getting movies');
         let urlList = [];
 
     idList.forEach(movie_id=>{
@@ -49,7 +48,6 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
                     responses.forEach((response,index)=>{
                         movieList.unshift(response.data);
                     })  
-                    console.log('movie list ', movieList);
                     setMoviesReady(true);
                      })
                      );
@@ -60,11 +58,9 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
     },[])
 
     const getSavedMoviesIDs = useCallback( async ()=>{
-        console.log('getting ids');
         const moviesIDs = await axios.get('/api/movie/watchlist');
 
         if(Object.keys(moviesIDs.data).length!==0){
-            console.log('ids came', moviesIDs);
             moviesIDs.data.forEach(data=>{
                 idList.push(data.movie_id);
             });
@@ -74,7 +70,6 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
     },[getMoviesWithIDs])
 
     useEffect(()=>{
-        console.log('use effect says hi');
         if(movieList.length>0){
             movieList = [];
             idList=[];
@@ -105,12 +100,8 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
      }
 
     const MovieCard = ()=>{
-        console.log(idList);
         return(
            movieList.map(movie=>{
-
-            console.log(idList.includes(movie.id));
-
                return(
                         <div className=' card-col col-12 col-md-4 col-lg-3 d-flex justify-content-center ' key={movie.id}>
                         <Card className='headings' style={{ width: '18rem' }}>
@@ -193,7 +184,7 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
                                 <p>
                                     start bookmarking movies now, go to&nbsp;
                                     <Link className='appText' to={{pathname:'/browse'}}>
-                                    Browse 
+                                    Home Page 
                                  </Link>.
                                 </p>
                               

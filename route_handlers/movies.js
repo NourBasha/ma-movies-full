@@ -10,7 +10,6 @@ module.exports = (app) =>{
     // add movie
     app.post('/api/movie', requireLogin, async (req,res) =>{
         const movieID = req.body.movie_id;
-            console.log('server, movie id is : ',movieID);
         if(movieID){
            const movie =  new Movie({
                              movie_id : movieID,
@@ -19,7 +18,6 @@ module.exports = (app) =>{
                 try {
                    await movie.save((err)=>{
                        if(err){
-                           console.log(err);
                        }else{
                            res.status(200).send({message:'done'});
                        }
@@ -39,16 +37,14 @@ module.exports = (app) =>{
                                   .select({_user: false});
             
         if(moviesIDs){
-            console.log('server, movies ids : ', moviesIDs);
             res.send(moviesIDs);
         }
 
     });
     //check movie exists 
-    app.post('/api/movie/watchlist/issaved',requireLogin, async (req,res)=>{
+    app.post('/api/movie/watchlist/issaved', async (req,res)=>{
 
         const movieID = req.body.movie_id;
-        console.log('server, ID : ',movieID);
         if(movieID){
             const existing = await Movie.findOne({
                 _user : req.user.id,
@@ -56,11 +52,8 @@ module.exports = (app) =>{
             });
 
             if(existing){
-                console.log('server, movies exists');
                 res.send(existing);
             }else{
-                console.log('server, movies does not exist');
-
                 res.send({});
             }
        
@@ -71,7 +64,6 @@ module.exports = (app) =>{
 
     // delete movies
     app.delete('/api/movie', requireLogin, async (req,res)=>{
-            console.log('server, deleting ID : ',req.body.movie_id);
             await Movie.deleteOne({_user: req.user.id, movie_id: req.body.movie_id});
             res.send({message:'done'});
     });

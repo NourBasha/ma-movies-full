@@ -11,7 +11,7 @@ const Profile = ({ user, deleteAccount }) => {
       <div>
         {user ? (
           <div className=" row data d-flex justify-content-center">
-            <div className=" col-10 profile-data ">
+            <div className=" col-10 profile-data  " >
                     <label> Username: </label>
                     <h3 className="appText">{user.displayName}</h3>
                     <label> Email: </label>

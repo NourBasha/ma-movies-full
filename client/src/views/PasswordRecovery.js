@@ -20,9 +20,7 @@ const PasswordRecovery = ({passwordRecovered , setPasswordRecoveryState, sendEma
 
         e.preventDefault();
 
-        console.log('client, email is : ', email);
         if(validateEmail(email)){
-            console.log('client, about to fire action');
             setPasswordRecoveryState(null);
             sendEmail({email: email.toLowerCase().trim()});
             setEmailValid(true);
@@ -66,13 +64,13 @@ const PasswordRecovery = ({passwordRecovered , setPasswordRecoveryState, sendEma
             {
                     
                     passwordRecovered === true 
-                   ? (<div className='row d-flex justify-content-center align-items-center headings mt-3'>
+                   ? (<div className='row d-flex justify-content-center align-items-center headings p-2 mt-3'>
                            <div className='col-12'>
                                <p className='m-0'>A recovery link has been sent to your E-mail address.</p>
                            </div>
                        </div>)
                    : passwordRecovered === false 
-                           ? (<div className='row d-flex justify-content-center align-items-center headings mt-3'>
+                           ? (<div className='row d-flex justify-content-center align-items-center p-2 headings mt-3'>
                            <div className='col-12'>
                                <p className='m-0'>There was a problem sending a recovery link to your E-mail address</p>
                            </div>

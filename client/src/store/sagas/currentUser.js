@@ -9,7 +9,6 @@ import history from '../../utils/history';
  
  function* getUser () {
    
-  console.log('inside getting user!!');
 
     let user =  yield axios.get('/api/current-user');    
 
@@ -26,13 +25,11 @@ import history from '../../utils/history';
 }
 
 function* logout(action) {
-  console.log(action.payload);
 
    const history = action.payload;
 
 
   const res = yield axios.get('/api/logout'); 
-      console.log('logout res : ', res.data);
         if (res.data.message === 'done'){
           yield put({type:CURRENT_APP_USER, payload: false });
           history.push('/');
@@ -42,10 +39,12 @@ function* logout(action) {
 function* deleteAcc (){
 
    const user = yield axios.delete('/api/delete-account',{data:{}});
-   console.log('client, coming data is : ', user);
-   yield put({type:CURRENT_APP_USER,payload: false });
-   yield call(forwardTo,'/');
-    console.log('client, account deleted');
+   if(user.data){
+     if(user.data.message==='done'){
+      yield put({type:CURRENT_APP_USER,payload: false });
+      yield call(forwardTo,'/');
+     }
+   }
 }
 
 function forwardTo (loc){

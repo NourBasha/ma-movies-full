@@ -430,10 +430,7 @@ const getMovies = useCallback(()=>{
  
   return (
     <div className="browse " >
-     <button onClick={()=>{
-          axios.get('/api/movies/weekly');
-        }}>get
-        </button>
+    
       <div className="browse-container container-fluid ">
 
       <div className='switch-theme'>    
@@ -513,7 +510,7 @@ const getMovies = useCallback(()=>{
         <ul className="pagination justify-content-center  paging ">
           <li className="page-item prev-page-item " onClick={prevPageClick}>
             <button
-              className="page-link prev-page prev-page-item headings"
+              className="page-link prev-page prev-page-item headings-small-border"
               aria-label="Previous"
             >
               <span aria-hidden="true">&laquo;</span>
@@ -537,7 +534,7 @@ const getMovies = useCallback(()=>{
           </li>
           <li className="page-item next-page-item" onClick={nextPageClick}>
             <button
-              className="page-link next-page next-page-item headings"
+              className="page-link next-page next-page-item headings-small-border"
               aria-label="Next"
             >
               <span aria-hidden="true">&raquo;</span>

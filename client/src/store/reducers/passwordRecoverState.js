@@ -1,8 +1,9 @@
 
-import {PASSWORD_RECOVERED} from '../actions/action_types';
+import {PASSWORD_RECOVERED, PASSWORD_UPDATED} from '../actions/action_types';
 
 const initialState = {
-    pass : ''
+    pass : '',
+    passwordUpdated: ''
 }
 
 
@@ -13,6 +14,11 @@ export const PasswordRecoveredState = (state = initialState, action) => {
             return{
                 ...state,
                 pass : action.payload
+            }
+        case PASSWORD_UPDATED:
+            return{
+                ...state,
+                passwordUpdated : action.payload
             }
     
         default:

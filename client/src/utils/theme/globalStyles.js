@@ -83,6 +83,17 @@ export const GlobalStyles = createGlobalStyle`
   border-radius: 10px; 
   transition: all 0.50s linear;
 }
+.headings-small-border {
+  background : ${({theme}) => theme.filterBackground};
+  color: ${({theme}) => theme.appText}; 
+  border-radius: 5px; 
+  transition: all 0.50s linear;
+}
+.headings-no-border {
+  background : ${({theme}) => theme.filterBackground};
+  color: ${({theme}) => theme.appText}; 
+  transition: all 0.50s linear;
+}
  .headings-reverse {
   background : ${({theme}) => theme.filterBackgroundReverse};
   color: ${({theme}) => theme.appText}; 

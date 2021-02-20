@@ -21,12 +21,9 @@ const MovieDetails = (props) => {
 
   const checkSavedMovie = useCallback( async ()=>{
       const existing = await axios.post('/api/movie/watchlist/issaved',{movie_id:props.data.match.params.id});
-     console.log(existing);
       if(Object.keys(existing.data).length!== 0){
-        console.log('client, movie : ',existing);
        return setMovieSaved(true);
       }else {
-        console.log('client, movie not saved');
         setMovieSaved(false);
       }
      
@@ -64,7 +61,6 @@ const MovieDetails = (props) => {
         .get(url)
         .then((response) => {
           movie = response.data;
-          console.log(movie);
           movieVideos = movie.videos.results;
           setLoadingState(false);
         })
@@ -147,7 +143,7 @@ const MovieDetails = (props) => {
                     alt="loading"
                   />
                   <div
-                    className="card-body headings pl-0 pr-0 pt-2 - pb-2"
+                    className="card-body headings-no-border pl-0 pr-0 pt-2 - pb-2"
                     
                   >
                     <h5 className="card-title" style={{ color: "white" }}>
@@ -173,7 +169,7 @@ const MovieDetails = (props) => {
                     src={alt}
                     alt="loading"
                   />
-                  <div className="card-body headings pl-0 pr-0 pt-2 - pb-2" >
+                  <div className="card-body headings-no-border pl-0 pr-0 pt-2 - pb-2" >
                     <h5 className="card-title" style={{ color: "white" }}> {cast.name} </h5>
                     <div style={{ color: "white" }}>
                       <span className="as">

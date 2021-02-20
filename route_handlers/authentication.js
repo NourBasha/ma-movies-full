@@ -13,7 +13,7 @@ const Mailer = require('../services/mailer');
 
 const template = require('../services/mailTemplates/welcomeTemplate');
 const autoWeeklySend = require('../services/automaticSend');
-const { use } = require('passport');
+const recoverPassTemplate = require('../services/mailTemplates/recoverPasswordTemplate');
 
 
 
@@ -45,7 +45,6 @@ module.exports = (app) =>{
     app.post('/api/authenticate/signup',
     
     async (req,res)=>{ // save the new user in db
-            console.log('server signup ');
         try {
             const existing = await User.findOne({
                                 email : req.body.email
@@ -67,7 +66,6 @@ module.exports = (app) =>{
               await user.save( async function(err) {
 
                 if(err) {
-                  console.log(err);
                   return res.status(408).send({message:'DB error'})
                 } else {
 
@@ -83,15 +81,13 @@ module.exports = (app) =>{
                         ).send();
 
                         autoWeeklySend(user);
-                        console.log('server, subbed + sent email');
 
                   } catch (error) {
-                    console.log(error);
+                   
                   }
 
                   req.login(user, function(err) {
                     if (err) {
-                      console.log( 'after saving, login() method error: ',err);
                     }
                     const {password, ...authUser} = user._doc;
                     return res.send(authUser);
@@ -100,7 +96,6 @@ module.exports = (app) =>{
               });
     
         } catch (error) {
-            console.log('server signup, failure error: ',error);
         }
     } 
     
@@ -119,13 +114,88 @@ module.exports = (app) =>{
     app.delete('/api/delete-account',reaquire_login, async (req,res)=>{
 
         const result = await Movie.deleteMany({_user: req.user.id}) ;     
-        console.log('server, delted count is : ', result);
         const user = await User.deleteOne({_id : req.user.id});
-        console.log('server, deleter user count : ', user);
-        res.send({});
+        res.send({message:'done'});
       
     }) 
 
+
+    // recover password 
+
+    //get user email and send him a link
+    app.post('/api/recover-password', async (req,res)=>{
+
+      const recoverEmail = req.body.email;
+
+      if(recoverEmail){
+
+        try {
+          
+         const user = await User.findOne({email:recoverEmail}).select({
+            googleId: false,
+            password: false,
+            displayName: false
+          });
+
+          if(user){
+            const recordID = user._id;
+            const mailer = new Mailer(
+              {
+                subject: 'MaMovies password recovery',
+                subscribers : [{email:recoverEmail}]
+              },
+              recoverPassTemplate({userRecordID: recordID})
+            ); 
+            mailer.send();
+
+            res.send({message:'done'});
+
+          }
+
+
+        } catch (error) {
+          res.status(402).send(error);
+        }
+
+      }
+
+    });
+
+
+    app.post('/api/setNewPassword', async (req,res)=>{
+
+      let newPassword = req.body.password;
+      const userID = req.body.userRecordID ;
+
+     try {
+       
+      
+      const salt = await bcrypt.genSalt(10); 
+
+      if(salt){
+        newPassword = await bcrypt.hash(newPassword,salt);
+        }
+
+       await User.updateOne(
+          {
+            _id : userID
+          },
+          {
+            password : newPassword
+          }
+        );
+
+        res.send({message:'done'});
+       
+
+     } catch (error) {
+        res.status(401).send(error);
+     }
+
+
+    });
+  
+  
 
 }
 

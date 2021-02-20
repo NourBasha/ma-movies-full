@@ -29,7 +29,6 @@ module.exports = (app)=>{
            if(existing){
             return res.status(403).send({message:'exists'});
            }else {
-            console.log('server, 2 req.body.email is : ',req.body.email);
             try {
                 const sub =  await new Subscribtion({
                           email : req.body.email,
@@ -46,7 +45,6 @@ module.exports = (app)=>{
                   res.send({message:'done'});
             } catch (error) {
                 res.status(408).send({message:'error'});
-                console.log('server, error is : ', error);
             }
            }
     });
@@ -57,7 +55,6 @@ module.exports = (app)=>{
 
     app.post('/api/subscribtion/webhook', async (req,res)=>{
 
-        console.log('coming data is : ', req.body);
         try {
             
             const p = new Path('/api/unsubscribe/:Id');
@@ -77,13 +74,10 @@ module.exports = (app)=>{
                         .uniqBy('Id')
                         .value();
                 
-            console.log('webhook result is : ', result);
-
                     _.map(result, async ({subscribtionID})=>{
                        await Subscribtion.deleteOne({_id : subscribtionID});
                     });
                         
-                    console.log('deleted');
 
             res.send({});
 
@@ -97,15 +91,12 @@ module.exports = (app)=>{
 
     app.get('/api/movies/weekly', async (req,res)=>{
 
-        console.log('req.user is : ', req.user);
         
         try {
             
         const movieList = await axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=${keys.theMoviedbAPIKey}`);
-        console.log('server, movie list is :', movieList);
 
         if(movieList){
-            console.log('server, movie list is :', movieList.data);
          let emailMoviesList = [] ; 
                  
                 _.map( movieList.data.results ,({id,title,vote_average,poster_path})=>{
@@ -117,10 +108,7 @@ module.exports = (app)=>{
             await Subscribtion.find({},(err,subs)=>{
                
                         if(subs){
-                            console.log('results back, subs', subs);
                             _.map(subs, async (subscribtion) =>{
-                                console.log('results back, sub1 ', subscribtion);
-
                                 await new Mailer(
                                     {subject: emailSubject, subscribers: [{email: subscribtion.email}]},
                                     weeklyTemplate(req.user,subscribtion, emailMoviesList)
@@ -138,7 +126,6 @@ module.exports = (app)=>{
 
 
         } catch (error) {
-            console.log(error);
             res.send(error);
         }
 

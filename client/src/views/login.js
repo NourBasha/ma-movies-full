@@ -54,6 +54,7 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
                   className="form-control"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  autoComplete='true'
                 />
               </div>
 
@@ -64,6 +65,7 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
                   className="form-control"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
+                  autoComplete='true'
                 />
               </div>
               <div className='row password-wrapper'>

@@ -1,13 +1,10 @@
 
 const keys = require('../../config/keys');
 
-const _ =  require('lodash');
-
-
-module.exports = (user, subscribtion, movies) =>{
-
-
+module.exports = ({userRecordID})=> {
     return `
+    
+    
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html
   data-editor-version="2"
@@ -20,8 +17,9 @@ module.exports = (user, subscribtion, movies) =>{
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
     />
+    <!--[if !mso]><!-->
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-   
+
     <style type="text/css">
       body,
       p,
@@ -146,10 +144,6 @@ module.exports = (user, subscribtion, movies) =>{
                     >
                       <tr>
                         <td>
-                          <!--[if mso]>
-    <center>
-    <table><tr><td width="600">
-  <![endif]-->
                           <table
                             width="100%"
                             cellpadding="0"
@@ -217,28 +211,27 @@ module.exports = (user, subscribtion, movies) =>{
                                         align="center"
                                       >
                                       <a href='${keys.redirectDomain}'>
-                                              <img
-                                              class="max-width"
-                                              border="0"
-                                              style="
-                                                display: block;
-                                                color: #000000;
-                                                text-decoration: none;
-                                                font-family: Helvetica, arial,
-                                                  sans-serif;
-                                                font-size: 16px;
-                                                max-width: 30% !important;
-                                                width: 30%;
-                                                height: auto !important;
-                                              "
-                                              width="180"
-                                              alt=""
-                                              data-proportionally-constrained="true"
-                                              data-responsive="true"
-                                              src="http://cdn.mcauto-images-production.sendgrid.net/6dbdf72d0ce32d11/a9a83eaa-8f00-42ea-bdcc-96062acc79bf/200x200.png"
-                                            />
-                                      </a>
-                                       
+                                        <img
+                                          class="max-width"
+                                          border="0"
+                                          style="
+                                            display: block;
+                                            color: #000000;
+                                            text-decoration: none;
+                                            font-family: Helvetica, arial,
+                                              sans-serif;
+                                            font-size: 16px;
+                                            max-width: 30% !important;
+                                            width: 30%;
+                                            height: auto !important;
+                                          "
+                                          width="180"
+                                          alt=""
+                                          data-proportionally-constrained="true"
+                                          data-responsive="true"
+                                          src="http://cdn.mcauto-images-production.sendgrid.net/6dbdf72d0ce32d11/a9a83eaa-8f00-42ea-bdcc-96062acc79bf/200x200.png"
+                                        />
+                                        </a>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -273,15 +266,15 @@ module.exports = (user, subscribtion, movies) =>{
                                   cellspacing="0"
                                   width="100%"
                                   style="table-layout: fixed"
-                                  data-muid="05cf8419-874d-488e-9d29-dc9366df3056"
+                                  data-muid="1166b65e-614f-4451-b598-4d22b865e26c"
                                   data-mc-module-version="2019-10-22"
                                 >
                                   <tbody>
                                     <tr>
                                       <td
                                         style="
-                                          padding: 20px 0px 20px 0px;
-                                          line-height: 30px;
+                                          padding: 18px 35px 10px 35px;
+                                          line-height: 24px;
                                           text-align: inherit;
                                         "
                                         height="100%"
@@ -293,37 +286,25 @@ module.exports = (user, subscribtion, movies) =>{
                                           <div
                                             style="
                                               font-family: inherit;
-                                              text-align: center;
-                                              font-size: 16px;
+                                              text-align: left;
                                             "
                                           >
                                             <span
                                               style="
                                                 color: #ffffff;
-                                                font-family: georgia, serif;
+                                                font-size: 14px;
                                               "
-                                              ><strong
-                                                >Hello ${user?user.displayName+',':'There!'} as we promised, these
-                                                are the top movies this
-                                                week.</strong
-                                              ></span
+                                              >Please click the link below to
+                                              set a new password.&nbsp;</span
                                             >
-                                          </div>
-                                          <div
-                                            style="
-                                              font-family: inherit;
-                                              text-align: center;
-                                            "
-                                          >
-                                            <span
-                                              style="
-                                                color: #ffffff;
-                                                font-family: georgia, serif;
-                                              "
-                                              ><strong
-                                                >happy watching!</strong
-                                              ></span
-                                            >
+                                            <div style=" margin-bottom: 20px; ">
+                                                <a  
+                                                style="color: white;"
+                                                 href = '${keys.redirectDomain}/new-password/${userRecordID}'
+                                                >
+                                                    set new password
+                                                </a>
+                                            </div>
                                           </div>
                                           <div></div>
                                         </div>
@@ -339,161 +320,13 @@ module.exports = (user, subscribtion, movies) =>{
                                   cellpadding="0"
                                   cellspacing="0"
                                   width="100%"
-                                  style="table-layout: fixed ; margin-bottom:10px;"
-                                  data-muid="e1f5c3a8-860d-495c-96b2-c9649de239cf"
-                                >
-                                  <tbody>
-                                    <tr>
-                                      <td
-                                        style="padding: 0px 0px 30px 0px"
-                                        role="module-content"
-                                        bgcolor="#029e9eab"
-                                      ></td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                               ${
-
-                                _.map(movies, (movie)=>{
-                                  return(
-                                    
-                                    `
-                                    <table
-                                    class="module"
-                                    role="module"
-                                    data-type="text"
-                                    border="0"
-                                    cellpadding="0"
-                                    cellspacing="0"
-                                    width="100%"
-                                    style="table-layout: fixed"
-                                    data-muid="de755ec5-f91e-4bc3-916c-d017602d7d4b"
-                                  >
-                                    <tbody>
-                                      <tr>
-                                        <td
-                                          style="
-                                            padding: 18px 0px 0px 0px;
-                                            line-height: 22px;
-                                            text-align: inherit;
-                                          "
-                                          height="100%"
-                                          valign="top"
-                                          bgcolor=""
-                                          role="module-content"
-                                        >
-                                          <div>
-                                            <div
-                                              style="
-                                                font-family: inherit;
-                                                text-align: center;
-                                                font-weight: bold ;
-                                                font-size: 22px;
-                                                margin-bottom:5px;
-                                              "
-                                                >
-                                              <span style="color: #ffffff"
-                                                >
-                                                
-                                                ${movie.title}
-                                                
-                                                </span
-                                              >
-                                            </div>
-                                            <div
-                                              style="
-                                                font-family: inherit;
-                                                text-align: center;
-                                                font-weight: bold ;
-                                                font-size: 19px ;
-                                                marigin-top: 5px;
-                                                margin-bottom:5px;
-                                              "
-                                                >
-                                              <span style="color: #fcff33"
-                                                >
-                                                
-                                                ${movie.vote_average}
-                                                <span style="font-size:12px; color:#ffffff;"> /10</span>
-                                                
-                                                </span
-                                              >
-                                            </div>
-                                            <div></div>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table
-                                    class="wrapper"
-                                    role="module"
-                                    data-type="image"
-                                    border="0"
-                                    cellpadding="0"
-                                    cellspacing="0"
-                                    width="100%"
-                                    style="table-layout: fixed"
-                                    data-muid="cb62f8c4-8107-486c-84fb-8d5d848edf7f.4"
-                                  >
-                                    <tbody>
-                                      <tr>
-                                        <td
-                                          style="
-                                            font-size: 6px;
-                                            line-height: 10px;
-                                            padding: 0px 0px 0px 0px;
-                                          "
-                                          valign="top"
-                                          align="center"
-                                        >
-                                         <a href='${keys.redirectDomain}/movie/${movie.id}'> 
-                                         <img
-                                         class="max-width"
-                                         border="0"
-                                         style="
-                                           display: block;
-                                           color: #000000;
-                                           text-decoration: none;
-                                           font-family: Helvetica, arial,
-                                             sans-serif;
-                                           font-size: 16px;
-                                           max-width: 70% !important;
-                                           width: 70%;
-                                           height: auto !important;
-                                           border-radius: 10px;
-                                         "
-                                         width="270"
-                                         alt="poster"
-                                         data-proportionally-constrained="true"
-                                         data-responsive="true"
-                                         src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
-                                       />
-                                         </a>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                    `
-                                  )
-                                })
-
-                               }
-                                <table
-                                  class="module"
-                                  role="module"
-                                  data-type="spacer"
-                                  border="0"
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  width="100%"
-                                  style="table-layout: fixed ; margin: 20px 0 0 0;"
+                                  style="table-layout: fixed"
                                   data-muid="0549999f-8bc5-4180-8c5a-0463afcd7bcd"
                                 >
                                   <tbody>
                                     <tr>
                                       <td
-                                        style="padding: 0px 0px 30px 0px; "
+                                        style="padding: 0px 0px 30px 0px"
                                         role="module-content"
                                         bgcolor="#029E9EAB"
                                       ></td>
@@ -553,6 +386,7 @@ module.exports = (user, subscribtion, movies) =>{
                                                 font-stretch: inherit;
                                                 line-height: inherit;
                                                 font-family: inherit;
+                                                font-size: 15px;
                                                 vertical-align: baseline;
                                                 border-top-width: 0px;
                                                 border-right-width: 0px;
@@ -592,13 +426,11 @@ module.exports = (user, subscribtion, movies) =>{
                                                 float: none;
                                                 display: inline;
                                                 color: #ffffff;
-                                                font-size: 12px;
                                               "
                                               >©2021 MaMovies | Alexandria,
                                               Egypt</span
-                                            ><span style="font-size: 12px">
-                                              &nbsp;</span
                                             >
+                                            &nbsp;
                                           </div>
                                           <div></div>
                                         </div>
@@ -623,7 +455,7 @@ module.exports = (user, subscribtion, movies) =>{
                                       <td
                                         valign="top"
                                         style="
-                                          padding: 5px 0px 0px 0px;
+                                          padding: 0px 0px 10px 0px;
                                           font-size: 6px;
                                           line-height: 10px;
                                         "
@@ -713,35 +545,9 @@ module.exports = (user, subscribtion, movies) =>{
                                     </tr>
                                   </tbody>
                                 </table>
-                                <div
-                                  data-role="module-unsubscribe"
-                                  class="module"
-                                  role="module"
-                                  data-type="unsubscribe"
-                                  style="
-                                    background-color: #126464;
-                                    font-size: 12px;
-                                    line-height: 20px;
-                                    padding: 8px 16px 8px 16px;
-                                    text-align: Center;
-                                  "
-                                  data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"
-                                >
-                                  <div class="Unsubscribe--addressLine"></div>
-                                  <p style="font-size: 12px; line-height: 20px">
-                                    <a
-                                      target="_blank"
-                                      class="Unsubscribe--unsubscribeLink zzzzzzz"
-                                      href='${keys.redirectDomain}/api/unsubscribe/${subscribtion._id}'
-                                      style="color: #00dbdb"
-                                      >Unsubscribe</a
-                                    >
-                                  </p>
-                                </div>
                               </td>
                             </tr>
                           </table>
-                          
                         </td>
                       </tr>
                     </table>
@@ -756,9 +562,6 @@ module.exports = (user, subscribtion, movies) =>{
   </body>
 </html>
 
-
     
     `
-
-
 }

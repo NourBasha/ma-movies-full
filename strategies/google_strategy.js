@@ -43,8 +43,6 @@ passport.use(
         }, 
 
          async (accessToken, refreshToken, profile, done) => {
-
-            console.log(profile);
             
              try {
                 const existing = await User.findOne({email: profile._json.email });
@@ -67,11 +65,8 @@ passport.use(
                           autoWeeklySend(user);
 
 
-                      console.log('server, subbed + sent email');
-
                 done(null,user);
              } catch (error) {
-                    console.log(error);
              }       
             }
     )

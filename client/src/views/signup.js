@@ -200,6 +200,7 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   id="username"
                   onChange={handleUsername}
                   value={username}
+                  autoComplete='true'
                 />
                 {!usernameValid ? (
                   <div>
@@ -232,6 +233,7 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   id="email-input"
                   value={email}
                   onChange={handleEmail}
+                  autoComplete='true'
                 />
                 {email.length > 4 ? (
                   emailValid ? (
@@ -266,6 +268,7 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   id="password-input"
                   value={password}
                   onChange={hanflePassword}
+                  autoComplete='true'
                 />
 
                 {password.length > 5 ? (
@@ -293,6 +296,7 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   value={passwordMatchText}
                   id="password-input2"
                   onChange={handlePassword}
+                  autoComplete='true'
                 />
               </div>
               {passwordMatch ? (

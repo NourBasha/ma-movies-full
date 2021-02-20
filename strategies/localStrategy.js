@@ -7,16 +7,12 @@ const bcrypt = require('bcrypt');
 
 
 passport.serializeUser ((user,done)=>{
-    console.log('server, local, serialize user');
-    console.log(user);
-    
+ 
     done(null,user.id);
 })
 
 passport.deserializeUser ((id,done)=>{
-    console.log('server, local, deserialize user');
-    console.log(id);
-
+  
     // find in db by id, then 
     User.findById(id).then(user=>{
         done(null,user)
@@ -44,7 +40,6 @@ passport.use(
               }
 
          }else{
-            console.log('didnt fall into the trap!!!!!')
             done(null,false);
          }
 

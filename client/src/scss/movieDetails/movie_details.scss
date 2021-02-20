@@ -246,28 +246,34 @@
            
 
             .cast-row {
-              .cast-image {
-                width: 4%;
-                height: auto;
-              }
-          
-              .cast-name {
-                  font-size: 18px;
-                  color: white;
-                  font-weight: bold;
-                  font-family: 'Times New Roman', Times, serif;
-                  margin: 0 30px 0 30px ;
-              }
-              .cast-as{
-                  font-size: 14px;
-                  color: $colo-secondary;
-              }
-              .cast-role {
+              .cast-card{
+                
+
+                .cast-image {
+                  width: 4%;
+                  height: auto;
+                }
+            
+                .cast-name {
                     font-size: 18px;
-                  color: white;
-                  font-family: 'Times New Roman', Times, serif;
-                  margin-left: 30px;
+                    color: white;
+                    font-weight: bold;
+                    font-family: 'Times New Roman', Times, serif;
+                    margin: 0 30px 0 30px ;
+                }
+                .cast-as{
+                    font-size: 14px;
+                    color: $colo-secondary;
+                }
+                .cast-role {
+                      font-size: 18px;
+                    color: white;
+                    font-family: 'Times New Roman', Times, serif;
+                    margin-left: 30px;
+                }
+
               }
+             
             }
 
           }

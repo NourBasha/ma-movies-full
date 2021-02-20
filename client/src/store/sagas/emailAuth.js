@@ -13,7 +13,6 @@ import axios from "axios";
 
 function* signUpSuccess(action) {
   if (action) {
-    console.log(action.payload)
     const { email, password, username } = action.payload.user;
     const history = action.payload.history;
 
@@ -54,7 +53,7 @@ function* login(action) {
         result = res.data;
       })
       .catch((err) => {
-        console.log("error is: ", err);
+      
       });
 
     if (result) {

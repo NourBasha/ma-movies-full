@@ -7,7 +7,7 @@ const PasswordField = ({ input, label, meta: { error, touched } }) => {
 
             <span >
                <label className='d-block'> {label} </label>
-               <input type='password' {...input} />
+               <input type='password' {...input} autoComplete='true'/>
             </span>
             <div className="error-message text-danger" style={{fontSize:'12px', margin:'2px'}}>{touched && error}</div>
 
