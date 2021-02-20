@@ -68,7 +68,7 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
               </div>
               <div className='row password-wrapper'>
                   <div className='col-12 password-col d-flex justify-content-end'>
-                      <Link className='appText' to={{pathname:'/password-recovery'}}>
+                      <Link className='appText' to={{pathname:'/password/recover'}}>
                         forgot password?  
                       </Link>
                   </div>

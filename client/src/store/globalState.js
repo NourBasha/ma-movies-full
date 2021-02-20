@@ -14,7 +14,6 @@ const GlobalState = (props)=>{
 
   const [componentMounted, setComponentMounted] = useState(false);
 
-  const[ subSuccess, setSubSuccess] = useState(''); // null loading, false failed , true success , '' nothing
 
   
   const setMode = (mode) =>{

@@ -80,6 +80,7 @@ export const GlobalStyles = createGlobalStyle`
  .headings {
   background : ${({theme}) => theme.filterBackground};
   color: ${({theme}) => theme.appText}; 
+  border-radius: 10px; 
   transition: all 0.50s linear;
 }
  .headings-reverse {

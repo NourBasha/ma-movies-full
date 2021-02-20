@@ -240,3 +240,17 @@ export const setSubscribeState = (payload)=>{ // loading sub
     }
 }
 
+export const setPasswordState = (payload)=>{ // loading password state
+    return{
+        type: ACTION_TYPES.PASSWORD_RECOVERED_SAGA,
+        payload: payload
+    }
+}
+export const sendRecoveryEmail = (payload)=>{ 
+    console.log('firing action');
+    return{
+        type: ACTION_TYPES.SEND_RECOVERY_EMAIL_SAGA,
+        payload: payload
+    }
+}
+

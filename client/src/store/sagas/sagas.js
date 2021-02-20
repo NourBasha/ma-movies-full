@@ -3,6 +3,7 @@ import {watchEmailUser} from './emailAuth';
 import {watchUser} from './currentUser';
 import { watchMovie } from './movie';
 import { watchSubs } from './subscribe';
+import { watchPassword } from './passwordRecover';
 
 
 function* rootSaga() {
@@ -11,7 +12,8 @@ function* rootSaga() {
             fork(watchEmailUser),
             fork(watchUser),
             fork(watchMovie),
-            fork(watchSubs)
+            fork(watchSubs),
+            fork(watchPassword)
         ]
     )
 }

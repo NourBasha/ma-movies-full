@@ -14,6 +14,9 @@ import AuthenticationReducer from "./authenticationReducer";
 
 import { LoginState } from "./loginState";
 import { SignUpState } from "./signupState";
+import { PasswordRecoveredState } from "./passwordRecoverState";
+
+import {reducer} from 'redux-form';
 
 
 
@@ -27,7 +30,9 @@ import { SignUpState } from "./signupState";
         auth: AuthenticationReducer,
         loginState : LoginState,
         signupState : SignUpState,
-        subSuccess : SubscribeSuccess
+        subSuccess : SubscribeSuccess,
+        passwordRecover : PasswordRecoveredState,
+        form : reducer
 })
 
 export default rootReducer;
