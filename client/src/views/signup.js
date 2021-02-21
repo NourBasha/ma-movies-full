@@ -16,13 +16,13 @@ const Signup = ({signUpResponse,addUser,history}) => {
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
 
   const [email, setEmail] = useState("");
-  const [emailValid, setEmailValid] = useState(true);
+  const [emailValid, setEmailValid] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
 
   const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState('');
 
-  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState('');
   const [passwordMatchText, setPasswordMatchText] = useState("");
 
   const [formValid, setFormValid] = useState(true);
@@ -97,7 +97,25 @@ const Signup = ({signUpResponse,addUser,history}) => {
     }
   };
 
-  const hanflePassword = (e) => {
+  const handleSetPassword = (e)=>{
+    setPassword(e.target.value);
+    if(!passwordValid){
+      function validatePassword(password) {
+        //eslint-disable-next-line
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+        return re.test(password);
+      }
+  
+      if (validatePassword(e.target.value)) {
+        setPasswordValid(true);
+      } else {
+        setPasswordMatch('')
+      }
+    }
+  }
+  
+  const handlePassword1 = (e) => {
+
     setPassword(e.target.value);
 
     function validatePassword(password) {
@@ -110,6 +128,7 @@ const Signup = ({signUpResponse,addUser,history}) => {
       setPasswordValid(true);
     } else {
       setPasswordValid(false);
+      setPasswordMatch('');
     }
   };
 
@@ -235,29 +254,33 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   onChange={handleEmail}
                   autoComplete='true'
                 />
-                {email.length > 4 ? (
-                  emailValid ? (
+                {
+                
+                  emailValid === true ? (
                     <FontAwesomeIcon
                       className="username-correct mr-2"
                       icon="check-circle"
                       color="green"
                     ></FontAwesomeIcon>
-                  ) : (
-                    <div>
-                      <FontAwesomeIcon
-                        className="email-wrong mr-2"
-                        icon="times-circle"
-                        color="red"
-                      ></FontAwesomeIcon>
-                      <label
-                        className="form-check-label"
-                        style={{ fontSize: "12px", color: "red" }}
-                      >
-                        {emailErrorMessage}
-                      </label>
-                    </div>
-                  )
-                ) : null}
+                  ) : emailValid === false 
+                      ?  (
+                        <div>
+                          <FontAwesomeIcon
+                            className="email-wrong mr-2"
+                            icon="times-circle"
+                            color="red"
+                          ></FontAwesomeIcon>
+                          <label
+                            className="form-check-label"
+                            style={{ fontSize: "12px", color: "red" }}
+                          >
+                            {emailErrorMessage}
+                          </label>
+                        </div>
+                      )
+                      :null
+            
+                }
               </div>
 
               <div className="mb-3">
@@ -267,25 +290,42 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   className="form-control"
                   id="password-input"
                   value={password}
-                  onChange={hanflePassword}
+                  onChange={handleSetPassword}
+                  onBlur={handlePassword1}
                   autoComplete='true'
                 />
+                  { 
+                  passwordValid === '' || passwordValid === false 
+                   ?  (  <p style={{fontSize:'10px', color:'#a3f1f1'}}
+                   >must be more than 8 characters and contain at least one (Capital letter, Number, Special letter '? = . @'  
+                   </p>)
 
-                {password.length > 5 ? (
-                  passwordValid ? (
+                   :null
+                   
+                  }
+                {
+              
+                  passwordValid === true 
+                  ? (
                     <FontAwesomeIcon
                       className="username-correct mr-2"
                       icon="check-circle"
                       color="green"
                     ></FontAwesomeIcon>
-                  ) : (
-                    <FontAwesomeIcon
-                      className="password-wrong mr-2"
-                      icon="times-circle"
-                      color="red"
-                    ></FontAwesomeIcon>
-                  )
-                ) : null}
+                  ) 
+                  : 
+                    passwordValid ===false ? 
+                      (
+                        <FontAwesomeIcon
+                          className="password-wrong mr-2"
+                          icon="times-circle"
+                          color="red"
+                        ></FontAwesomeIcon>
+                      )
+                      :null
+                  
+                
+                }
               </div>
 
               <div className="mb-3">
@@ -299,17 +339,21 @@ const Signup = ({signUpResponse,addUser,history}) => {
                   autoComplete='true'
                 />
               </div>
-              {passwordMatch ? (
-                <div className="mb-4">
-                  <FontAwesomeIcon
-                    className="password-match mr-2"
-                    id="password-match"
-                    icon="check-circle"
-                    color="green"
-                  ></FontAwesomeIcon>
-                  <label className="form-check-label">Password match</label>
-                </div>
-              ) : null}
+              {
+                passwordValid === true 
+                ?  passwordMatch ? (
+                  <div className="mb-4">
+                    <FontAwesomeIcon
+                      className="password-match mr-2"
+                      id="password-match"
+                      icon="check-circle"
+                      color="green"
+                    ></FontAwesomeIcon>
+                    <label className="form-check-label">Password match</label>
+                  </div>
+                ) : null
+                :null
+              }
               <button type="submit" className="mamovie-button btn">
                 Sign up
               </button>
