@@ -89,8 +89,7 @@ const NewPassword = (props) =>{
                    </div>
 
                  { 
-                    true
-                   // props.passwordUpdated === true 
+                    props.passwordUpdated === true 
                     ? 
                         (<div className='row d-flex justify-content-center mt-2'>
 

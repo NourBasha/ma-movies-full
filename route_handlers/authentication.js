@@ -42,9 +42,7 @@ module.exports = (app) =>{
     })
     
     // email and password authentication
-    app.post('/api/authenticate/signup',
-    
-    async (req,res)=>{ // save the new user in db
+    app.post('/api/authenticate/signup', async (req,res)=>{ // save the new user in db
         try {
             const existing = await User.findOne({
                                 email : req.body.email
@@ -70,18 +68,22 @@ module.exports = (app) =>{
                 } else {
 
                   try {
-                   const sub =  await new Subscribtion({
-                      email :user.email.toLowerCase(),
-                      dateOfSub : Date.now()
-                       }).save();
 
-                    await new Mailer(
-                        {subject: 'Welcome to MaMovies', subscribers:  [{email: user.email}]    }, 
-                        template({user, subscribtion:sub}) 
-                        ).send();
+              const exist = await Subscribtion.findOne({email: user.email.toLowerCase() });
 
-                        autoWeeklySend(user);
-
+                    if(!exist){
+                      const sub =  await new Subscribtion({
+                        email :user.email.toLowerCase(),
+                        dateOfSub : Date.now()
+                         }).save();
+  
+                      await new Mailer(
+                          {subject: 'Welcome to MaMovies', subscribers:  [{email: user.email}]    }, 
+                          template({user, subscribtion:sub}) 
+                          ).send();
+  
+                          autoWeeklySend(user);
+                    }
                   } catch (error) {
                    
                   }

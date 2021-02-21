@@ -52,18 +52,20 @@ passport.use(
                 //new user
                 const user = await new User({googleId: profile.id, email: profile._json.email, displayName: profile._json.name }).save();
                 // subscribe for weekly updates
-               const sub =  await new Subscribtion({
-                    email :profile._json.email.toLowerCase(),
-                    dateOfSub : Date.now()
-                     }).save();
+               
+               const exist = await Subscribtion.findOne({email: profile._json.email.toLowerCase() });
 
-                  await new Mailer(
-                      {subject: 'Welcome to MaMovies', subscribers: [{email:profile._json.email}]   }, 
-                      template({user, subscribtion:sub}) 
-                      ).send();
-
-                          autoWeeklySend(user);
-
+                if(!exist){
+                    const sub =  await new Subscribtion({
+                        email :profile._json.email.toLowerCase(),
+                        dateOfSub : Date.now()
+                         }).save();
+                    await new Mailer(
+                          {subject: 'Welcome to MaMovies', subscribers: [{email:profile._json.email}]   }, 
+                          template({user, subscribtion:sub}) 
+                          ).send();
+                    autoWeeklySend(user);
+                }   
 
                 done(null,user);
              } catch (error) {

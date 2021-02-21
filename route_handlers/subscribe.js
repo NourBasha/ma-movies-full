@@ -89,46 +89,5 @@ module.exports = (app)=>{
     });
 
 
-    app.get('/api/movies/weekly', async (req,res)=>{
-
-        
-        try {
-            
-        const movieList = await axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=${keys.theMoviedbAPIKey}`);
-
-        if(movieList){
-         let emailMoviesList = [] ; 
-                 
-                _.map( movieList.data.results ,({id,title,vote_average,poster_path})=>{
-                        emailMoviesList.push({id,title,vote_average,poster_path});                         
-                   });
-           
-                emailMoviesList.splice(10);
-            const emailSubject = 'Trending movies this week!';
-            await Subscribtion.find({},(err,subs)=>{
-               
-                        if(subs){
-                            _.map(subs, async (subscribtion) =>{
-                                await new Mailer(
-                                    {subject: emailSubject, subscribers: [{email: subscribtion.email}]},
-                                    weeklyTemplate(req.user,subscribtion, emailMoviesList)
-                                    ).send();
-                            });
-                        };
-                            })
-                        .select({
-                            dateOfSub: false
-                        });
-
-                res.send({});
-              
-        }
-
-
-        } catch (error) {
-            res.send(error);
-        }
-
-    });
 
 }
