@@ -163,7 +163,7 @@ const observeCarousel = () =>{
       {/* start of carousel */}
         <div className='container-fluid'>
           
-           <div className='row caro-row pt-0 pl-2 pr-2 pb-4'>
+           <div className='row caro-row '>
        
        {
          caroLoaded
