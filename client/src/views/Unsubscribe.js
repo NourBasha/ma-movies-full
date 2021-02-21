@@ -1,7 +1,13 @@
+import { Helmet } from "react-helmet";
+
 const Unsubscribe = (props) =>{
 
     return(
         <div className='unsubscribe'>
+             <Helmet>
+              <title>Unsubscribe</title>
+              <meta name='description' content='unsubscribe from mamovies app weekly list of movies to your e-mail' />
+            </Helmet>
                 <div className='container'>
                     <div className='row d-flex justify-content-center align-items-center' 
                             style={{marginTop:'25vh'}}>

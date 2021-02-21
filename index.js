@@ -14,7 +14,6 @@ require('./models/subscribe_model');
 require('./strategies/google_strategy');
 require('./strategies/localStrategy');
 
-
 mongoose.connect(keys.mongoURI,{useNewUrlParser: true, useUnifiedTopology: true})
 .then(res=>{
     console.log('conncetion done');

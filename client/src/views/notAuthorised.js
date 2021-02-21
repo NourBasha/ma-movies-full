@@ -1,10 +1,15 @@
 
+import { Helmet } from 'react-helmet';
 import {Link} from 'react-router-dom';
 
 
 const NotAuthorised = (props) => {
   return (
     <div className="not-auth container" >
+            <Helmet>
+              <title>Not Authorised</title>
+              <meta name='description' content='You are not authorised to view this page of mamovies app, you need to login or sign up to view it' />
+            </Helmet>
       <div className="row d-flex justify-content-center text-center">
         <div className="col  align-content-center">
           

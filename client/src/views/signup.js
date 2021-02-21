@@ -9,6 +9,8 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 
+import {Helmet} from 'react-helmet';
+
 
 const Signup = ({signUpResponse,addUser,history}) => {
   const [username, setUsername] = useState("");
@@ -169,6 +171,13 @@ const Signup = ({signUpResponse,addUser,history}) => {
 
   return (
     <div className="signup container-fluid pl-0 pr-0 ">
+
+        <Helmet>
+              <title> Sign up </title>
+              <meta name='description' content='sign up to mamovies app to discover the latest movies,
+               long standing hits and subscribe to get the latest movies every week' />  
+        </Helmet>
+
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center text-center">
           <div className=" signup-heading ">

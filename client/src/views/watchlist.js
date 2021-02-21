@@ -14,6 +14,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import img from '../assets/imgs/alt.jpg'
+import { Helmet } from 'react-helmet';
 
 let idList = [];
 let movieList = [];
@@ -157,6 +158,12 @@ const Watchlist = ({deleteMovieFromAPI, saveMovietoAPI}) =>{
 
     return(
         <div className='watchlist'>
+
+            <Helmet>
+                <title>MaMovies Watchlist</title>
+                <meta name='description' content='View your watchlist of movies on mamovies app. You can unsave a movie
+                from the list' />
+            </Helmet>
             <div className='container-fluid'>
                 <div className='row card-row d-flex justify-content-center'>
                    {

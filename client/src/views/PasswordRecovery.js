@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {setPasswordState, sendRecoveryEmail} from '../store/actions/actions';
 import {validateEmail} from '../utils/validateEmail';
 
+import {Helmet} from 'react-helmet' ;
+
 
 const PasswordRecovery = ({passwordRecovered , setPasswordRecoveryState, sendEmail})=>{
 
@@ -33,6 +35,11 @@ const PasswordRecovery = ({passwordRecovered , setPasswordRecoveryState, sendEma
 
     return (
         <div className='recover'>
+
+        <Helmet>
+              <title> Recover Password </title>
+              <meta name='description' content='recover your password for you account on mamvoies app' />  
+        </Helmet>
             
         <div className='container'>
             

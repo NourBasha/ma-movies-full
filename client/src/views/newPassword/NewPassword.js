@@ -13,6 +13,8 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import {Helmet} from 'react-helmet';
+
 const FIELDS = [
     {
         name : 'password',
@@ -59,6 +61,11 @@ const NewPassword = (props) =>{
     return(
         <div className='new-password d-flex align-items-center'>
            
+           <Helmet>
+              <title>New Password</title>
+              <meta name='description' content='set new password for your account on mamvoies app' />  
+             </Helmet>
+
                <div className='container '>
 
                    <div className='row d-flex justify-content-center form-row'>

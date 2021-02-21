@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import {saveMovie,deleteMovie} from '../store/actions/actions';
 
+import {Helmet} from 'react-helmet';
+
 let movie = [];
 let movieVideos = [];
 let movieCastCrew = [];
@@ -197,14 +199,25 @@ const MovieDetails = (props) => {
   }
   return (
     <div   >
+      
+
       {loadingError ? (
         <div className="text-center">
+           <Helmet>
+              <title>Movie</title>
+              <meta name='description' content='View movie details and cast on mamovies app and save it to watchlist' />
+            </Helmet>
             <div className="spinner-border text-info m-5" role="status">
                   </div>
       </div>
       ) : (
+        
+
         <div className="container-fluid movie bg-dark" style={{backgroundImage:"url("+DATA.IMAGE_BIG+movie.backdrop_path+")"}}>
-      
+            <Helmet>
+              <title>{movie.title}</title>
+              <meta name='description' content={movie.overview} />
+            </Helmet>
           <div className="row "  > 
               <div className="col-12 data-video-container" >
                     {/* start of movie data row */}

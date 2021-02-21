@@ -17,7 +17,7 @@ const Footer = (props)=>{
             </a>
             <p>
               This website gets its data from themoviedb API, we only use it here
-              to practice. We aspire that you would enjoy your visit to our Application
+              to practice. We aspire that you would enjoy your visit to our application
                and hopefully you will come back again!
             </p>
           </div>

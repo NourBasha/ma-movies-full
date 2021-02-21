@@ -8,6 +8,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import {Link} from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 
 const Login = ({loginSuccess, login, setLoginState, history}) => {
 
@@ -36,6 +37,11 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
 
   return (
     <div className="login container-fluid pr-0 pl-0 h-100 ">
+       <Helmet>
+              <title> Login </title>
+              <meta name='description' content='Login to mamovies app to discover the latest movies,
+               long standing hits, find a personal favortie movie and subscribe to get the latest movies every week' />  
+        </Helmet>
       <div className="container" style={{ marginBottom: "250px" }}>
         <div className="row d-flex justify-content-center align-items-center text-center">
           <div className=" login-heading ">
@@ -131,8 +137,6 @@ const Login = ({loginSuccess, login, setLoginState, history}) => {
    
    
       </div>
-
-    
       <Footer />
     </div>
   );

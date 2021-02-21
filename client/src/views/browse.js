@@ -11,6 +11,8 @@ import Skeleton, {SkeletonTheme} from 'react-loading-skeleton';
 import {connect} from 'react-redux';
 import { useHistory } from "react-router";
 
+import {Helmet} from 'react-helmet';
+
 
 let movieList = [];
 let paging = [1, 2, 3];
@@ -430,6 +432,13 @@ const getMovies = useCallback(()=>{
  
   return (
     <div className="browse " >
+
+      <Helmet>
+        <title>Browse Movies</title>
+        <meta name='description' content='find the movie you want using genres filter, year of production filter and the 
+        rating of the movie, you can also search by movie name. mamovies app has an updated list of all latest movies' />
+      </Helmet>
+
     
       <div className="browse-container container-fluid ">
 

@@ -1,9 +1,14 @@
+import { Helmet } from "react-helmet";
+
 const PageNotFound = (props) =>{
 
 
     return(
         <div   className='container'>
-
+                <Helmet>
+                    <title>404 Page</title>
+                    <meta name='description' content='This page does not exist on mamovies app' />
+                </Helmet>
                 <div className='row d-flex justify-content-center align-items-center'>
 
                     <div style={{marginTop:'70px', background:'#202429f5', padding:'40px', borderRadius:'10px'}}>

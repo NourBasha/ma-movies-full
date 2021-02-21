@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 import {subscribe,setSubscribeState} from '../store/actions/actions';
 import {validateEmail} from '../utils/validateEmail';
 
+import {Helmet} from 'react-helmet';
+
 let moviesList = [];
 let caroMovieList= [];
 const Home = ({subscribeUser,subscribtionSuccess, setSubscribingState}) => {
@@ -147,6 +149,13 @@ const observeCarousel = () =>{
 
   return (
     <div className="home-container">
+
+        <Helmet>
+              <title> MaMovies Home </title>
+              <meta name='description' content='discover the latest movies,
+               long standing hits and subscribe to get the latest movies every week' />  
+        </Helmet>
+
 
       {/* start of heed message */}
         <div className='container-fluid headings head-message'>

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { deleteAcc } from "../store/actions/actions";
 
@@ -8,6 +9,11 @@ const Profile = ({ user, deleteAccount }) => {
 
   return (
     <div className="profile container d-flex justify-content-center align-items-center">
+
+      <Helmet>
+        <title>Profile</title>
+        <meta name='description' content='view your account data on mamovies app and you can also delete your account and data from mamovies'  />
+      </Helmet>
       <div>
         {user ? (
           <div className=" row data d-flex justify-content-center">
