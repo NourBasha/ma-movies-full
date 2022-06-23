@@ -33,9 +33,6 @@ const Footer = (props)=>{
                   <li>
                     <a href="https://github.com/NourBasha">Github</a>
                   </li>
-                  <li>
-                    <a href="https://www.facebook.com/nour.wagdy.334839">Facebook</a>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -45,7 +42,7 @@ const Footer = (props)=>{
             <ul>
               <li>Phone: +201020696796</li>
               <li>
-                Email: <a href="/">Nour.basha2011@gmail.com</a>
+                Email: <a href="/">NourWagdyNasr@gmail.com</a>
               </li>
             </ul>
           </div>
